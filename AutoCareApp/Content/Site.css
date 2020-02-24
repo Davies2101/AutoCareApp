@@ -1,0 +1,47 @@
+﻿/*body{
+    font-family:Calibri;
+}
+
+.bg-dark{
+    background-color:#a54569;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color:white;
+}
+
+.navbar-nav > li.navbar-seperator > a::after {
+    content: "|";
+    padding-left:15px;
+    color:gray;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6
+{
+    margin-top:20px;
+}
+
+
+.modal-dialog {
+  position:unset!important;
+  margin: 0 auto; 
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin: 4px 10px;
+}
+
+.btn-primary, .btn-primary:hover, .btn-success, .btn-success:hover {
+    background-color: #301934;
+}*/
+
+.error{
+    border: 1px solid;
+    margin: 10px 0px;
+    padding: 15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    color: #D8000C;
+    background-color: #FFBABA;
+    background-image: url('https://i.imgur.com/GnyDvKN.png');
+}

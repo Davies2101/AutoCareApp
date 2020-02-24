@@ -1,0 +1,134 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Booking.master.cs" Inherits="AutoCareApp.Booking" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Auto Care</title>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <!-- CSS Files -->
+    <link href="Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/css/material-kit-booking.css" rel="stylesheet" />
+    <link href="Content/css/material-bootstrap-wizard.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-primary fixed-top">
+            <div class="container">
+                <div class="navbar-translate">
+                    <img class="navbar-brand" src="Content/images/Logo-Small.png" />
+                    <a class="navbar-brand" runat="server" href="~/">Auto Care</a>
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Default">
+                                <i class="material-icons">home</i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Services">
+                                <i class="material-icons">perm_data_setting</i> Services
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/NewBooking">
+                                <i class="material-icons">assignment</i> Booking
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/About">
+                                <i class="material-icons">supervisor_account</i> About
+                            </a>
+                        </li>
+                        <li class="nav-item navbar-seperator">
+                            <a class="nav-link" runat="server" href="~/Contact">
+                                <i class="material-icons">perm_phone_msg</i> Contact
+                            </a>
+                        </li>
+                    </ul>
+                    <ul id="navAccount" runat="server" class="navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">face</i><asp:Label ID="lblUserName" runat="server" Text="" /></a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                                <a class="dropdown-item" runat="server" href="~/Profile">My Profile</a>
+                                <a class="dropdown-item" runat="server" href="~/Logout">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul id="navLogin" runat="server" class="navbar-nav navbar-right">
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Register">Register</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on Twitter">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on Facebook">
+                                <i class="fa fa-facebook-square"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Follow us on Instagram">
+                                <i class="fa fa-instagram"></i>
+                                <div class="ripple-container"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    <div class="main main-raised main-content image-container set-full-height" style="background-image: url(&quot;assets/img/wizard-book.jpg&quot;); height: auto;">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+        <hr />
+    </div>
+    <footer class="footer footer-default">
+        <div class="container">
+            <div class="copyright">
+                Auto Care &copy; 
+            <script>
+                document.write(new Date().getFullYear())
+            </script>
+                Copyright
+            </div>
+        </div>
+    </footer>
+
+    <script src="Scripts/jquery-3.0.0.min.js"></script>
+    <script src="<%# Page.ResolveUrl("~")%>Scripts/popper.min.js"></script>
+    <script src="Scripts/wizard/bootstrap.min.js"></script>
+    <script src="Scripts/wizard/jquery.bootstrap.js"></script>
+    <script src="Scripts/wizard/material-bootstrap-wizard.js"></script>
+    <script src="Scripts/wizard/jquery.validate.min.js"></script>
+    <script src="<%# Page.ResolveUrl("~")%>Scripts/bootstrap-material-design.min.js"></script>
+    <script src="<%# Page.ResolveUrl("~")%>Scripts/plugins/moment.min.js"></script>
+    <!-- Plugins  -->
+    <script src="<%# Page.ResolveUrl("~")%>Scripts/plugins/bootstrap-datetimepicker.js"></script>
+    <script src="<%# Page.ResolveUrl("~")%>Scripts/plugins/nouislider.min.js"></script>
+    <script src="<%# Page.ResolveUrl("~")%>Scripts/buttons.js"></script>
+    <script src="<%# Page.ResolveUrl("~")%>Scripts/material-kit.js?v=2.0.6"></script>
+</body>
+</html>
