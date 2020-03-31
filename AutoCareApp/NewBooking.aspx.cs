@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI;
@@ -39,7 +41,7 @@ namespace AutoCareApp
         {
             try
             {
-                // reading the  logged in user class (credentials)z
+                // reading the  logged in user class (credentials)
                 clsUser User = (clsUser)Session["User"];
 
                 // creating a new object of Booking class with form data in booking form
@@ -58,15 +60,13 @@ namespace AutoCareApp
                 string ServiceIDList = hdnServiceList.Value;
                 // Saving the new object (booking)
                 mgtBooking.Add(obj, ServiceIDList);
-
-                HideError();
-
-                panelPopup.Visible = true;
+                SendBookingConfirmation(obj, ServiceIDList);
+                DisplaySuccessMessage();
             }
             catch (Exception ex)
             {
                 // displays error messsage
-                ShowError(ex.Message);
+                DisplayErrorMessage(ex.Message);
             }
         }
 
@@ -86,12 +86,12 @@ namespace AutoCareApp
                 int PackageID = Convert.ToInt32(hdnPackages.Value);
                 string ServiceIDList = hdnServiceList.Value;
                 double price = mgtBooking.GetPrice(PackageID, ServiceIDList);
-                HideError();
+                HideErrorMessage();
             }
             catch (Exception ex)
             {
                 // displays error messsage
-                ShowError(ex.Message);
+                DisplayErrorMessage(ex.Message);
             }
         }
 
@@ -110,12 +110,12 @@ namespace AutoCareApp
                     VehicleColor.Text = obj.VehicleColor;
                 }
 
-                HideError();
+                HideErrorMessage();
             }
             catch (Exception ex)
             {
                 // displays error messsage
-                ShowError(ex.Message);
+                DisplayErrorMessage(ex.Message);
             }
         }
 
@@ -142,17 +142,66 @@ namespace AutoCareApp
             }
         }
 
-        public void ShowError(string message)
+        public void DisplayErrorMessage(string message)
         {
             lblError.Text = message;
             lblError.ForeColor = System.Drawing.Color.Red;
             lblError.Visible = true;
         }
-        public void HideError()
+
+        public void HideErrorMessage()
         {
             lblError.Text = "";
             lblError.ForeColor = System.Drawing.Color.Green;
             lblError.Visible = false;
+        }
+
+        public void SendBookingConfirmation(clsBooking bookingObject, string serviceIDList)
+        { 
+            // reading the  logged in user class (credentials)
+            clsUser User = (clsUser)Session["User"];
+
+            // Creating email format and from to addresses
+
+            MailAddress to = new MailAddress(User.Email);
+            MailAddress from = new MailAddress("booking@autocarebookings.com");
+
+            MailMessage message = new MailMessage(from, to);
+            message.Subject = "AutoCare - Booking Confirmation";
+
+            // Creating email body
+            string BodyMsg =
+                "<h2>Thank You " + User.FullName + ".</h1>" +
+                "<h3>Your booking is confirmed on " + bookingObject.BookingDate.ToShortDateString() + ".</h3>" +
+                "<h4>Total: £" + SetPrices(bookingObject.PackageID.ToString(), serviceIDList) + "</h4><p>Thanks, <br>Team AutoCare </p>";
+
+
+            message.Body = BodyMsg;
+
+            message.IsBodyHtml = true;
+            // Set Email server and creditials
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential("autocarebookings@gmail.com", "AutoCare2101"),
+                EnableSsl = true
+            };
+
+            try
+            {
+                // Success sending email message
+                client.Send(message);
+            }
+            catch (SmtpException ex)
+            {
+                // Displays error message
+                DisplayErrorMessage(ex.Message);
+            }
+        }
+
+        public void DisplaySuccessMessage()
+        {
+            HideErrorMessage();
+            panelPopup.Visible = true;
         }
     }
 }

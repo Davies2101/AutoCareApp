@@ -54,8 +54,8 @@
                                     <h5 class="category">Price: £ <%#Eval("PackagePrice")%></h5>
                                 </div>
                                 <div class="card-body">
+                                    <div class="more text-left"><%#Eval("PackageDetails")%> </div>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item" style="max-height: 130px; min-height: 130px;"><%#Eval("PackageDetails")%> <a runat="server" href="~/Services">More...</a> </li>
                                         <li class="list-group-item">
                                             <a href="NewBooking.aspx?id=<%#Eval("PackageID")%>" class="btn btn-primary">Book Now</a>
                                         </li>
@@ -129,4 +129,36 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            var showChar = 100;  // How many characters are shown by default
+            var ellipsestext = "...";
+            var moretext = "Show more";
+            var lesstext = "Show less";
+
+            $('.more').each(function() {
+                var content = $(this).html();
+ 
+                if(content.length > showChar) {
+                    var c = content.substr(0, showChar);
+                    var h = content.substr(showChar, content.length - showChar);
+                    var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+                    $(this).html(html);
+                }
+            });
+ 
+            $(".morelink").click(function(){
+                if($(this).hasClass("less")) {
+                    $(this).removeClass("less");
+                    $(this).html(moretext);
+                } else {
+                    $(this).addClass("less");
+                    $(this).html(lesstext);
+                }
+                $(this).parent().prev().toggle();
+                $(this).prev().toggle();
+                return false;
+            });
+        });
+    </script>
 </asp:Content>

@@ -228,7 +228,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            Booking submited successfully
+                                            Successful Booking!
                                         </div>
                                         <div class="modal-footer">
                                             <asp:Button runat="server" type="button" Text="OK" class="btn btn-success waves-effect waves-light" PostBackUrl="~/Default.aspx" />
@@ -317,9 +317,9 @@
         }
 
         function getTotal(total) {
-            return '<tr class="total"><td></td><td></td><td class="text-right"><h6 class="title">Total: </h5></td><td class="text-left"><h5 class="title">£<span> ' +
+            return '<tr class="total"><td></td><td></td><td class="text-right"><h6 class="title">Total: </h5></td><td class="text-left"><h6 class="title">£<span> ' +
                 total +
-                '</span></h5></td></tr>';
+                '</span></h6></td></tr>';
         }
         function changePackage() {
             var selectedElement = $("input[name='package']:checked");

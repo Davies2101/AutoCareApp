@@ -1,44 +1,54 @@
 ﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="AutoCareApp.Login" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container main-content">
-        <div class="section text-center"><%--style="background-image: url('Content/images/login-bg.jpg');"--%>
+    <asp:Panel ID="alertBox" runat="server" Visible="False">
+        <div class="alert alert-dismissible fade show text-center" role="alert" runat="server">
+            <span class="alert-text">
+                <asp:Label ID="lblAlert" runat="server" Text=""></asp:Label></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </asp:Panel>
+
+    <div class="container">
+        <div class="section text-center">
+            <%--style="background-image: url('Content/images/login-bg.jpg');"--%>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 ml-auto mr-auto">
                         <div class="card card-login">
                             <div class="card-header card-header-primary text-center">
-                                <h4 class="card-title">Login</h4>
+                                <h2>Login</h2>
                             </div>
                             <div class="card-body">
-                                <asp:Label ID="lblError" runat="server" Text="Please enter login details" Visible="False"></asp:Label>
                                 <div class="bmd-form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
-                                                <i class="material-icons">face</i>
+                                                <i class="far fa-grin-alt"></i>
                                             </span>
                                         </div>
                                         <asp:TextBox runat="server" ID="Username" CssClass="form-control" TextMode="SingleLine" placeholder="Username" />
                                     </div>
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="Username"
-                                        CssClass="text-danger small" ErrorMessage="Username field is required." />
+                                        CssClass="text-danger small" ErrorMessage="The Username is required." />
                                 </div>
                                 <div class="bmd-form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
-                                                <i class="material-icons">lock_outline</i>
+                                                <i class="fas fa-unlock-alt"></i>
                                             </span>
                                         </div>
                                         <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" placeholder="Password" />
                                     </div>
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="Password"
-                                        CssClass="text-danger small" ErrorMessage="The password field is required." />
+                                        CssClass="text-danger small" ErrorMessage="The Password is required." />
                                 </div>
                             </div>
                             <div class="footer text-center mb-3">
-                                <asp:Button runat="server" OnClick="LogIn" Text="Log in" CssClass="btn btn-primary" />
+                                <asp:Button runat="server" OnClick="LogIn" Text="Log in" CssClass="btn btn-default" />
                             </div>
 
                         </div>

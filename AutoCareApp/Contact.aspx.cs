@@ -49,18 +49,20 @@ namespace AutoCareApp
             {
                 // Success sending email message
                 client.Send(message);
-
-                lblError.Text = "Messsage sent successfully";
-                lblError.ForeColor = System.Drawing.Color.Green;
-
+                alertBox.Visible = false;
                 panelPopup.Visible = true;
             }
             catch (SmtpException ex)
             {
                 // Displays error message
-                lblError.Text = ex.Message;
-                lblError.ForeColor = System.Drawing.Color.Red;
+                AlertMessage(ex.Message);
             }
+        }
+
+        public void AlertMessage(string message)
+        {
+            lblAlert.Text = message;
+            alertBox.Visible = true;
         }
     }
 }
