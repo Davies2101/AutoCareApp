@@ -45,3 +45,10 @@ packages/Respond.1.2.0/content/Scripts/respond.js
 packages/Respond.1.2.0/content/Scripts/respond.min.js
 packages/WebGrease.1.5.2/tools/install.ps1
 packages/WebGrease.1.5.2/tools/uninstall.ps1
+AutoCareApp/obj/Debug/Tsc.out
+AutoCareApp/obj/Debug/AutoCareApp.pdb
+AutoCareApp/obj/Debug/AutoCareApp.dll
+AutoCareApp/obj/Debug/AutoCareApp.csproj.FileListAbsolute.txt
+AutoCareApp/obj/Debug/AutoCareApp.csproj.CoreCompileInputs.cache
+AutoCareApp/bin/AutoCareApp.pdb
+AutoCareApp/bin/AutoCareApp.dll
