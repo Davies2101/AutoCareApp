@@ -25,7 +25,7 @@ namespace AutoCareApp
                     navAccount.Visible = true;
 
                     clsUser obj = (clsUser)Session["User"];
-                    lblUserName.Text = obj.FullName;
+                    lblUserName.Text = obj.Username;
                 }
                 else
                 {

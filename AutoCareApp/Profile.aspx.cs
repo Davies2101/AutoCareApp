@@ -11,10 +11,15 @@ namespace AutoCareApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["User"] == null)
+            {
+                Response.Redirect("LoginMsg");
+            }
+
             if (!IsPostBack)
             {
 
-                // Load curent pofile infor
+                // Load curent pofile info
                 clsUser obj = (clsUser)Session["User"];
                 FullName.Text = obj.FullName;
                 PhoneNumber.Text = obj.PhoneNumber;
@@ -39,27 +44,32 @@ namespace AutoCareApp
 
                 if (chkPassword.Checked)
                 {
-                    obj.Password = Password.Text;
+                    obj.Password = Cipher.Encrypt(obj.Username, Password.Text);
                 }
 
                 mgtUSer.Update(obj);
 
-                // Store user details to session as login user, redirects to home page
+                // Store user details to session as login user
                 Session["User"] = obj;
-                Response.Redirect("Default");
+                messageBox.Visible = true;
 
             }
             catch (Exception ex)
             {
-                // displays error messsage
-                lblError.Text = ex.Message;
-                lblError.ForeColor = System.Drawing.Color.Red;
+                AlertMessage(ex.Message);
             }
         }
 
         protected void chkPassword_CheckedChanged(object sender, EventArgs e)
         {
             panelPassword.Visible = chkPassword.Checked;
+        }
+
+        public void AlertMessage(string message)
+        {
+            lblAlert.Text = message;
+            alertBox.Visible = true;
+            messageBox.Visible = false;
         }
     }
 }

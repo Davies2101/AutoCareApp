@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 public class mgtUSer
 {
-    public static clsUser Login(string username)
+    public static clsUser GetUserByUsername(string username)
     {
         try
         {
@@ -112,9 +112,8 @@ public class mgtUSer
         }
     }
 
-    public static bool UsernameCheck(string username)
+    public static bool ValidateUsername(string username)
     {
-        SqlDataReader rd;
         SqlConnection con = new SqlConnection(App.GetDBCon());
         SqlCommand cmd = new SqlCommand("sp_User_CheckUsername", con);
         cmd.CommandType = CommandType.StoredProcedure;

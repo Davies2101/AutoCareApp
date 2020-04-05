@@ -1,10 +1,4 @@
-﻿using AutoCareApp.Management;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using System;
 
 namespace AutoCareApp
 {
@@ -24,7 +18,7 @@ namespace AutoCareApp
                 clsUser obj = null;
 
                 // get user by username
-                obj = mgtUSer.Login(Username.Text);
+                obj = mgtUSer.GetUserByUsername(Username.Text);
 
                 if (obj == null)
                 {   //if user object is null it emans username is invalid as it is not available in the database
@@ -48,7 +42,7 @@ namespace AutoCareApp
                         }
                         
                     }//password check
-                    else if (Password.Text == mgtEncryption.Decryptdata(obj.Password))
+                    else if (Password.Text == Cipher.Decrypt(obj.Password, obj.Username))
                     {
                         // if login success, stores new user and redirects to home page if its a normal user if not redirect to admin page
                         Session["User"] = obj;
@@ -91,7 +85,6 @@ namespace AutoCareApp
             lblAlert.Text = message;
             alertBox.Visible = true;
         }
-
   
     }
 }
