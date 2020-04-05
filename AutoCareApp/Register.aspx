@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Panel ID="alertBox" runat="server" Visible="False">
-        <div class="alert alert-dismissible fade show text-center" role="alert" runat="server">
+        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
             <span class="alert-text">
                 <asp:Label ID="lblAlert" runat="server" Text=""></asp:Label></span>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -12,139 +12,129 @@
     </asp:Panel>
     <div class="container">
         <div class="section text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 ml-auto mr-auto">
-                        <div class="card card-login">
-                            <div class="card-header card-header-primary text-center">
-                                <h2>Register</h2>
-                            </div>
-                            <div class="card-body">
-                                <asp:Label ID="lblError" runat="server" Text="Please enter your details" Visible="False"></asp:Label>
-                                <div class="row">
-                                    <div class="bmd-form-group col-md-6">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="far fa-grin-alt"></i>
-                                                </span>
-                                            </div>
-                                            <asp:TextBox runat="server" ID="FullName" CssClass="form-control fullname" TextMode="SingleLine" placeholder="Full Name" />
-                                        </div>
-                                        <span id="popover-fullname" class="text-danger small" style="visibility:hidden;">The Full Name is required.</span>
-                                    </div>
-                                    <div class="bmd-form-group col-md-6">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-phone"></i>
-                                                </span>
-                                            </div>
-                                            <asp:TextBox runat="server" ID="PhoneNumber" CssClass="form-control phonenumber" TextMode="Number" placeholder="Phone Number" />
-                                        </div>
-                                        <span id="popover-phonenumber" class="text-danger small" style="visibility:hidden;">Enter a valid Phone Number.</span>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="bmd-form-group col-md-6">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-user"></i>
-                                                </span>
-                                            </div>
-                                            <asp:TextBox runat="server" ID="Username" CssClass="form-control username" TextMode="SingleLine" placeholder="Username" />
-                                        </div>
-                                        <span id="popover-username" class="text-danger small" style="visibility:hidden;">The Username is required.</span>
-                                    </div>
-
-                                    <div class="bmd-form-group col-md-6">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-at"></i>
-                                                </span>
-                                            </div>
-                                            <asp:TextBox runat="server" ID="Email" CssClass="form-control email" TextMode="Email" placeholder="Email" />
-                                        </div>
-                                        <span id="popover-email" class="text-danger small" style="visibility:hidden;">Enter an valid Email Address.</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="bmd-form-group col-md-6">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-lock"></i>
-                                                </span>
-                                            </div>
-                                            <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control password" placeholder="Password" />
-                                        </div>
-                                        <span id="popover-password-top" class="text-danger small" style="visibility:hidden;">Enter a strong Password.</span>
-
-                                        <div id="popover-password">
-                                            <p class="small">Password Strength: <span id="result"></span></p>
-                                            <div class="progress">
-                                                <div id="password-strength" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                                                </div>
-                                            </div>
-                                            <ul class="list-unstyled text-left ml-auto mr-auto w-75 small">
-                                                <li class=""><span class="low-upper-case"><i class="fa fa-file-text" aria-hidden="true"></i></span>&nbsp;1 lowercase &amp; 1 uppercase</li>
-                                                <li class=""><span class="one-number"><i class="fa fa-file-text" aria-hidden="true"></i></span>&nbsp;1 number (0-9)</li>
-                                                <li class=""><span class="one-special-char"><i class="fa fa-file-text" aria-hidden="true"></i></span>&nbsp;1 Special Character (!@#$%^&*).</li>
-                                                <li class=""><span class="eight-character"><i class="fa fa-file-text" aria-hidden="true"></i></span>&nbsp; Atleast 8 Character</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="bmd-form-group col-md-6">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="fas fa-unlock"></i>
-                                                </span>
-                                            </div>
-                                            <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" CssClass="form-control confirm-password" placeholder="Confirm Password" />
-                                        </div>
-                                        <span id="popover-confirmpassword" class="text-danger small" style="visibility:hidden;">Password don't match.</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="footer text-center mb-3">
-                                <asp:Button runat="server" OnClick="CreateUser_Click" Text="Register" CssClass="btn btn-default btn-createUser" OnClientClick="return validateForm();" />
-                            </div>
-
+            <div class="row">
+                <div class="col-md-10 ml-auto mr-auto">
+                    <div class="card card-login">
+                        <div class="card-header card-header-primary text-center">
+                            <h2>Register</h2>
                         </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="bmd-form-group col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="far fa-grin-alt"></i>
+                                            </span>
+                                        </div>
+                                        <asp:TextBox runat="server" ID="FullName" CssClass="form-control fullname" TextMode="SingleLine" placeholder="Full Name" />
+                                    </div>
+                                    <span id="popover-fullname" class="text-danger small" style="visibility: hidden;">The Full Name is required.</span>
+                                </div>
+                                <div class="bmd-form-group col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-phone"></i>
+                                            </span>
+                                        </div>
+                                        <asp:TextBox runat="server" ID="PhoneNumber" CssClass="form-control phonenumber" TextMode="Number" placeholder="Phone Number" />
+                                    </div>
+                                    <span id="popover-phonenumber" class="text-danger small" style="visibility: hidden;">Enter a valid Phone Number.</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="bmd-form-group col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                        </div>
+                                        <asp:TextBox runat="server" ID="Username" CssClass="form-control username" TextMode="SingleLine" placeholder="Username" />
+                                    </div>
+                                    <span id="popover-username" class="text-danger small" style="visibility: hidden;">The Username is required.</span>
+                                </div>
+
+                                <div class="bmd-form-group col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-at"></i>
+                                            </span>
+                                        </div>
+                                        <asp:TextBox runat="server" ID="Email" CssClass="form-control email" TextMode="Email" placeholder="Email" />
+                                    </div>
+                                    <span id="popover-email" class="text-danger small" style="visibility: hidden;">Enter an valid Email Address.</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="bmd-form-group col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-lock"></i>
+                                            </span>
+                                        </div>
+                                        <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control password" placeholder="Password" />
+                                    </div>
+                                    <span id="popover-password-top" class="text-danger small" style="visibility: hidden;">Enter a strong Password.</span>
+
+                                    <div id="popover-password">
+                                        <p class="small">Password Strength: <span id="result"></span></p>
+                                        <div class="progress">
+                                            <div id="password-strength" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                            </div>
+                                        </div>
+                                        <ul class="list-unstyled text-left ml-auto mr-auto w-75 small">
+                                            <li class=""><span class="low-upper-case"><i class="fa fa-file-text" aria-hidden="true"></i></span>&nbsp;1 lowercase &amp; 1 uppercase</li>
+                                            <li class=""><span class="one-number"><i class="fa fa-file-text" aria-hidden="true"></i></span>&nbsp;1 number (0-9)</li>
+                                            <li class=""><span class="one-special-char"><i class="fa fa-file-text" aria-hidden="true"></i></span>&nbsp;1 Special Character (!@#$%^&*).</li>
+                                            <li class=""><span class="eight-character"><i class="fa fa-file-text" aria-hidden="true"></i></span>&nbsp; Atleast 8 Character</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="bmd-form-group col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-unlock"></i>
+                                            </span>
+                                        </div>
+                                        <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" CssClass="form-control confirm-password" placeholder="Confirm Password" />
+                                    </div>
+                                    <span id="popover-confirmpassword" class="text-danger small" style="visibility: hidden;">Password don't match.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer text-center mb-3">
+                            <asp:Button ID="btnCreateUser" runat="server" OnClick="CreateUser_Click" Text="Register" CssClass="btn btn-default" OnClientClick="return validateForm();" />
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   <%-- <asp:Panel runat="server" ID="panelPopup" Visible="false">
-        <div class="modal fade" id="myModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Register</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+    <asp:Panel ID="messageBox" runat="server" Visible="False">
+        <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+            <div class="modal-dialog modal-success modal-dialog-centered modal-" role="document">
+                <div class="modal-content bg-gradient-success">
                     <div class="modal-body">
-                        Successful, Your Account is created!
-
+                        <div class="text-center">
+                            <i class="far fa-check-circle fa-4x"></i>
+                            <h4 class="heading mt-4">Admin added successfully!</h4>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <asp:Button runat="server" type="button" Text="OK" OnClientClick="OKClick();" class="btn btn-success waves-effect waves-light" PostBackUrl="~/Default.aspx" />
+                        <button type="button" class="btn btn-white ml-auto" data-dismiss="modal">Ok</button>
                     </div>
-
                 </div>
-
             </div>
         </div>
-    </asp:Panel>--%>
-   
+    </asp:Panel>
     <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript">
@@ -155,13 +145,14 @@
 
 
         $(document).ready(function () {
-            window.onunload = function(e) {
+            $("#modal-notification").modal('show');
+
+            window.onunload = function (e) {
                 e = e || window.event;
                 var y = e.pageY || e.clientY;
                 if (y < 0) { alert("Window closed"); }
-                else {validateForm();}
-            }
-            $("#myModal").modal('show');
+                else { validateForm(); }
+            }            
 
             $('.email').blur(function () {
                 validateEmail();
