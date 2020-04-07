@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 
 using System.Net;
 using System.Net.Mail;
+using AutoCareApp.Classes;
 
 namespace AutoCareApp
 {
@@ -20,14 +21,6 @@ namespace AutoCareApp
 
         protected void ContactSend_Click(object sender, EventArgs e)
         {
-            // Creating email format and from to addresses
-
-            MailAddress to = new MailAddress("autocarebookings@gmail.com");
-            MailAddress from = new MailAddress("contactus@autocarebookings.com"); 
-
-            MailMessage message = new MailMessage(from, to);
-            message.Subject = "AutoCare Contact";
-            
             // Creating email body
             string BodyMsg = "We have received a contact from AutoCare website.\n\n";
             BodyMsg += "Name: " + ContactName.Text + "\n";
@@ -35,27 +28,18 @@ namespace AutoCareApp
             BodyMsg += "Subject: " + Subject.Text + "\n";
             BodyMsg += "Message: " + Message.Text + "\n\n";
             BodyMsg += "Thank you!";
-
-            message.Body = BodyMsg;
-
-            // Set Email server and creditials
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
-            {
-                Credentials = new NetworkCredential("autocarebookings@gmail.com", "AutoCare2101"),
-                EnableSsl = true
-            };
-
             try
             {
                 // Success sending email message
-                client.Send(message);
+                //client.Send(message);
+                EmailSender.Send("AutoCare Contact", BodyMsg, "autocarebookings@gmail.com");
                 alertBox.Visible = false;
                 panelPopup.Visible = true;
             }
-            catch (SmtpException ex)
+            catch (Exception ex)
             {
                 // Displays error message
-                AlertMessage(ex.Message);
+                AlertMessage("Something went wrong. Please try again!");
             }
         }
 
