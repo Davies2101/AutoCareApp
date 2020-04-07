@@ -106,6 +106,7 @@
     <Content Include="assets\vendor\bootstrap\dist\js\bootstrap.bundle.min.js" />
     <Content Include="assets\vendor\jquery\dist\jquery.min.js" />
     <Content Include="assets\vendor\nucleo\css\nucleo.css" />
+    <Content Include="Booking.aspx" />
     <Content Include="Content\images\about2.jpg" />
     <Content Include="Content\images\about3.jpg" />
     <Content Include="Content\images\login-bg.jpg" />
@@ -113,7 +114,6 @@
     <Content Include="Content\images\quote-2-70x70.jpg" />
     <Content Include="Content\images\quote-3-70x70.jpg" />
     <Content Include="NewBooking2.aspx" />
-    <Content Include="Booking.Master" />
     <Content Include="Services.aspx" />
     <Content Include="About.aspx" />
     <Content Include="Contact.aspx" />
@@ -132,12 +132,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
-    <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Site.Mobile.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -153,14 +151,16 @@
     <Compile Include="AdminPage.aspx.designer.cs">
       <DependentUpon>AdminPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Booking.Master.cs">
-      <DependentUpon>Booking.Master</DependentUpon>
+    <Compile Include="Booking.aspx.cs">
+      <DependentUpon>Booking.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Booking.Master.designer.cs">
-      <DependentUpon>Booking.Master</DependentUpon>
+    <Compile Include="Booking.aspx.designer.cs">
+      <DependentUpon>Booking.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Management\mgtEncryption.cs" />
+    <Compile Include="Classes\Cipher.cs" />
+    <Compile Include="Classes\EmailSender.cs" />
+    <Compile Include="Models\clsTime.cs" />
     <Compile Include="NewBooking2.aspx.cs">
       <DependentUpon>NewBooking2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -261,20 +261,6 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Site.Mobile.Master.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Mobile.Master.designer.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
-    </Compile>
-    <Compile Include="ViewSwitcher.ascx.cs">
-      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewSwitcher.ascx.designer.cs">
-      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

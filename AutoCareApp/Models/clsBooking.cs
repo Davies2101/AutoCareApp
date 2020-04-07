@@ -16,5 +16,8 @@ public class clsBooking
     public string PostCode { get; set; }
     public DateTime BookingDate { get; set; }
     public string Remarks { get; set; }
+    public bool IsPending { get; set; }
+    public bool IsCompleted { get; set; }
+    public TimeSpan TimeSlot { get; set; }
 
 }
