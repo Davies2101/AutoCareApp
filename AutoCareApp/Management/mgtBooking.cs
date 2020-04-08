@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 public class mgtBooking
 {
 
-    public static void Add(clsBooking obj, string ServiceIDList)
+    public static void Add(clsBooking obj, string ExtraIDList)
     {
         try
         {
@@ -30,7 +30,7 @@ public class mgtBooking
             cmd.Parameters.AddWithValue("BookingDate", obj.BookingDate);
             cmd.Parameters.AddWithValue("Remarks", obj.Remarks);
             cmd.Parameters.AddWithValue("TimeSlot", obj.TimeSlot);
-            cmd.Parameters.AddWithValue("ServiceIDList", ServiceIDList);
+            cmd.Parameters.AddWithValue("ExtraIDList", ExtraIDList);
 
             con.Open();
             cmd.ExecuteNonQuery();
