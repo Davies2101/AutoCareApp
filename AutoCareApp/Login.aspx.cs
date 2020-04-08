@@ -42,17 +42,17 @@ namespace AutoCareApp
                         }
                         
                     }//password check
-                    else if (Password.Text == Cipher.Decrypt(obj.Password, obj.Username))
+                    else if (Password.Text == Cipher.Decrypt(obj.Password))
                     {
                         // if login success, stores new user and redirects to home page if its a normal user if not redirect to admin page
                         Session["User"] = obj;
                         if (obj.AdminLogin)
                         {
-                            Response.Redirect("AdminPage");
+                            Response.Redirect("~/AdminPage.aspx");
                         }
                         else
                         {
-                            Response.Redirect("Default");
+                            Response.Redirect("~/Default.aspx");
                         }
                     }
                     else

@@ -6,122 +6,52 @@ using System.Text;
 namespace AutoCareApp
 {
     /// <summary>
-    /// https://www.selamigungor.com/post/7/encrypt-decrypt-a-string-in-csharp
+    /// https://www.aspsnippets.com/Articles/Encrypt-and-Decrypt-Username-or-Password-stored-in-database-in-Windows-Application-using-C-and-VBNet.aspx
     /// </summary>
     public class Cipher
     {
-        public static string Encrypt(string plainText, string password)
+        public static string Encrypt(string clearText)
         {
-            if (plainText == null)
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
             {
-                return null;
-            }
-
-            if (password == null)
-            {
-                password = String.Empty;
-            }
-
-            // Get the bytes of the string
-            var bytesToBeEncrypted = Encoding.UTF8.GetBytes(plainText);
-            var passwordBytes = Encoding.UTF8.GetBytes(password);
-
-            // Hash the password with SHA256
-            passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
-
-            var bytesEncrypted = Cipher.Encrypt(bytesToBeEncrypted, passwordBytes);
-
-            return Convert.ToBase64String(bytesEncrypted);
-        }
-       
-        public static string Decrypt(string encryptedText, string password)
-        {
-            if (encryptedText == null)
-            {
-                return null;
-            }
-
-            if (password == null)
-            {
-                password = String.Empty;
-            }
-
-            // Get the bytes of the string
-            var bytesToBeDecrypted = Convert.FromBase64String(encryptedText);
-            var passwordBytes = Encoding.UTF8.GetBytes(password);
-
-            passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
-
-            var bytesDecrypted = Cipher.Decrypt(bytesToBeDecrypted, passwordBytes);
-
-            return Encoding.UTF8.GetString(bytesDecrypted);
-        }
-
-        private static byte[] Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
-        {
-            byte[] encryptedBytes = null;
-
-            // Set your salt here, change it to meet your flavor:
-            // The salt bytes must be at least 8 bytes.
-            var saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                using (RijndaelManaged AES = new RijndaelManaged())
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
                 {
-                    var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
-
-                    AES.KeySize = 256;
-                    AES.BlockSize = 128;
-                    AES.Key = key.GetBytes(AES.KeySize / 8);
-                    AES.IV = key.GetBytes(AES.BlockSize / 8);
-
-                    AES.Mode = CipherMode.CBC;
-
-                    using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write))
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
                     {
-                        cs.Write(bytesToBeEncrypted, 0, bytesToBeEncrypted.Length);
+                        cs.Write(clearBytes, 0, clearBytes.Length);
                         cs.Close();
                     }
-
-                    encryptedBytes = ms.ToArray();
+                    clearText = Convert.ToBase64String(ms.ToArray());
                 }
             }
-
-            return encryptedBytes;
+            return clearText;
         }
 
-        private static byte[] Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes)
+        public static string Decrypt(string cipherText)
         {
-            byte[] decryptedBytes = null;
-
-            // Set your salt here, change it to meet your flavor:
-            // The salt bytes must be at least 8 bytes.
-            var saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-
-            using (MemoryStream ms = new MemoryStream())
+            string EncryptionKey = "MAKV2SPBNI99212";
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
             {
-                using (RijndaelManaged AES = new RijndaelManaged())
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
                 {
-                    var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
-
-                    AES.KeySize = 256;
-                    AES.BlockSize = 128;
-                    AES.Key = key.GetBytes(AES.KeySize / 8);
-                    AES.IV = key.GetBytes(AES.BlockSize / 8);
-                    AES.Mode = CipherMode.CBC;
-
-                    using (var cs = new CryptoStream(ms, AES.CreateDecryptor(), CryptoStreamMode.Write))
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
                     {
-                        cs.Write(bytesToBeDecrypted, 0, bytesToBeDecrypted.Length);
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
                         cs.Close();
                     }
-
-                    decryptedBytes = ms.ToArray();
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
                 }
             }
-
-            return decryptedBytes;
+            return cipherText;
         }
     }
 }

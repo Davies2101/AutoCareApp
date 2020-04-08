@@ -25,7 +25,7 @@ namespace AutoCareApp
                 clsUser obj = new clsUser();
                 obj.FullName = FullName.Text;
                 obj.Username = Username.Text;
-                obj.Password = Cipher.Encrypt(Username.Text, Password.Text);
+                obj.Password = Cipher.Encrypt(Password.Text);
                 obj.Email = Email.Text;
                 obj.PhoneNumber = PhoneNumber.Text;
                 obj.AdminLogin = false;
