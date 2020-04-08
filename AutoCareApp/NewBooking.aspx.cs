@@ -72,7 +72,7 @@ namespace AutoCareApp
 
         protected void LoadServices()
         {
-            DataTable dt = mgtService.GetDataSet().Tables[0];
+            DataTable dt = mgtExtra.GetDataSet().Tables[0];
             lstServices.DataSource = dt;
             lstServices.DataBind();
 

@@ -78,6 +78,7 @@
 
     #wizHeader li {
         float: left;
+        width: 25%;
     }
 
         #wizHeader li a {
@@ -89,6 +90,7 @@
             position: relative;
             display: block;
             float: left;
+            width: 100%;
         }
 
             #wizHeader li a:after {
@@ -141,4 +143,21 @@
 
 .invisible{
     visibility: hidden;
+}
+
+.bronze {
+    background: linear-gradient(87deg,#9a813c 0,#b18c04 100%) !important;
+    color: white;
+}
+.gold {
+    background: linear-gradient(87deg,#efcf76 0,#c1a12c 100%) !important;
+    color: white;
+}
+.silver {
+    background: linear-gradient(87deg,#cac4b6 0,#ceccc9 100%) !important;
+    color: white;
+}
+.platinum {
+    background: linear-gradient(87deg,#a5a5a5 0,#525252 100%) !important;
+    color: white;
 }

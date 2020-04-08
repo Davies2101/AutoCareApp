@@ -1,11 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Booking.aspx.cs" Inherits="AutoCareApp.Booking" %>
+<%@ Import Namespace="System.Activities.Statements" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Panel ID="alertBox" runat="server" Visible="False">
         <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
             <span class="alert-text">
                 <asp:Label ID="lblAlert" runat="server" Text=""></asp:Label></span>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" aria-label="Close" onclick="redirect();">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -13,10 +14,10 @@
     <div class="container">
         <div class="section text-center">
             <div class="row">
-                <div class="card col-xl-12">
+                <div class="card col-xl-12 mt-2">
                     <asp:Wizard runat="server" DisplaySideBar="False" ID="Wizard1" OnPreRender="Wizard1_OnPreRender" OnActiveStepChanged="Wizard1_OnActiveStepChanged">
                         <WizardSteps>
-                            <asp:WizardStep Title="Step 1" runat="server">
+                            <asp:WizardStep Title="Packages" runat="server">
                                 <div class="card content">
                                     <div class="card-header card-header-primary text-center">
                                         <h2 class="text-left">Select Your Package</h2>
@@ -29,22 +30,32 @@
                                             <asp:ListView ID="lstVPackage" runat="server">
                                                 <ItemTemplate>
                                                     <div class="card col-md-3" runat="server" id="divCard">
-                                                        <div class="card-header" runat="server" id="divCardHeader">
+                                                        <div class='<%#Eval("PackageName").ToString().ToLower() + " card-header"%>' runat="server">
                                                             <span class=""><%#Eval("PackageName")%></span>
                                                         </div>
                                                         <div class="card-body bg-gradient-secondary">
                                                             <h2 class="card-title">£ <%#Eval("PackagePrice")%></h2>
-                                                            <p class="card-text" style="height: 150px; overflow: hidden"><%#Eval("PackageDetails")%></p>
-                                                            <asp:Button ID="btnSelectPackage" runat="server" Text="Select" CssClass="btn btn-primary" OnClick="btnSelectPackage_OnClick" PackageID='<%#Eval("PackageID")%>' />
+                                                            <div class="card-text text-left" style="min-height: 185px">
+                                                                <span class="text-sm d-block mb-1"><i class="far fa-check-square mr-2"></i><%#Eval("Content1")%></span>
+                                                                <span class="text-sm d-block mb-1"><i class="far fa-check-square mr-2"></i><%#Eval("Content2")%></span>
+                                                                <span class="text-sm d-block mb-1"><i class="far fa-check-square mr-2"></i><%#Eval("Content3")%></span>
+                                                                <span class="text-sm d-block mb-1"><%# (string)Eval("Content4") == "" ? "" : "<i class='far fa-check-square mr-2'></i>" + Eval("Content4") %></span>
+                                                                <span class="text-sm d-block mb-1"><%# (string)Eval("Content5") == "" ? "" : "<i class='far fa-check-square mr-2'></i>" + Eval("Content5") %></span>
+                                                                <span class="text-sm d-block mb-1"><%# (string)Eval("Content6") == "" ? "" : "<i class='far fa-check-square mr-2'></i>" + Eval("Content6") %></span>
+                                                                <span class="text-sm d-block mb-1"><%# (string)Eval("Content7") == "" ? "" : "<i class='far fa-check-square mr-2'></i>" + Eval("Content7") %></span>
+                                                            </div>
+                                                            <asp:Button ID="btnSelectPackage" runat="server" Text="Select" CssClass='<%#Eval("PackageName").ToString().ToLower() + " btn"%>' OnClick="btnSelectPackage_OnClick" PackageID='<%#Eval("PackageID")%>' />
                                                         </div>
                                                     </div>
                                                 </ItemTemplate>
                                             </asp:ListView>
                                         </div>
+
                                     </div>
                                 </div>
+
                             </asp:WizardStep>
-                            <asp:WizardStep Title="Step 2" runat="server">
+                            <asp:WizardStep Title="Date & Time" runat="server">
                                 <div class="card content">
                                     <div class="card-header card-header-primary text-center">
                                         <h2>Select Booking Date and Time</h2>
@@ -73,13 +84,18 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <h5>Additional services (optional)</h5>
-                                                <asp:CheckBoxList ID="chkBoxServices" runat="server" CssClass="text-left" AutoPostBack="True" OnSelectedIndexChanged="chkBoxServices_OnSelectedIndexChanged"></asp:CheckBoxList>
+                                                <asp:CheckBoxList ID="chkBoxServices" runat="server" CssClass="text-left" AutoPostBack="True" OnSelectedIndexChanged="chkBoxServices_OnSelectedIndexChanged">
+                                                    <asp:ListItem Value="1" Text="Wax - (£10)"></asp:ListItem>
+                                                    <asp:ListItem Value="2" Text="Engine Clean - (£12)"></asp:ListItem>
+                                                    <asp:ListItem Value="3" Text="Paintwork Buffed - (£8.5)"></asp:ListItem>
+                                                    <asp:ListItem Value="4" Text="Shampoo Self-Cleaning Pack - (£12.5)"></asp:ListItem>
+                                                </asp:CheckBoxList>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </asp:WizardStep>
-                            <asp:WizardStep Title="Step 3" runat="server">
+                            <asp:WizardStep Title="Add Your Info" runat="server">
                                 <div class="card content">
                                     <div class="card-header card-header-primary text-center">
                                         <h2>Add Your Info</h2>
@@ -177,7 +193,7 @@
                                     </div>
                                 </div>
                             </asp:WizardStep>
-                            <asp:WizardStep Title="Step 4" runat="server">
+                            <asp:WizardStep Title="Summary" runat="server">
                                 <div class="card content">
                                     <div class="card-header card-header-primary text-center">
                                         <h2 class="text-center">Booking Summary</h2>
@@ -209,11 +225,11 @@
                                                                 <asp:Label ID="lblServices" runat="server" Text="Additional Services:" Visible="False"></asp:Label></td>
                                                             <td class="col-md-3 text-left"></td>
                                                         </tr>
-                                                        <asp:ListView ID="lstViewServices" runat="server">
+                                                        <asp:ListView ID="lstViewExtras" runat="server">
                                                             <ItemTemplate>
                                                                 <tr>
-                                                                    <td class="col-md-9 text-left">&nbsp;&nbsp;<i class="fas fa-dot-circle"></i>&nbsp;&nbsp;<%#Eval("ServiceName")%></td>
-                                                                    <td class="col-md-3 text-left">£ <%# string.Format("{0:0.00}",Eval("ServicePrice"))%></td>
+                                                                    <td class="col-md-9 text-left">&nbsp;&nbsp;<i class="fas fa-dot-circle"></i>&nbsp;&nbsp;<%#Eval("ExtraName")%></td>
+                                                                    <td class="col-md-3 text-left">£ <%# string.Format("{0:0.00}",Eval("ExtraPrice"))%></td>
                                                                 </tr>
                                                             </ItemTemplate>
                                                         </asp:ListView>
@@ -235,7 +251,7 @@
                                 </div>
                             </asp:WizardStep>
                         </WizardSteps>
-                        <%-- <HeaderTemplate>
+                         <HeaderTemplate>
                             <ul id="wizHeader">
                                 <asp:Repeater ID="SideBarList" runat="server">
                                     <ItemTemplate>
@@ -244,7 +260,7 @@
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </ul>
-                        </HeaderTemplate>--%>
+                        </HeaderTemplate>
                         <StartNavigationTemplate>
                             <asp:Button ID="StartNextButton" runat="server" Text="Next" CommandName="MoveNext" CssClass="btn btn-default" />
                         </StartNavigationTemplate>
@@ -270,6 +286,7 @@
                             <i class="far fa-check-circle fa-4x"></i>
                             <h4 class="heading mt-4">Your booking has been confirmed.</h4>
                             <p>Check your email for details.</p>
+                            <div id="dvCountDown" style="display:none;font-size:small;">You will be redirected to Home in <span id="lblCount"></span>&nbsp;seconds.</div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -287,5 +304,19 @@
                 $(this).next().click();
             });
         });
+        function redirectToHome() {
+            var seconds = 5;
+            var dvCountDown = document.getElementById("dvCountDown");
+            var lblCount = document.getElementById("lblCount");
+            dvCountDown.style.display = "block";
+            lblCount.innerHTML = seconds;
+            setInterval(function () {
+                seconds--;
+                lblCount.innerHTML = seconds;
+                if (seconds == 0) {
+                    window.location = "Default.aspx";
+                }
+            }, 1000);
+        }
     </script>
 </asp:Content>

@@ -20,9 +20,9 @@ namespace AutoCareApp
     {
         private DataSet bookingDateDataSet = mgtBooking.GetActiveBookings();
         private static clsBooking bookingObject = null;
-        private static List<string> selectedServices = null;
+        private static List<string> selectedExtras = null;
         private static DataTable packageList = mgtPackage.GetDataSet().Tables[0];
-        private static DataTable servicesList = mgtService.GetDataSet().Tables[0];
+        private static DataTable servicesList = mgtExtra.GetDataSet().Tables[0];
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,18 +35,18 @@ namespace AutoCareApp
             if (!Page.IsPostBack)
             {
                 BindPackages();
-                BindServices();
+                //BindServices();
                 bookingObject = new clsBooking();
-                selectedServices = new List<string>();
+                selectedExtras = new List<string>();
             }
             alertBox.Visible = false;
         }
 
         protected void Wizard1_OnPreRender(object sender, EventArgs e)
         {
-            //Repeater SideBarList = Wizard1.FindControl("HeaderContainer").FindControl("SideBarList") as Repeater;
-            //SideBarList.DataSource = Wizard1.WizardSteps;
-            //SideBarList.DataBind();
+            Repeater SideBarList = Wizard1.FindControl("HeaderContainer").FindControl("SideBarList") as Repeater;
+            SideBarList.DataSource = Wizard1.WizardSteps;
+            SideBarList.DataBind();
         }
 
         protected string GetClassForWizardStep(object wizardStep)
@@ -133,14 +133,10 @@ namespace AutoCareApp
             {
                 HtmlControl divCard = (HtmlControl)childControl.FindControl("divCard");
                 divCard.Attributes.Add("class", "card col-md-3");
-                HtmlControl divCardHeader = (HtmlControl)childControl.FindControl("divCardHeader");
-                divCardHeader.Attributes.Add("class", "card-header");
             }
 
             HtmlControl card = (HtmlControl)button.Parent.FindControl("divCard");
             card.Attributes.Add("class", "card col-md-3 bg-gradient-primary");
-            HtmlControl cardHeader = (HtmlControl)button.Parent.FindControl("divCardHeader");
-            cardHeader.Attributes.Add("class", "card-header bg-gradient-info");
             bookingObject.PackageID = packageID;
             CalculateTotal();
         }
@@ -162,11 +158,21 @@ namespace AutoCareApp
                     {
                         foreach (clsTime timeSlot in availableSlots)
                         {
-                            if (timeSlot.Value == bookingTime)
+                            if (timeSlot.Value == bookingTime || timeSlot.Value <= DateTime.Now.TimeOfDay)
                             {
                                 timeSlot.IsAvailable = false;
                             }
                         }
+                    }
+                }
+            }
+            else
+            {
+                foreach (clsTime timeSlot in availableSlots)
+                {
+                    if (timeSlot.Value <= DateTime.Now.TimeOfDay)
+                    {
+                        timeSlot.IsAvailable = false;
                     }
                 }
             }
@@ -210,18 +216,7 @@ namespace AutoCareApp
             lstVTimeSlots.DataSource = listTimes;
             lstVTimeSlots.DataBind();
         }
-
-        /// <summary>
-        /// binding checkbox values
-        /// http://www.dotnetfox.com/articles/how-to-bind-data-to-checkboxlist-control-in-Asp-Net-using-C-Sharp-1042.aspx
-        /// </summary>
-        private void BindServices()
-        {
-            chkBoxServices.DataSource = servicesList;
-            chkBoxServices.DataTextField = "ServiceName";
-            chkBoxServices.DataValueField = "ServiceID";
-            chkBoxServices.DataBind();
-        }
+        
 
         /// <summary>
         /// getting checbox values
@@ -229,12 +224,12 @@ namespace AutoCareApp
         /// </summary>
         protected void chkBoxServices_OnSelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedServices = new List<string>();
+            selectedExtras = new List<string>();
             foreach (ListItem item in chkBoxServices.Items)
             {
                 if (item.Selected)
                 {
-                    selectedServices.Add(item.Value);
+                    selectedExtras.Add(item.Value);
                 }
             }
 
@@ -245,7 +240,7 @@ namespace AutoCareApp
         public void CalculateTotal()
         {
             double packagePrice = 0;
-            double serviceTotal = 0;
+            double extraTotal = 0;
             double total = 0;
             
             //filter data from datatable
@@ -263,21 +258,21 @@ namespace AutoCareApp
                 }
             }
 
-            if (selectedServices.Count > 0)
+            if (selectedExtras.Count > 0)
             {
-                foreach (var serviceId in selectedServices)
+                foreach (var serviceId in selectedExtras)
                 {
                     DataView dv = new DataView(servicesList);
-                    dv.RowFilter = "ServiceID=" + serviceId;
+                    dv.RowFilter = "ExtraID=" + serviceId;
 
                     foreach (DataRowView drV in dv)
                     {
-                        serviceTotal = serviceTotal + Convert.ToDouble(drV["ServicePrice"].ToString());
+                        extraTotal = extraTotal + Convert.ToDouble(drV["ExtraPrice"].ToString());
                     }
                 }
             }
 
-            total = packagePrice + serviceTotal;
+            total = packagePrice + extraTotal;
 
             lblTotal1.Text = string.Format("{0:0.00}", total);
             lblTotal2.Text = string.Format("{0:0.00}", total);
@@ -289,7 +284,7 @@ namespace AutoCareApp
         /// </summary>
         protected void Wizard1_OnActiveStepChanged(object sender, EventArgs e)
         {
-            if (Wizard1.ActiveStep.Name == "Step 2")
+            if (Wizard1.ActiveStep.Name == "Date & Time")
             {
                 if (bookingObject.PackageID == 0)
                 {
@@ -298,7 +293,7 @@ namespace AutoCareApp
                 }
 
             }
-            if (Wizard1.ActiveStep.Name == "Step 3")
+            if (Wizard1.ActiveStep.Name == "Add Your Info")
             {
 
                 if (bookingObject.TimeSlot == new TimeSpan(0, 0, 0))
@@ -313,10 +308,10 @@ namespace AutoCareApp
                 }
             }
             
-            if (Wizard1.ActiveStep.Name == "Step 4")
+            if (Wizard1.ActiveStep.Name == "Summary")
             {
                 double packagePrice = 0;
-                double serviceTotal = 0;
+                double extraTotal = 0;
                 double total = 0;
                 if (bookingObject.PackageID > 0)
                 {
@@ -334,34 +329,34 @@ namespace AutoCareApp
                     }
                 }
 
-                List<clsService> services = new List<clsService>();
-                if (selectedServices.Count > 0)
+                List<clsExtra> extras = new List<clsExtra>();
+                if (selectedExtras.Count > 0)
                 {
                     lblServices.Visible = true;
-                    foreach (var serviceId in selectedServices)
+                    foreach (var extraId in selectedExtras)
                     {
                         DataView dv = new DataView(servicesList);
-                        dv.RowFilter = "ServiceID=" + serviceId;
+                        dv.RowFilter = "ExtraID=" + extraId;
 
-                        clsService service = new clsService();
+                        clsExtra extra = new clsExtra();
                         foreach (DataRowView drV in dv)
                         {
-                            service.ServicePrice = Convert.ToDouble(drV["ServicePrice"].ToString());
-                            serviceTotal = serviceTotal + service.ServicePrice;
-                            service.ServiceName = drV["ServiceName"].ToString();
+                            extra.ExtraPrice = Convert.ToDouble(drV["ExtraPrice"].ToString());
+                            extraTotal = extraTotal + extra.ExtraPrice;
+                            extra.ExtraName = drV["ExtraName"].ToString();
                         }
 
-                        services.Add(service);
+                        extras.Add(extra);
                     }
                 }
 
-                if (services.Count > 0)
+                if (extras.Count > 0)
                 {
-                    lstViewServices.DataSource = services;
-                    lstViewServices.DataBind();
+                    lstViewExtras.DataSource = extras;
+                    lstViewExtras.DataBind();
                 }
 
-                total = serviceTotal + packagePrice;
+                total = extraTotal + packagePrice;
                 lblTotal.Text = string.Format("{0:0.00}", total);
                 lblBookingDateAndTime.Text = bookingObject.BookingDate.ToShortDateString() + " " + DateTime.Today.Add(bookingObject.TimeSlot).ToString("hh:mm tt");
              }
@@ -387,9 +382,10 @@ namespace AutoCareApp
                 bookingObject.VehicleReg = VehicleReg.Text;
                 bookingObject.VehicleModel = VehicleModel.Text;
                 bookingObject.UserID = user.UserID;
-                mgtBooking.Add(bookingObject, string.Join(",", selectedServices));
+                mgtBooking.Add(bookingObject, string.Join(",", selectedExtras));
                 messageBox.Visible = true;
                 SendBookingConfirmation(user);
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "clientScript", "redirectToHome();", true);
             }
             catch (Exception ex)
             {

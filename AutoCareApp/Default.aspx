@@ -44,26 +44,26 @@
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
                     </LayoutTemplate>
                     <ItemTemplate>
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-header card-header-primary">
-                                    <div class="card-icon">
-                                        <i class="material-icons">directions_car</i>
-                                    </div>
-                                    <h4 class="card-title"><%#Eval("PackageName")%></h4>
-                                    <h5 class="category">Price: £ <%#Eval("PackagePrice")%></h5>
+                        <div class="card col-md-3" runat="server" id="divCard">
+                            <div class='<%#Eval("PackageName").ToString().ToLower() + " card-header"%>' runat="server">
+                                <span class=""><%#Eval("PackageName")%></span>
+                            </div>
+                            <div class="card-body bg-gradient-secondary">
+                                <h2 class="card-title">£ <%#Eval("PackagePrice")%></h2>
+                                <div class="card-text text-left" style="min-height: 185px">
+                                    <span class="text-sm d-block mb-1"><i class="far fa-check-square mr-2"></i><%#Eval("Content1")%></span>
+                                    <span class="text-sm d-block mb-1"><i class="far fa-check-square mr-2"></i><%#Eval("Content2")%></span>
+                                    <span class="text-sm d-block mb-1"><i class="far fa-check-square mr-2"></i><%#Eval("Content3")%></span>
+                                    <span class="text-sm d-block mb-1"><%# (string)Eval("Content4") == "" ? "" : "<i class='far fa-check-square mr-2'></i>" + Eval("Content4") %></span>
+                                    <span class="text-sm d-block mb-1"><%# (string)Eval("Content5") == "" ? "" : "<i class='far fa-check-square mr-2'></i>" + Eval("Content5") %></span>
+                                    <span class="text-sm d-block mb-1"><%# (string)Eval("Content6") == "" ? "" : "<i class='far fa-check-square mr-2'></i>" + Eval("Content6") %></span>
+                                    <span class="text-sm d-block mb-1"><%# (string)Eval("Content7") == "" ? "" : "<i class='far fa-check-square mr-2'></i>" + Eval("Content7") %></span>
                                 </div>
-                                <div class="card-body">
-                                    <div class="more text-left"><%#Eval("PackageDetails")%> </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <a href="NewBooking.aspx?id=<%#Eval("PackageID")%>" class="btn btn-primary">Book Now</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <a href="Booking.aspx" class='<%#Eval("PackageName").ToString().ToLower() + " btn"%>'>Book Now</a>
                             </div>
                         </div>
                     </ItemTemplate>
+
                 </asp:ListView>
             </div>
         </div>
@@ -129,36 +129,4 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-            var showChar = 100;  // How many characters are shown by default
-            var ellipsestext = "...";
-            var moretext = "Show more";
-            var lesstext = "Show less";
-
-            $('.more').each(function() {
-                var content = $(this).html();
- 
-                if(content.length > showChar) {
-                    var c = content.substr(0, showChar);
-                    var h = content.substr(showChar, content.length - showChar);
-                    var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
-                    $(this).html(html);
-                }
-            });
- 
-            $(".morelink").click(function(){
-                if($(this).hasClass("less")) {
-                    $(this).removeClass("less");
-                    $(this).html(moretext);
-                } else {
-                    $(this).addClass("less");
-                    $(this).html(lesstext);
-                }
-                $(this).parent().prev().toggle();
-                $(this).prev().toggle();
-                return false;
-            });
-        });
-    </script>
 </asp:Content>
