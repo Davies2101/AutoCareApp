@@ -110,12 +110,15 @@
     <Content Include="assets\vendor\jquery\dist\jquery.min.js" />
     <Content Include="assets\vendor\nucleo\css\nucleo.css" />
     <Content Include="Booking.aspx" />
+    <Content Include="BookingEdit.aspx" />
     <Content Include="Content\images\about2.jpg" />
     <Content Include="Content\images\about3.jpg" />
     <Content Include="Content\images\login-bg.jpg" />
     <Content Include="Content\images\quote-1-70x70.jpg" />
     <Content Include="Content\images\quote-2-70x70.jpg" />
     <Content Include="Content\images\quote-3-70x70.jpg" />
+    <Content Include="ManageBookings.aspx" />
+    <Content Include="MyBookings.aspx" />
     <Content Include="Services.aspx" />
     <Content Include="About.aspx" />
     <Content Include="Contact.aspx" />
@@ -172,9 +175,31 @@
     <Compile Include="Booking.aspx.designer.cs">
       <DependentUpon>Booking.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BookingEdit.aspx.cs">
+      <DependentUpon>BookingEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BookingEdit.aspx.designer.cs">
+      <DependentUpon>BookingEdit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Classes\Cipher.cs" />
     <Compile Include="Classes\EmailSender.cs" />
+    <Compile Include="ManageBookings.aspx.cs">
+      <DependentUpon>ManageBookings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageBookings.aspx.designer.cs">
+      <DependentUpon>ManageBookings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\mgtPoint.cs" />
     <Compile Include="Models\clsTime.cs" />
+    <Compile Include="MyBookings.aspx.cs">
+      <DependentUpon>MyBookings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyBookings.aspx.designer.cs">
+      <DependentUpon>MyBookings.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Services.aspx.cs">
       <DependentUpon>Services.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
