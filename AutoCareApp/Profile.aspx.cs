@@ -44,7 +44,7 @@ namespace AutoCareApp
 
                 if (chkPassword.Checked)
                 {
-                    obj.Password = Cipher.Encrypt(obj.Username, Password.Text);
+                    obj.Password = Cipher.Encrypt(Password.Text);
                 }
 
                 mgtUSer.Update(obj);

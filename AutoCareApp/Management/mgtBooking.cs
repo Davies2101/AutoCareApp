@@ -30,6 +30,7 @@ public class mgtBooking
             cmd.Parameters.AddWithValue("BookingDate", obj.BookingDate);
             cmd.Parameters.AddWithValue("Remarks", obj.Remarks);
             cmd.Parameters.AddWithValue("TimeSlot", obj.TimeSlot);
+            cmd.Parameters.AddWithValue("Total", obj.Total);
             cmd.Parameters.AddWithValue("ExtraIDList", ExtraIDList);
 
             con.Open();
@@ -73,8 +74,10 @@ public class mgtBooking
                     obj.VehicleColor = rd["VehicleColor"].ToString();
 
                 }
+
                 rd.Close();
             }
+
             con.Close();
 
             return obj;
@@ -112,8 +115,10 @@ public class mgtBooking
                     // Reads return values to see criteria matches DB Users 
                     obj = Convert.ToInt32(rd[0]);
                 }
+
                 rd.Close();
             }
+
             con.Close();
 
             return obj;
@@ -132,15 +137,15 @@ public class mgtBooking
             DataSet ds = new DataSet("dt");
 
             // Getting the database connectivity as stored procedure
-            using (SqlConnection conn = new SqlConnection(App.GetDBCon()))
+            using (SqlConnection con = new SqlConnection(App.GetDBCon()))
             {
-                SqlCommand sqlComm = new SqlCommand("sp_ActiveBookings_All", conn);
+                SqlCommand cmd = new SqlCommand("sp_ActiveBookings_All", con);
                 //sqlComm.Parameters.AddWithValue("@TimeRange", TimeRange);
 
-                sqlComm.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlDataAdapter da = new SqlDataAdapter();
-                da.SelectCommand = sqlComm;
+                da.SelectCommand = cmd;
 
                 // Getting the data and filing to data set variable
                 da.Fill(ds);
@@ -151,6 +156,54 @@ public class mgtBooking
         catch (Exception ex)
         {
             throw ex;
+        }
+    }
+
+    public static DataSet GetMyBookings(int userId)
+    {
+        try
+        {
+            DataSet ds = new DataSet("dt");
+
+            // Getting the database connectivity as stored procedure
+            using (SqlConnection con = new SqlConnection(App.GetDBCon()))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Get_MyBookings", con);
+                //sqlComm.Parameters.AddWithValue("@TimeRange", TimeRange);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("userId", userId);
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+
+                // Getting the data and filing to data set variable
+                da.Fill(ds);
+            }
+
+            return ds;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    public static void CancelBooking(int bookingId)
+    {
+        try
+        {
+            // Getting the database connectivity as stored procedure
+            SqlConnection con = new SqlConnection(App.GetDBCon());
+            SqlCommand cmd = new SqlCommand("sp_Booking_Cancel", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("BookingId", bookingId);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        catch (Exception)
+        {
+            throw;
         }
     }
 }

@@ -19,5 +19,6 @@ public class clsBooking
     public bool IsPending { get; set; }
     public bool IsCompleted { get; set; }
     public TimeSpan TimeSlot { get; set; }
+    public double Total { get; set; }
 
 }
