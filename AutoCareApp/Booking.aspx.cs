@@ -13,6 +13,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using AutoCareApp.Classes;
 using System.Globalization;
+using AutoCareApp.Management;
 
 namespace AutoCareApp
 {
@@ -382,7 +383,9 @@ namespace AutoCareApp
                 bookingObject.VehicleReg = VehicleReg.Text;
                 bookingObject.VehicleModel = VehicleModel.Text;
                 bookingObject.UserID = user.UserID;
+                bookingObject.Total = Convert.ToDouble(lblTotal.Text);
                 mgtBooking.Add(bookingObject, string.Join(",", selectedExtras));
+                mgtPoint.Add(user.UserID);
                 messageBox.Visible = true;
                 SendBookingConfirmation(user);
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "clientScript", "redirectToHome();", true);
