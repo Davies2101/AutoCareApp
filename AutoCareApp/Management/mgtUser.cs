@@ -172,4 +172,52 @@ public class mgtUSer
             throw;
         }
     }
+
+    public static clsUser GetUserByUserId(int userId)
+    {
+        try
+        {
+            SqlConnection con = new SqlConnection(App.GetDBCon());
+            SqlDataReader rd;
+
+            clsUser obj = null;
+
+            using (con)
+            {
+                // Getting the database connectivity using stored procedure
+                SqlCommand cmd = new SqlCommand("sp_Get_UserById", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                // Passing parameters
+                cmd.Parameters.AddWithValue("userId", userId);
+
+                con.Open();
+                rd = cmd.ExecuteReader();
+                while (rd.Read())
+                {
+                    // Reads return values to see criteria matches DB Users 
+                    obj = new clsUser();
+
+                    obj.UserID = Convert.ToInt32(rd["UserID"]);
+                    obj.FullName = rd["FullName"].ToString();
+                    obj.Username = rd["Username"].ToString();
+                    obj.Password = rd["Password"].ToString();
+                    obj.Email = rd["Email"].ToString();
+                    obj.PhoneNumber = rd["PhoneNumber"].ToString();
+                    obj.AdminLogin = Convert.ToBoolean(rd["AdminLogin"].ToString());
+                    obj.FailedLoginAttempts = Convert.ToInt32(rd["FailedLoginAttempts"].ToString());
+                    obj.LockedOutDatetime = rd["LockedOutDatetime"] == DBNull.Value ? (DateTime?)null : (DateTime)rd["LockedOutDatetime"];
+
+                }
+                rd.Close();
+            }
+            con.Close();
+
+            return obj;
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+    }
 }

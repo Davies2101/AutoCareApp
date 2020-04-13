@@ -45,19 +45,19 @@
 
 
 #wizHeader li .prevStep {
-    background-color: #5e72e4;
+    background-color: #172b4d;
 }
 
     #wizHeader li .prevStep:after {
-        border-left-color: #5e72e4 !important;
+        border-left-color: #172b4d !important;
     }
 
 #wizHeader li .currentStep {
-    background-color: #5e72e4;
+    background-color: #172b4d;
 }
 
     #wizHeader li .currentStep:after {
-        border-left-color: #5e72e4 !important;
+        border-left-color: #172b4d !important;
     }
 
 #wizHeader li .nextStep {
@@ -86,7 +86,7 @@
             text-decoration: none;
             padding: 10px 0 10px 55px;
             background: brown; /* fallback color */
-            background: #5e72e4;
+            background: #172b4d;
             position: relative;
             display: block;
             float: left;
@@ -100,7 +100,7 @@
                 height: 0;
                 border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
                 border-bottom: 50px solid transparent;
-                border-left: 30px solid #5e72e4;
+                border-left: 30px solid #172b4d;
                 position: absolute;
                 top: 50%;
                 margin-top: -50px;
@@ -133,11 +133,11 @@
         }
 
         #wizHeader li a:hover {
-            background: #172b4d;
+            background: #7e8796;
         }
 
             #wizHeader li a:hover:after {
-                border-left-color: #172b4d !important;
+                border-left-color: #7e8796 !important;
             }
 
 
@@ -161,3 +161,5 @@
     background: linear-gradient(87deg,#a5a5a5 0,#525252 100%) !important;
     color: white;
 }
+
+

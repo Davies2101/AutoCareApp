@@ -34,12 +34,16 @@
                 <div class="collapse navbar-collapse" id="navbar-info">
                     <div class="navbar-collapse-header">
                         <div class="row">
-                            <div class="col-6 collapse-brand">
-                                <a href="javascript:void(0)">
-                                    <img src="../../assets/img/brand/blue.png">
+                            <div class="col-8 collapse-brand">
+                                <a href="Default.aspx">
+                                    <div class="row">
+                                        <img src="/Content/images/Logo-Small.png" style="filter: invert(100%);"/>
+                                        <p class="ml-4">Auto Care</p>
+
+                                    </div>
                                 </a>
                             </div>
-                            <div class="col-6 collapse-close">
+                            <div class="col-4 collapse-close">
                                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-info" aria-controls="navbar-info" aria-expanded="false" aria-label="Toggle navigation">
                                     <span></span>
                                     <span></span>
@@ -78,17 +82,17 @@
                                 <span class="nav-link-inner--text">Contact Us</span>
                             </a>
                         </li>
-                       
+
                     </ul>
                     <ul id="navAccount" runat="server" class="navbar-nav navbar-right">
                         <li class="nav-item dropdown">
                             <a class="nav-link nav-link-icon dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-users"></i>
-                                <span class="nav-link-inner--text"><asp:Label ID="lblUserName" runat="server" Text="" /></span>
+                                <span class="nav-link-inner--text">
+                                    <asp:Label ID="lblUserName" runat="server" Text="" /></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
                                 <a class="dropdown-item" runat="server" href="Profile.aspx">My Profile</a>
-                                <a class="dropdown-item" runat="server" href="MyBookings.aspx">My Bookings</a>
                                 <a class="dropdown-item" runat="server" href="Logout.aspx">Logout</a>
                             </div>
                         </li>
@@ -124,7 +128,7 @@
                             </a>
                         </li>
                     </ul>
-                   
+
                 </div>
             </div>
         </nav>
@@ -187,7 +191,7 @@
             </div>
         </div>
     </footer>
-   
+
     <!-- Core -->
     <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
     <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -14,7 +14,7 @@
         <div class="section text-center">
             <div class="row">
                 <div class="col-md-10 ml-auto mr-auto">
-                    <div class="card card-login">
+                    <div class="card">
                         <div class="card-header card-header-primary text-center">
                             <h2>Register</h2>
                         </div>
@@ -118,41 +118,19 @@
             </div>
         </div>
     </div>
-    <asp:Panel ID="messageBox" runat="server" Visible="False">
-        <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-            <div class="modal-dialog modal-success modal-dialog-centered modal-" role="document">
-                <div class="modal-content bg-gradient-success">
-                    <div class="modal-body">
-                        <div class="text-center">
-                            <i class="far fa-check-circle fa-4x"></i>
-                            <h4 class="heading mt-4">Admin added successfully!</h4>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-white ml-auto" data-dismiss="modal">Ok</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </asp:Panel>
+  
     <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        var OKClick = function () {
-            window.location.replace("Default.aspx");
-            event.preventDefault();
-        }
-
-
+       
         $(document).ready(function () {
-            $("#modal-notification").modal('show');
 
             window.onunload = function (e) {
                 e = e || window.event;
                 var y = e.pageY || e.clientY;
                 if (y < 0) { alert("Window closed"); }
                 else { validateForm(); }
-            }            
+            }
 
             $('.email').blur(function () {
                 validateEmail();
@@ -242,24 +220,24 @@
             if (strength < 2) {
                 $('#result').removeClass()
                 $('#password-strength').addClass('progress-bar-danger');
-                $('#result').addClass('text-danger').text('Very Week');
+                $('#result').addClass('text-danger').text('Low');
                 $('#password-strength').css('width', '10%');
-                return 'Very Week';
+                return 'Low';
             } else if (strength == 2) {
                 $('#result').addClass('good');
                 $('#password-strength').removeClass('progress-bar-danger');
                 $('#password-strength').addClass('progress-bar-warning');
-                $('#result').addClass('text-warning').text('Week')
+                $('#result').addClass('text-warning').text('Medium')
                 $('#password-strength').css('width', '60%');
-                return 'Week';
+                return 'Medium';
             } else if (strength == 4) {
                 $('#result').removeClass()
                 $('#result').addClass('strong');
                 $('#password-strength').removeClass('progress-bar-warning');
                 $('#password-strength').addClass('progress-bar-success');
-                $('#result').addClass('text-success').text('Strength');
+                $('#result').addClass('text-success').text('High');
                 $('#password-strength').css('width', '100%');
-                return 'Strong';
+                return 'High';
             }
 
         }
@@ -274,12 +252,12 @@
             }
         }
         function validatePhone() {
-            if ($('.phonenumber').val().length != 10) {
-                $('#popover-phonenumber').css('visibility', 'visible');
-                return false;
-            } else {
+            if ($('.phonenumber').val().length > 3 && $('.phonenumber').val().length <= 15) {
                 $('#popover-phonenumber').css('visibility', 'hidden');
                 return true;
+            } else {
+                $('#popover-phonenumber').css('visibility', 'visible');
+                return false;
             }
         }
         function validateConfirmPassword() {

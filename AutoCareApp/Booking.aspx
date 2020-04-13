@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Booking.aspx.cs" Inherits="AutoCareApp.Booking" %>
+
 <%@ Import Namespace="System.Activities.Statements" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
@@ -84,11 +85,11 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <h5>Additional services (optional)</h5>
-                                                <asp:CheckBoxList ID="chkBoxServices" runat="server" CssClass="text-left" AutoPostBack="True" OnSelectedIndexChanged="chkBoxServices_OnSelectedIndexChanged">
-                                                    <asp:ListItem Value="1" Text="Wax - (£10)"></asp:ListItem>
-                                                    <asp:ListItem Value="2" Text="Engine Clean - (£12)"></asp:ListItem>
-                                                    <asp:ListItem Value="3" Text="Paintwork Buffed - (£8.5)"></asp:ListItem>
-                                                    <asp:ListItem Value="4" Text="Shampoo Self-Cleaning Pack - (£12.5)"></asp:ListItem>
+                                                <asp:CheckBoxList ID="chkBoxExtras" runat="server" CssClass="text-left" AutoPostBack="True" OnSelectedIndexChanged="chkBoxServices_OnSelectedIndexChanged">
+                                                    <asp:ListItem Value="1" Text="Wax - (£10.00)"></asp:ListItem>
+                                                    <asp:ListItem Value="2" Text="Engine Clean - (£12.00)"></asp:ListItem>
+                                                    <asp:ListItem Value="3" Text="Paintwork Buffed - (£8.50)"></asp:ListItem>
+                                                    <asp:ListItem Value="4" Text="Shampoo Self-Cleaning Pack - (£12.50)"></asp:ListItem>
                                                 </asp:CheckBoxList>
                                             </div>
                                         </div>
@@ -201,7 +202,8 @@
                                     <asp:Panel ID="panelBookingSummary" runat="server">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-md-12 text-left mb-2"> Booking Date and Time: <asp:Label ID="lblBookingDateAndTime" runat="server" Text=""></asp:Label></div>
+                                                <div class="col-md-12 text-left mb-2">Booking Date and Time:
+                                                    <asp:Label ID="lblBookingDateAndTime" runat="server" Text=""></asp:Label></div>
                                                 <table class="table table-hover table-bordered">
                                                     <thead>
                                                         <tr>
@@ -251,7 +253,7 @@
                                 </div>
                             </asp:WizardStep>
                         </WizardSteps>
-                         <HeaderTemplate>
+                        <HeaderTemplate>
                             <ul id="wizHeader">
                                 <asp:Repeater ID="SideBarList" runat="server">
                                     <ItemTemplate>
@@ -286,7 +288,7 @@
                             <i class="far fa-check-circle fa-4x"></i>
                             <h4 class="heading mt-4">Your booking has been confirmed.</h4>
                             <p>Check your email for details.</p>
-                            <div id="dvCountDown" style="display:none;font-size:small;">You will be redirected to Home in <span id="lblCount"></span>&nbsp;seconds.</div>
+                            <div id="dvCountDown" style="display: none; font-size: small;">You will be redirected to Home in <span id="lblCount"></span>&nbsp;seconds.</div>
                         </div>
                     </div>
                     <div class="modal-footer">

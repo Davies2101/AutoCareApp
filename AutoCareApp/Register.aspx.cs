@@ -7,14 +7,7 @@ namespace AutoCareApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            clsUser user = (clsUser) Session["User"];
-            if (user != null && user.AdminLogin)
-            {
-                btnCreateUser.Text = "Add Admin";
-            }
-            // Focus on name field 
             FullName.Focus();
-
         }
 
         protected void CreateUser_Click(object sender, EventArgs e)
@@ -22,43 +15,27 @@ namespace AutoCareApp
             try
             {
                 // Creating a new user object with form data
-                clsUser obj = new clsUser();
-                obj.FullName = FullName.Text;
-                obj.Username = Username.Text;
-                obj.Password = Cipher.Encrypt(Password.Text);
-                obj.Email = Email.Text;
-                obj.PhoneNumber = PhoneNumber.Text;
-                obj.AdminLogin = false;
-
-                //if the current user is admin/then new user is register as a new admin
-                clsUser user = (clsUser)Session["User"];
-                if (user != null && user.AdminLogin)
-                {
-                    obj.AdminLogin = true;
-                }
+                clsUser user = new clsUser();
+                user.FullName = FullName.Text;
+                user.Username = Username.Text;
+                user.Password = Cipher.Encrypt(Password.Text);
+                user.Email = Email.Text;
+                user.PhoneNumber = PhoneNumber.Text;
+                user.AdminLogin = false;
 
                 //check username availability
-                if (mgtUSer.ValidateUsername(obj.Username))
+                if (mgtUSer.ValidateUsername(user.Username))
                 {
                     // Saving user class to database
-                    mgtUSer.Register(obj);
-                    
-                    if (obj.AdminLogin)
-                    {
-                        //if saved user is admin then show admin succesfully added message
-                        messageBox.Visible = true;
-                        ClearForm();
-                    }
-                    else
-                    {
-                        //get registered user details
-                        obj = mgtUSer.GetUserByUsername(Username.Text);
-                        // Store user details to session as login user, redirects to home page
-                        Session["User"] = obj;
-                        //redirect to home page
-                        Response.Redirect("Default.aspx");
-                    }
-                    
+                    mgtUSer.Register(user);
+
+                    //get registered user details
+                    user = mgtUSer.GetUserByUsername(Username.Text);
+                    // Store user details to session as login user, redirects to home page
+                    Session["User"] = user;
+                    //redirect to home page
+                    Response.Redirect("Default.aspx");
+
                 }
                 else
                 {
@@ -76,9 +53,8 @@ namespace AutoCareApp
 
         public void AlertMessage(string message)
         {
-            messageBox.Visible = false;
             lblAlert.Text = message;
-            alertBox.Visible = false;
+            alertBox.Visible = true;
         }
 
         public void ClearForm()
@@ -90,8 +66,6 @@ namespace AutoCareApp
             PhoneNumber.Text = "";
             ConfirmPassword.Text = "";
         }
-        
-
     }
 }
 

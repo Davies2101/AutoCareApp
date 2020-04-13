@@ -13,6 +13,24 @@ namespace AutoCareApp {
     public partial class Profile {
         
         /// <summary>
+        /// profileimg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image profileimg;
+        
+        /// <summary>
+        /// lblFullName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFullName;
+        
+        /// <summary>
         /// alertBox control.
         /// </summary>
         /// <remarks>

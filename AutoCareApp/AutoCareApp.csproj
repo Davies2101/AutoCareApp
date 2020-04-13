@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminPage.aspx" />
+    <Content Include="AdminRegister.aspx" />
     <Content Include="App_Data\AutoCareDB.mdf" />
     <Content Include="App_Data\AutoCareDB_log.ldf">
       <DependentUpon>AutoCareDB.mdf</DependentUpon>
@@ -106,19 +107,27 @@
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\webfonts\fa-brands-400.svg" />
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\webfonts\fa-regular-400.svg" />
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\webfonts\fa-solid-900.svg" />
+    <Content Include="assets\vendor\bootstrap-datepicker\dist\js\bootstrap-datepicker.min.js" />
     <Content Include="assets\vendor\bootstrap\dist\js\bootstrap.bundle.min.js" />
     <Content Include="assets\vendor\jquery\dist\jquery.min.js" />
     <Content Include="assets\vendor\nucleo\css\nucleo.css" />
+    <Content Include="assets\vendor\nucleo\fonts\nucleo-icons.svg" />
     <Content Include="Booking.aspx" />
-    <Content Include="BookingEdit.aspx" />
+    <Content Include="BookingAdmin.aspx" />
     <Content Include="Content\images\about2.jpg" />
     <Content Include="Content\images\about3.jpg" />
     <Content Include="Content\images\login-bg.jpg" />
+    <Content Include="Content\images\Logo-Small.png" />
     <Content Include="Content\images\quote-1-70x70.jpg" />
     <Content Include="Content\images\quote-2-70x70.jpg" />
     <Content Include="Content\images\quote-3-70x70.jpg" />
+    <Content Include="Content\SideMenu.css" />
+    <Content Include="Content\SiteAdmin.css" />
+    <Content Include="Dashboard.aspx" />
     <Content Include="ManageBookings.aspx" />
+    <Content Include="MessageBox.aspx" />
     <Content Include="MyBookings.aspx" />
+    <Content Include="Reports.aspx" />
     <Content Include="Services.aspx" />
     <Content Include="About.aspx" />
     <Content Include="Contact.aspx" />
@@ -152,6 +161,11 @@
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\webfonts\fa-solid-900.ttf" />
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="Admin.Master" />
+    <Content Include="assets\vendor\nucleo\fonts\nucleo-icons.eot" />
+    <Content Include="assets\vendor\nucleo\fonts\nucleo-icons.ttf" />
+    <Content Include="assets\vendor\nucleo\fonts\nucleo-icons.woff" />
+    <Content Include="assets\vendor\nucleo\fonts\nucleo-icons.woff2" />
     <None Include="Project_Readme.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -161,12 +175,26 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
     <Compile Include="AdminPage.aspx.cs">
       <DependentUpon>AdminPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AdminPage.aspx.designer.cs">
       <DependentUpon>AdminPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRegister.aspx.cs">
+      <DependentUpon>AdminRegister.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRegister.aspx.designer.cs">
+      <DependentUpon>AdminRegister.aspx</DependentUpon>
     </Compile>
     <Compile Include="Booking.aspx.cs">
       <DependentUpon>Booking.aspx</DependentUpon>
@@ -175,15 +203,22 @@
     <Compile Include="Booking.aspx.designer.cs">
       <DependentUpon>Booking.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BookingEdit.aspx.cs">
-      <DependentUpon>BookingEdit.aspx</DependentUpon>
+    <Compile Include="BookingAdmin.aspx.cs">
+      <DependentUpon>BookingAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BookingEdit.aspx.designer.cs">
-      <DependentUpon>BookingEdit.aspx</DependentUpon>
+    <Compile Include="BookingAdmin.aspx.designer.cs">
+      <DependentUpon>BookingAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classes\Cipher.cs" />
     <Compile Include="Classes\EmailSender.cs" />
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManageBookings.aspx.cs">
       <DependentUpon>ManageBookings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -191,7 +226,15 @@
     <Compile Include="ManageBookings.aspx.designer.cs">
       <DependentUpon>ManageBookings.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Management\mgtMails.cs" />
     <Compile Include="Management\mgtPoint.cs" />
+    <Compile Include="MessageBox.aspx.cs">
+      <DependentUpon>MessageBox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MessageBox.aspx.designer.cs">
+      <DependentUpon>MessageBox.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Models\clsTime.cs" />
     <Compile Include="MyBookings.aspx.cs">
       <DependentUpon>MyBookings.aspx</DependentUpon>
@@ -199,6 +242,13 @@
     </Compile>
     <Compile Include="MyBookings.aspx.designer.cs">
       <DependentUpon>MyBookings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
     </Compile>
     <Compile Include="Services.aspx.cs">
       <DependentUpon>Services.aspx</DependentUpon>

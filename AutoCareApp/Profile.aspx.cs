@@ -20,10 +20,11 @@ namespace AutoCareApp
             {
 
                 // Load curent pofile info
-                clsUser obj = (clsUser)Session["User"];
-                FullName.Text = obj.FullName;
-                PhoneNumber.Text = obj.PhoneNumber;
-                Email.Text = obj.Email;
+                clsUser user = (clsUser)Session["User"];
+                lblFullName.Text = user.FullName;
+                FullName.Text = user.FullName;
+                PhoneNumber.Text = user.PhoneNumber;
+                Email.Text = user.Email;
 
                 // Focus on name field 
                 FullName.Focus();

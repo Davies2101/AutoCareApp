@@ -32,4 +32,40 @@ public class mgtExtra
             throw ex;
         }
     }
+
+    public static List<string> GetExtrasByBookingId(int bookingId)
+    {
+        try
+        {
+            SqlConnection con = new SqlConnection(App.GetDBCon());
+            SqlDataReader rd;
+
+            List<string> list = new List<string>();
+
+            using (con)
+            {
+                // Getting the database connectivity using stored procedure
+                SqlCommand cmd = new SqlCommand("sp_Get_ExtrasByBookingId", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                // Passing parameters
+                cmd.Parameters.AddWithValue("bookingId", bookingId);
+
+                con.Open();
+                rd = cmd.ExecuteReader();
+                while (rd.Read())
+                {
+                    list.Add(rd["ExtraID"].ToString());
+                }
+                rd.Close();
+            }
+            con.Close();
+
+            return list;
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+    }
 }

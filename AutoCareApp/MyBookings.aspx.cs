@@ -16,6 +16,8 @@ namespace AutoCareApp
             {
                 Response.Redirect("LoginMsg");
             }
+            clsUser user = (clsUser)Session["User"];
+            lblFullName.Text = user.FullName;
             if (!Page.IsPostBack)
             {
                 BindBookings();
@@ -36,7 +38,6 @@ namespace AutoCareApp
             Button button = (sender as Button);
             int bookingId = Convert.ToInt32(button.Attributes["BookingId"]);
             mgtBooking.CancelBooking(bookingId);
-            mgtPoint.Remove(user.UserID);
             messageBox.Visible = true;
             BindBookings();
 

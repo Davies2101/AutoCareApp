@@ -26,24 +26,5 @@ namespace AutoCareApp.Management
                 throw;
             }
         }
-
-        public static void Remove(int userId)
-        {
-            try
-            {
-                // Getting the database connectivity as stored procedure
-                SqlConnection con = new SqlConnection(App.GetDBCon());
-                SqlCommand cmd = new SqlCommand("sp_Point_Remove", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("UserId", userId);
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
     }
 }

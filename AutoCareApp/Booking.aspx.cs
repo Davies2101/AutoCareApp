@@ -23,7 +23,7 @@ namespace AutoCareApp
         private static clsBooking bookingObject = null;
         private static List<string> selectedExtras = null;
         private static DataTable packageList = mgtPackage.GetDataSet().Tables[0];
-        private static DataTable servicesList = mgtExtra.GetDataSet().Tables[0];
+        private static DataTable extrasList = mgtExtra.GetDataSet().Tables[0];
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,7 +36,6 @@ namespace AutoCareApp
             if (!Page.IsPostBack)
             {
                 BindPackages();
-                //BindServices();
                 bookingObject = new clsBooking();
                 selectedExtras = new List<string>();
             }
@@ -137,7 +136,7 @@ namespace AutoCareApp
             }
 
             HtmlControl card = (HtmlControl)button.Parent.FindControl("divCard");
-            card.Attributes.Add("class", "card col-md-3 bg-gradient-primary");
+            card.Attributes.Add("class", "card col-md-3 bg-gradient-default");
             bookingObject.PackageID = packageID;
             CalculateTotal();
         }
@@ -226,7 +225,7 @@ namespace AutoCareApp
         protected void chkBoxServices_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             selectedExtras = new List<string>();
-            foreach (ListItem item in chkBoxServices.Items)
+            foreach (ListItem item in chkBoxExtras.Items)
             {
                 if (item.Selected)
                 {
@@ -263,7 +262,7 @@ namespace AutoCareApp
             {
                 foreach (var serviceId in selectedExtras)
                 {
-                    DataView dv = new DataView(servicesList);
+                    DataView dv = new DataView(extrasList);
                     dv.RowFilter = "ExtraID=" + serviceId;
 
                     foreach (DataRowView drV in dv)
@@ -336,7 +335,7 @@ namespace AutoCareApp
                     lblServices.Visible = true;
                     foreach (var extraId in selectedExtras)
                     {
-                        DataView dv = new DataView(servicesList);
+                        DataView dv = new DataView(extrasList);
                         dv.RowFilter = "ExtraID=" + extraId;
 
                         clsExtra extra = new clsExtra();

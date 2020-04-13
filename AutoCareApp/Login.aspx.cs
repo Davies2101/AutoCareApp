@@ -48,7 +48,7 @@ namespace AutoCareApp
                         Session["User"] = obj;
                         if (obj.AdminLogin)
                         {
-                            Response.Redirect("~/AdminPage.aspx");
+                            Response.Redirect("~/Dashboard.aspx");
                         }
                         else
                         {
