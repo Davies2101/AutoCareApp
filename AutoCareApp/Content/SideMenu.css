@@ -40,8 +40,6 @@
 
 #page-content-wrapper {
     width: 100%;
-    position: absolute;
-    padding: 15px;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -87,6 +85,7 @@
         height: 65px;
         font-size: 18px;
         line-height: 60px;
+        text-indent: 0;
     }
 
         .sidebar-nav > .sidebar-brand {

@@ -56,6 +56,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="AdminReview.aspx">
+                                    <i class="far fa-check-square"></i>
+                                    <span class="nav-link-text">Reviews</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="AdminRegister.aspx">
                                     <i class="ni ni-single-02 text-yellow"></i>
                                     <span class="nav-link-text">Register Admin</span>

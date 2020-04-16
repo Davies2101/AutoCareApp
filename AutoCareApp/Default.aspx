@@ -1,132 +1,187 @@
 ﻿<%@ Page Title="Cleaning your car at a time" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="AutoCareApp._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <link href="assets/css/slick.min.css" rel="stylesheet" />
+    <link href="assets/css/slick-theme.min.css" rel="stylesheet" />
 
     <div class="container">
-        <div class="section text-center">
-            <div class="row">
-                <div class="col-md-8 ml-auto mr-auto">
-                    <h2 class="title">A Few Words About Us</h2>
-                    <h5 class="description">For nearly 20 years, residents throughout the local area have turned to Car Repair for all of their automotive repair needs. With free estimates and fast turnaround, we are known for our personal service and expertise in all forms of specialized engine repair. We use the latest and most modern diagnostic technology to have you back in your car.</h5>
-                </div>
-            </div>
-        </div>
-        <div class="section text-center">
-            <h2 class="title">Why Choose Us</h2>
-            <div class="row mt-5">
-                <div class="col-md-3">
-                    <span class="text-primary mdi mdi-timetable mdi-md" style="font-size: 40px"></span>
-                    <h4><a class="link" href="Services.aspx">Easy Booking</a></h4>
-                    <p>First things first, you’ll need to either book an appointment with us or just drop by and see if we have a vacant time slot!</p>
-                </div>
-                <div class="col-md-3">
-                    <span class="text-primary mdi mdi-hand-pointing-right mdi-md" style="font-size: 40px"></span>
-                    <h4><a class="link" href="Services.aspx">Perfect Servicing</a></h4>
-                    <p>When your car’s already at our place, all you’ll have to do is just wait a little bit till it comes out all shiny and clean!</p>
-                </div>
-                <div class="col-md-3">
-                    <span class="text-primary mdi mdi-car-wash mdi-md" style="font-size: 40px"></span>
-                    <h4><a class="link" href="Services.aspx">Additional Services</a></h4>
-                    <p>Besides providing the ultimate exterior &amp; interior washing services, we also offer waxing, detailing and vacuuming!</p>
-                </div>
-                <div class="col-md-3">
-                    <span class="text-primary mdi mdi-cash-usd mdi-md" style="font-size: 40px"></span>
-                    <h4><a class="link" href="Services.aspx">Awesome Pricing</a></h4>
-                    <p>With our services all really being top-notch, here’s also the last joy – the ultimately finest pricing, which can save you a lot of money.</p>
-                </div>
-            </div>
-        </div>
-        <div class="section text-center">
-            <h2 class="title">Our Packages</h2>
-            <div class="row">
-                <asp:ListView ID="lstVPackage" runat="server">
-                    <LayoutTemplate>
-                        <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
-                    </LayoutTemplate>
-                    <ItemTemplate>
-                        <div class="card col-md-3" runat="server" id="divCard">
-                            <div class='<%#Eval("PackageName").ToString().ToLower() + " card-header"%>' runat="server">
-                                <span class=""><%#Eval("PackageName")%></span>
-                            </div>
-                            <div class="card-body bg-gradient-secondary">
-                                <h2 class="card-title">£ <%#Eval("PackagePrice")%></h2>
-                                <div class="card-text text-left" style="min-height: 185px">
-                                    <span class="text-sm d-block mb-1"><i class="far fa-check-square mr-2"></i><%#Eval("Content1")%></span>
-                                    <span class="text-sm d-block mb-1"><i class="far fa-check-square mr-2"></i><%#Eval("Content2")%></span>
-                                    <span class="text-sm d-block mb-1"><i class="far fa-check-square mr-2"></i><%#Eval("Content3")%></span>
-                                    <span class="text-sm d-block mb-1"><%# (string)Eval("Content4") == "" ? "" : "<i class='far fa-check-square mr-2'></i>" + Eval("Content4") %></span>
-                                    <span class="text-sm d-block mb-1"><%# (string)Eval("Content5") == "" ? "" : "<i class='far fa-check-square mr-2'></i>" + Eval("Content5") %></span>
-                                    <span class="text-sm d-block mb-1"><%# (string)Eval("Content6") == "" ? "" : "<i class='far fa-check-square mr-2'></i>" + Eval("Content6") %></span>
-                                    <span class="text-sm d-block mb-1"><%# (string)Eval("Content7") == "" ? "" : "<i class='far fa-check-square mr-2'></i>" + Eval("Content7") %></span>
-                                </div>
-                                <a href="Booking.aspx" class='<%#Eval("PackageName").ToString().ToLower() + " btn"%>'>Book Now</a>
-                            </div>
-                        </div>
-                    </ItemTemplate>
+        <div class="ml-auto mr-auto">
+            <div class="card">
+                <div class="section text-center card-body">
+                    <div class="card-header card-header-primary text-center">
+                        <h2>Why Choose Us</h2>
+                    </div>
 
-                </asp:ListView>
-            </div>
-        </div>
-        <div class="section text-center">
-            <h2 class="title">What Our Clients Say</h2>
-            <div class="team">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="team-player">
-                            <div class="card card-plain">
-                                <div class="col-md-6 ml-auto mr-auto">
-                                    <img src="Content/images/quote-1-70x70.jpg" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+                    <div class="row">
+                        <div class="card col-lg-3 col-md-6 bg-gradient-secondary">
+                            <div class="card-body">
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-orange text-white rounded-top shadow mb-3">
+                                        <i class="fab fa-etsy"></i>
+                                    </div>
                                 </div>
-                                <h4 class="card-title">Samantha Johnson
-                    <br>
-                                    <small class="card-description text-muted">Manager</small>
-                                </h4>
-                                <div class="card-body blockquote">
-                                    <p class="card-description text-left">
-                                        For several dollars a day I can drive a clean car 12 months a year, and it’s truly amazing! As a member of the Cleanmotor loyalty program the past 16 months, my car looks as good as it did the day I drove it off the showroom floor.
-                                    </p>
-                                </div>
+                                <h4 class="card-title">Easy Booking</h4>
+                                <p>First things first, you’ll need to either book an appointment with us or just drop by and see if we have a vacant time slot!</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="team-player">
-                            <div class="card card-plain">
-                                <div class="col-md-6 ml-auto mr-auto">
-                                    <img src="Content/images/quote-2-70x70.jpg" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+                        <div class="card col-lg-3 col-md-6 bg-gradient-secondary">
+                            <div class="card-body">
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-blue text-white rounded-top shadow mb-3">
+                                        <i class="far fa-thumbs-up"></i>
+                                    </div>
                                 </div>
-                                <h4 class="card-title">Richard Smith
-                    <br>
-                                    <small class="card-description text-muted">Designer</small>
-                                </h4>
-                                <div class="card-body blockquote">
-                                    <p class="card-description text-left">
-                                        I always use Cleanmotor Car Wash. I love their affordable prices and loyalty program - it's so convient to be able to get my car washed any time, any day. The people working there are always nice and friendly.
-                                    </p>
-                                </div>
+                                <h4 class="card-title">Perfect Servicing</h4>
+                                <p>When your car’s already at our place, all you’ll have to do is just wait a little bit till it comes out all shiny and clean!</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="team-player">
-                            <div class="card card-plain">
-                                <div class="col-md-6 ml-auto mr-auto">
-                                    <img src="Content/images/quote-3-70x70.jpg" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+                        <div class="card col-lg-3 col-md-6 bg-gradient-secondary">
+                            <div class="card-body">
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-green text-white rounded-top shadow mb-3">
+                                        <i class="fas fa-calendar-plus"></i>
+                                    </div>
                                 </div>
-                                <h4 class="card-title">Dennis Richardson
-                    <br>
-                                    <small class="card-description text-muted">Teacher</small>
-                                </h4>
-                                <div class="card-body blockquote">
-                                    <p class="card-description text-left">
-                                        The friendly staff at Cleanmotor provides good service at their wash. They offer a variety of car washing products including car sprays, car wax etc. They also have a comfortable cafe nearby, where they serve free snacks for every client.
-                                    </p>
+                                <h4 class="card-title">Additional Services</h4>
+                                <p>Besides providing the ultimate exterior &amp; interior washing services, we also offer waxing, detailing and vacuuming!</p>
+                            </div>
+                        </div>
+                        <div class="card col-lg-3 col-md-6 bg-gradient-secondary">
+                            <div class="card-body">
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-red text-white rounded-top shadow mb-3">
+                                        <i class="fas fa-pound-sign"></i>
+                                    </div>
                                 </div>
+                                <h4 class="card-title">Awesome Pricing</h4>
+                                <p>With our services all really being top-notch, here’s also the last joy – the ultimately finest pricing, which can save you a lot of money.</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="section text-center card-body">
+                    <div class="card-header card-header-primary text-center">
+                        <h2>Our Packages</h2>
+                    </div>
+                    <div class="row">
+                        <asp:ListView ID="lstVPackage" runat="server">
+                            <LayoutTemplate>
+                                <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
+                            </LayoutTemplate>
+                            <ItemTemplate>
+                                <div class="col-lg-3 col-md-6" runat="server" id="divCard">
+                                    <div class="card-body bg-gradient-secondary">
+                                        <h2 class="card-title">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1 class="card-title font-weight-bold mb-0"><%#Eval("PackageName")%></h1>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class='<%#Eval("PackageName").ToString().ToLower() + " icon icon-shape text-white rounded-circle shadow" %>'>
+                                                        <i class="fas fa-car"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div class="card-text text-left" style="min-height: 185px">
+                                            <span class="text-sm d-block mb-1"><%#Eval("Content1")%></span>
+                                            <span class="text-sm d-block mb-1"><%#Eval("Content2")%></span>
+                                            <span class="text-sm d-block mb-1"><%#Eval("Content3")%></span>
+                                            <span class="text-sm d-block mb-1"><%# (string)Eval("Content4") == "" ? "" : "" + Eval("Content4") %></span>
+                                            <span class="text-sm d-block mb-1"><%# (string)Eval("Content5") == "" ? "" : "" + Eval("Content5") %></span>
+                                            <span class="text-sm d-block mb-1"><%# (string)Eval("Content6") == "" ? "" : "" + Eval("Content6") %></span>
+                                            <span class="text-sm d-block mb-1"><%# (string)Eval("Content7") == "" ? "" : "" + Eval("Content7") %></span>
+                                        </div>
+                                        <a class="btn btn-icon btn-default" href="Booking.aspx">
+                                            <span class="btn-inner--icon">£<%#Eval("PackagePrice")%></span>
+                                            <span class="btn-inner--text">Book Now</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+
+                        </asp:ListView>
+                    </div>
+                </div>
+                <asp:Panel ID="panelReviews" runat="server">
+
+                    <div class="section text-center card-body">
+                        <div class="card-header card-header-primary text-center">
+                            <h2>What Our Clients Say</h2>
+                        </div>
+                        <!-- Testimonial Carousel -->
+                        <div class="testimonial-reel">
+                            <asp:ListView ID="lstReview" runat="server">
+                                <LayoutTemplate>
+                                    <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                    <!-- Testimonial -->
+                                    <div>
+                                        <div class="box">
+                                            <!-- Testimonial Image -->
+                                            <figure class="image">
+                                                <img class="img-fluid rounded-circle" src='<%# "/Content/profile/" + Eval("Picture")%>'>
+                                            </figure>
+                                            <!-- / Testimonial Image -->
+                                            <div class="test-component">
+                                                <!-- Title -->
+                                                <article class="test-title">
+                                                    <h4><%#Eval("FullName")%></h4>
+                                                </article>
+                                                <!-- / Title -->
+                                                <article class="test-content">
+                                                    <p>
+                                                        <%#Eval("Review")%>
+                                                    </p>
+                                                </article>
+                                                <div class="star-ratings-css">
+                                                    <div class="star-ratings-css-top" style='<%# "width:" + ((int) Eval("Rating")*100)/5 + "%" %>'><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                                    <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- / Testimonial -->
+                                </ItemTemplate>
+                            </asp:ListView>
+                        </div>
+                        <!-- / Testimonial Carousel -->
+                    </div>
+
+                </asp:Panel>
             </div>
         </div>
     </div>
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/slick.min.js"></script>
+    <%--https://codepen.io/CoderBear/pen/KLNQjg--%>
+    <%--https://codepen.io/Bluetidepro/pen/GkpEa--%>
+    <script type="text/javascript">
+        //Slick Carousel Controllers
+        $(".testimonial-reel").slick({
+            centerMode: true,
+            centerPadding: "40px",
+            dots: true,
+            slidesToShow: 3,
+            infinite: true,
+            arrows: true,
+            lazyLoad: "ondemand",
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        centerMode: false
+                    }
+                },
+                {
+                    breakpoint: 767,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    </script>
 </asp:Content>

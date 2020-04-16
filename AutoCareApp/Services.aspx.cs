@@ -19,7 +19,7 @@ namespace AutoCareApp
         private void LoadPackages()
         {
             // Getting packge data from database and displaying on the home page
-            DataTable dt = mgtPackage.GetDataSet().Tables[0];
+            DataTable dt = mgtPackage.GetPackagesDataSet().Tables[0];
             lstVPackage.DataSource = dt;
             lstVPackage.DataBind();
         }

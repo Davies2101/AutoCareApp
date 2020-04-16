@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,24 +12,29 @@ namespace AutoCareApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["User"] == null)
+            // Load curent pofile info
+            clsUser user = (clsUser) Session["User"];
+            if (user == null)
             {
                 Response.Redirect("LoginMsg");
             }
 
+            if (user.AdminLogin)
+            {
+                Response.Redirect("Unauthorized");
+            }
+
             if (!IsPostBack)
             {
-
-                // Load curent pofile info
-                clsUser user = (clsUser)Session["User"];
                 lblFullName.Text = user.FullName;
                 FullName.Text = user.FullName;
                 PhoneNumber.Text = user.PhoneNumber;
                 Email.Text = user.Email;
-
-                // Focus on name field 
-                FullName.Focus();
+                imgPreview.Src = "/Content/profile/" + user.Picture;
+                profileimg.ImageUrl = "/Content/profile/" + user.Picture;
             }
+
+            messageBox.Visible = false;
         }
 
         protected void UpdateUser_Click(object sender, EventArgs e)
@@ -36,24 +42,34 @@ namespace AutoCareApp
             try
             {
                 // Save new profile data to database
-                clsUser obj = (clsUser)Session["User"];
+                clsUser user = (clsUser)Session["User"];
 
-                obj.FullName = FullName.Text;
-                obj.Email = Email.Text;
-                obj.PhoneNumber = PhoneNumber.Text;
-                obj.Password = "";
+                user.FullName = FullName.Text;
+                user.Email = Email.Text;
+                user.PhoneNumber = PhoneNumber.Text;
+                user.Password = "";
 
                 if (chkPassword.Checked)
                 {
-                    obj.Password = Cipher.Encrypt(Password.Text);
+                    user.Password = Cipher.Encrypt(Password.Text);
                 }
 
-                mgtUSer.Update(obj);
+                if (hdnUpload.Value != "")
+                {
+                    string filename = Path.GetFileName(fileupload.FileName);
+                    fileupload.SaveAs(Server.MapPath("~/Content/profile/") + filename);
+                    user.Picture = filename;
+                    imgPreview.Src = "/Content/profile/" + user.Picture;
+                    profileimg.ImageUrl = "/Content/profile/" + user.Picture;
+                }
+
+                lblFullName.Text = user.FullName;
+                mgtUSer.Update(user);
 
                 // Store user details to session as login user
-                Session["User"] = obj;
+                Session["User"] = user;
                 messageBox.Visible = true;
-
+                
             }
             catch (Exception ex)
             {

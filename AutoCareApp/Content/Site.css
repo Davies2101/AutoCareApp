@@ -163,3 +163,93 @@
 }
 
 
+.testimonial-reel {
+    margin-bottom: 4rem !important;
+    margin-top: 4rem;
+}
+
+.testimonial-reel .box {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.testimonial-reel .box .image {
+    margin: 0 auto -45px;
+    text-align: center;
+}
+
+.testimonial-reel .box .image img {
+    height: 130px;
+    margin: 0 auto;
+}
+
+.testimonial-reel .box .test-component {
+    background-color: #fff;
+    padding: 1rem 2.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    min-height: 200px;
+}
+
+.testimonial-reel .box .test-title {
+    font-family: "Open Sans", sans-serif;
+    color: #f96d02;
+    text-align: center;
+    margin-top: 3.3rem;
+    margin-bottom: 15px;
+}
+
+.testimonial-reel .box .test-content {
+    text-align: center;
+}
+
+.testimonial-reel .slick-slide {
+    opacity: 0.3;
+    transition: opacity 0.3s;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.testimonial-reel .slick-slide.slick-cloned {
+    opacity: 0.3;
+    transition: opacity 0.3s;
+}
+
+.testimonial-reel .slick-slide.slick-current.slick-active {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.star-ratings-css {
+    unicode-bidi: bidi-override;
+    color: #c5c5c5;
+    font-size: 25px;
+    height: 25px;
+    width: 100px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0;
+    text-shadow: 0px 1px 0 #a2a2a2;
+    word-wrap: normal;
+}
+.star-ratings-css-top {
+    color: #e7711b;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: block;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+.star-ratings-css-bottom {
+    padding: 0;
+    display: block;
+    z-index: 0;
+}
+
+
+.table-responsive .wrap-cell {
+    white-space: normal;
+    display: block;
+    width: 500px;
+}

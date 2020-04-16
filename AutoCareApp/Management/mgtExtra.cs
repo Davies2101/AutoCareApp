@@ -8,20 +8,20 @@ using System.Data.SqlClient;
 
 public class mgtExtra
 {
-    public static DataSet GetDataSet()
+    public static DataSet GetExtrasDataSet()
     {
         try
         {
             DataSet ds = new DataSet("dt");
 
             // Getting the database connectivity as stored procedure
-            using (SqlConnection conn = new SqlConnection(App.GetDBCon()))
+            using (SqlConnection con = new SqlConnection(App.GetDBCon()))
             {
-                SqlCommand sqlComm = new SqlCommand("sp_Extra_All", conn);
-                sqlComm.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd = new SqlCommand("sp_Extra_All", con);
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlDataAdapter da = new SqlDataAdapter();
-                da.SelectCommand = sqlComm;
+                da.SelectCommand = cmd;
                 da.Fill(ds);
             }
 

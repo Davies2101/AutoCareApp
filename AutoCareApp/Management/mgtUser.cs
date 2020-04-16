@@ -15,7 +15,7 @@ public class mgtUSer
             SqlConnection con = new SqlConnection(App.GetDBCon());
             SqlDataReader rd;
 
-            clsUser obj = null;
+            clsUser user = null;
 
             using (con)
             {
@@ -30,24 +30,25 @@ public class mgtUSer
                 while (rd.Read())
                 {
                     // Reads return values to see criteria matches DB Users 
-                    obj = new clsUser();
+                    user = new clsUser();
 
-                    obj.UserID = Convert.ToInt32(rd["UserID"]);
-                    obj.FullName = rd["FullName"].ToString();
-                    obj.Username = rd["Username"].ToString();
-                    obj.Password = rd["Password"].ToString();
-                    obj.Email = rd["Email"].ToString();
-                    obj.PhoneNumber = rd["PhoneNumber"].ToString();
-                    obj.AdminLogin = Convert.ToBoolean(rd["AdminLogin"].ToString());
-                    obj.FailedLoginAttempts = Convert.ToInt32(rd["FailedLoginAttempts"].ToString());
-                    obj.LockedOutDatetime = rd["LockedOutDatetime"] == DBNull.Value ? (DateTime?)null : (DateTime)rd["LockedOutDatetime"];
+                    user.UserID = Convert.ToInt32(rd["UserID"]);
+                    user.FullName = rd["FullName"].ToString();
+                    user.Username = rd["Username"].ToString();
+                    user.Password = rd["Password"].ToString();
+                    user.Email = rd["Email"].ToString();
+                    user.PhoneNumber = rd["PhoneNumber"].ToString();
+                    user.AdminLogin = Convert.ToBoolean(rd["AdminLogin"].ToString());
+                    user.FailedLoginAttempts = Convert.ToInt32(rd["FailedLoginAttempts"].ToString());
+                    user.LockedOutDatetime = rd["LockedOutDatetime"] == DBNull.Value ? (DateTime?)null : (DateTime)rd["LockedOutDatetime"];
+                    user.Picture = rd["Picture"].ToString();
 
                 }
                 rd.Close();
             }
             con.Close();
 
-            return obj;
+            return user;
         }
         catch (Exception)
         {
@@ -56,7 +57,7 @@ public class mgtUSer
         }
     }
 
-    public static void Register(clsUser obj)
+    public static void Register(clsUser user)
     {
         try
         {
@@ -66,12 +67,12 @@ public class mgtUSer
             cmd.CommandType = CommandType.StoredProcedure;
 
             // Passing parameters
-            cmd.Parameters.AddWithValue("FullName", obj.FullName);
-            cmd.Parameters.AddWithValue("Username", obj.Username);
-            cmd.Parameters.AddWithValue("Password", obj.Password);
-            cmd.Parameters.AddWithValue("Email", obj.Email);
-            cmd.Parameters.AddWithValue("PhoneNumber", obj.PhoneNumber);
-            cmd.Parameters.AddWithValue("AdminLogin", obj.AdminLogin);
+            cmd.Parameters.AddWithValue("FullName", user.FullName);
+            cmd.Parameters.AddWithValue("Username", user.Username);
+            cmd.Parameters.AddWithValue("Password", user.Password);
+            cmd.Parameters.AddWithValue("Email", user.Email);
+            cmd.Parameters.AddWithValue("PhoneNumber", user.PhoneNumber);
+            cmd.Parameters.AddWithValue("AdminLogin", user.AdminLogin);
 
             con.Open();
             cmd.ExecuteNonQuery();
@@ -84,7 +85,7 @@ public class mgtUSer
         }
     }
 
-    public static void Update(clsUser obj)
+    public static void Update(clsUser user)
     {
         try
         {
@@ -94,12 +95,13 @@ public class mgtUSer
             cmd.CommandType = CommandType.StoredProcedure;
 
             // Passing parameters
-            cmd.Parameters.AddWithValue("UserID", obj.UserID);
-            cmd.Parameters.AddWithValue("FullName", obj.FullName);
-            cmd.Parameters.AddWithValue("Username", obj.Username);
-            cmd.Parameters.AddWithValue("Password", obj.Password);
-            cmd.Parameters.AddWithValue("Email", obj.Email);
-            cmd.Parameters.AddWithValue("PhoneNumber", obj.PhoneNumber);
+            cmd.Parameters.AddWithValue("UserID", user.UserID);
+            cmd.Parameters.AddWithValue("FullName", user.FullName);
+            cmd.Parameters.AddWithValue("Username", user.Username);
+            cmd.Parameters.AddWithValue("Password", user.Password);
+            cmd.Parameters.AddWithValue("Email", user.Email);
+            cmd.Parameters.AddWithValue("PhoneNumber", user.PhoneNumber);
+            cmd.Parameters.AddWithValue("Picture", user.Picture);
 
             con.Open();
             cmd.ExecuteNonQuery();
@@ -180,7 +182,7 @@ public class mgtUSer
             SqlConnection con = new SqlConnection(App.GetDBCon());
             SqlDataReader rd;
 
-            clsUser obj = null;
+            clsUser user = null;
 
             using (con)
             {
@@ -195,29 +197,44 @@ public class mgtUSer
                 while (rd.Read())
                 {
                     // Reads return values to see criteria matches DB Users 
-                    obj = new clsUser();
+                    user = new clsUser();
 
-                    obj.UserID = Convert.ToInt32(rd["UserID"]);
-                    obj.FullName = rd["FullName"].ToString();
-                    obj.Username = rd["Username"].ToString();
-                    obj.Password = rd["Password"].ToString();
-                    obj.Email = rd["Email"].ToString();
-                    obj.PhoneNumber = rd["PhoneNumber"].ToString();
-                    obj.AdminLogin = Convert.ToBoolean(rd["AdminLogin"].ToString());
-                    obj.FailedLoginAttempts = Convert.ToInt32(rd["FailedLoginAttempts"].ToString());
-                    obj.LockedOutDatetime = rd["LockedOutDatetime"] == DBNull.Value ? (DateTime?)null : (DateTime)rd["LockedOutDatetime"];
+                    user.UserID = Convert.ToInt32(rd["UserID"]);
+                    user.FullName = rd["FullName"].ToString();
+                    user.Username = rd["Username"].ToString();
+                    user.Password = rd["Password"].ToString();
+                    user.Email = rd["Email"].ToString();
+                    user.PhoneNumber = rd["PhoneNumber"].ToString();
+                    user.AdminLogin = Convert.ToBoolean(rd["AdminLogin"].ToString());
+                    user.FailedLoginAttempts = Convert.ToInt32(rd["FailedLoginAttempts"].ToString());
+                    user.LockedOutDatetime = rd["LockedOutDatetime"] == DBNull.Value ? (DateTime?)null : (DateTime)rd["LockedOutDatetime"];
 
                 }
                 rd.Close();
             }
             con.Close();
 
-            return obj;
+            return user;
         }
         catch (Exception)
         {
 
             throw;
         }
+    }
+
+    public static int GetTotalCustomers()
+    {
+        int count = 0;
+        using (SqlConnection con = new SqlConnection(App.GetDBCon()))
+        {
+            SqlCommand cmd = new SqlCommand("sp_Get_TotalCustomers", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            count = Convert.ToInt32(cmd.ExecuteScalar());
+            con.Close();
+        }
+
+        return count;
     }
 }

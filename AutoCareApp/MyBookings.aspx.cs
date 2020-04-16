@@ -12,14 +12,22 @@ namespace AutoCareApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["User"] == null)
+            // Load curent pofile info
+            clsUser user = (clsUser)Session["User"];
+            if (user == null)
             {
                 Response.Redirect("LoginMsg");
             }
-            clsUser user = (clsUser)Session["User"];
-            lblFullName.Text = user.FullName;
-            if (!Page.IsPostBack)
+
+            if (user.AdminLogin)
             {
+                Response.Redirect("Unauthorized");
+            }
+
+            if (!IsPostBack)
+            {
+                lblFullName.Text = user.FullName;
+                profileimg.ImageUrl = "/Content/profile/" + user.Picture;
                 BindBookings();
             }
         }
@@ -27,7 +35,7 @@ namespace AutoCareApp
         public void BindBookings()
         {
             clsUser user = (clsUser)Session["User"];
-            lstBookings.DataSource = mgtBooking.GetMyBookings(user.UserID).Tables[0];
+            lstBookings.DataSource = mgtBooking.GetMyBookingsDataSet(user.UserID).Tables[0];
             lstBookings.DataBind();
         }
        

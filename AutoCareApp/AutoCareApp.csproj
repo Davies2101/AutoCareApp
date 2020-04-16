@@ -97,12 +97,16 @@
   <ItemGroup>
     <Content Include="AdminPage.aspx" />
     <Content Include="AdminRegister.aspx" />
+    <Content Include="AdminReview.aspx" />
     <Content Include="App_Data\AutoCareDB.mdf" />
     <Content Include="App_Data\AutoCareDB_log.ldf">
       <DependentUpon>AutoCareDB.mdf</DependentUpon>
     </Content>
     <Content Include="assets\css\argon.min.css" />
+    <Content Include="assets\css\slick-theme.min.css" />
+    <Content Include="assets\css\slick.min.css" />
     <Content Include="assets\js\argon.min.js" />
+    <Content Include="assets\js\slick.min.js" />
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\css\all.min.css" />
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\webfonts\fa-brands-400.svg" />
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\webfonts\fa-regular-400.svg" />
@@ -127,6 +131,8 @@
     <Content Include="ManageBookings.aspx" />
     <Content Include="MessageBox.aspx" />
     <Content Include="MyBookings.aspx" />
+    <Content Include="MyCars.aspx" />
+    <Content Include="MyRewards.aspx" />
     <Content Include="Reports.aspx" />
     <Content Include="Services.aspx" />
     <Content Include="About.aspx" />
@@ -139,7 +145,6 @@
     <Content Include="Login.aspx" />
     <Content Include="LoginMsg.aspx" />
     <Content Include="Logout.aspx" />
-    <Content Include="NewBooking.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Default.aspx" />
@@ -196,6 +201,13 @@
     <Compile Include="AdminRegister.aspx.designer.cs">
       <DependentUpon>AdminRegister.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminReview.aspx.cs">
+      <DependentUpon>AdminReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminReview.aspx.designer.cs">
+      <DependentUpon>AdminReview.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Booking.aspx.cs">
       <DependentUpon>Booking.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -228,6 +240,7 @@
     </Compile>
     <Compile Include="Management\mgtMails.cs" />
     <Compile Include="Management\mgtPoint.cs" />
+    <Compile Include="Management\mgtReview.cs" />
     <Compile Include="MessageBox.aspx.cs">
       <DependentUpon>MessageBox.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -235,6 +248,7 @@
     <Compile Include="MessageBox.aspx.designer.cs">
       <DependentUpon>MessageBox.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\clsReview.cs" />
     <Compile Include="Models\clsTime.cs" />
     <Compile Include="MyBookings.aspx.cs">
       <DependentUpon>MyBookings.aspx</DependentUpon>
@@ -242,6 +256,20 @@
     </Compile>
     <Compile Include="MyBookings.aspx.designer.cs">
       <DependentUpon>MyBookings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyCars.aspx.cs">
+      <DependentUpon>MyCars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyCars.aspx.designer.cs">
+      <DependentUpon>MyCars.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyRewards.aspx.cs">
+      <DependentUpon>MyRewards.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyRewards.aspx.designer.cs">
+      <DependentUpon>MyRewards.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports.aspx.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
@@ -315,13 +343,6 @@
     <Compile Include="Models\clsExtra.cs" />
     <Compile Include="Models\clsUser.cs" />
     <Compile Include="Models\clsVehicle.cs" />
-    <Compile Include="NewBooking.aspx.cs">
-      <DependentUpon>NewBooking.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="NewBooking.aspx.designer.cs">
-      <DependentUpon>NewBooking.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -349,6 +370,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\profile\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <PropertyGroup>

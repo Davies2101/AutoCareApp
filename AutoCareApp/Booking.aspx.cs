@@ -19,11 +19,11 @@ namespace AutoCareApp
 {
     public partial class Booking : System.Web.UI.Page
     {
-        private DataSet bookingDateDataSet = mgtBooking.GetActiveBookings();
+        private DataSet bookingDateDataSet = mgtBooking.GetActiveBookingsDataSet();
         private static clsBooking bookingObject = null;
         private static List<string> selectedExtras = null;
-        private static DataTable packageList = mgtPackage.GetDataSet().Tables[0];
-        private static DataTable extrasList = mgtExtra.GetDataSet().Tables[0];
+        private static DataTable packageList = mgtPackage.GetPackagesDataSet().Tables[0];
+        private static DataTable extrasList = mgtExtra.GetExtrasDataSet().Tables[0];
 
         protected void Page_Load(object sender, EventArgs e)
         {

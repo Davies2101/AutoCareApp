@@ -11,7 +11,25 @@ namespace AutoCareApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Load curent pofile info
+            clsUser user = (clsUser)Session["User"];
+            if (user == null)
+            {
+                Response.Redirect("LoginMsg");
+            }
 
+            if (user.AdminLogin)
+            {
+                Response.Redirect("Unauthorized");
+            }
+
+            if (!IsPostBack)
+            {
+                lblFullName.Text = user.FullName;
+                profileimg.ImageUrl = "/Content/profile/" + user.Picture;
+            }
+
+            messageBox.Visible = false;
         }
     }
 }

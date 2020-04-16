@@ -76,6 +76,33 @@ namespace AutoCareApp {
         protected global::System.Web.UI.WebControls.TextBox Email;
         
         /// <summary>
+        /// imgPreview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgPreview;
+        
+        /// <summary>
+        /// fileupload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileupload;
+        
+        /// <summary>
+        /// hdnUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnUpload;
+        
+        /// <summary>
         /// chkPassword control.
         /// </summary>
         /// <remarks>

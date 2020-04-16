@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 public class mgtBooking
 {
 
-    public static void Add(clsBooking obj, string ExtraIDList)
+    public static void Add(clsBooking booking, string ExtraIDList)
     {
         try
         {
@@ -19,18 +19,18 @@ public class mgtBooking
             cmd.CommandType = CommandType.StoredProcedure;
 
             // Passing parameters
-            cmd.Parameters.AddWithValue("UserID", obj.UserID);
-            cmd.Parameters.AddWithValue("PackageID", obj.PackageID);
-            cmd.Parameters.AddWithValue("VehicleReg", obj.VehicleReg);
-            cmd.Parameters.AddWithValue("VehicleMake", obj.VehicleMake);
-            cmd.Parameters.AddWithValue("VehicleModel", obj.VehicleModel);
-            cmd.Parameters.AddWithValue("VehicleColor", obj.VehicleColor);
-            cmd.Parameters.AddWithValue("Address", obj.Address);
-            cmd.Parameters.AddWithValue("PostCode", obj.PostCode);
-            cmd.Parameters.AddWithValue("BookingDate", obj.BookingDate);
-            cmd.Parameters.AddWithValue("Remarks", obj.Remarks);
-            cmd.Parameters.AddWithValue("TimeSlot", obj.TimeSlot);
-            cmd.Parameters.AddWithValue("Total", obj.Total);
+            cmd.Parameters.AddWithValue("UserID", booking.UserID);
+            cmd.Parameters.AddWithValue("PackageID", booking.PackageID);
+            cmd.Parameters.AddWithValue("VehicleReg", booking.VehicleReg);
+            cmd.Parameters.AddWithValue("VehicleMake", booking.VehicleMake);
+            cmd.Parameters.AddWithValue("VehicleModel", booking.VehicleModel);
+            cmd.Parameters.AddWithValue("VehicleColor", booking.VehicleColor);
+            cmd.Parameters.AddWithValue("Address", booking.Address);
+            cmd.Parameters.AddWithValue("PostCode", booking.PostCode);
+            cmd.Parameters.AddWithValue("BookingDate", booking.BookingDate);
+            cmd.Parameters.AddWithValue("Remarks", booking.Remarks);
+            cmd.Parameters.AddWithValue("TimeSlot", booking.TimeSlot);
+            cmd.Parameters.AddWithValue("Total", booking.Total);
             cmd.Parameters.AddWithValue("ExtraIDList", ExtraIDList);
 
             con.Open();
@@ -43,8 +43,7 @@ public class mgtBooking
         }
     }
 
-
-    public static void Update(clsBooking obj, string ExtraIDList)
+    public static void Update(clsBooking booking, string ExtraIDList)
     {
         try
         {
@@ -54,18 +53,18 @@ public class mgtBooking
             cmd.CommandType = CommandType.StoredProcedure;
 
             // Passing parameters
-            cmd.Parameters.AddWithValue("BookingId", obj.BookingNo);
-            cmd.Parameters.AddWithValue("PackageID", obj.PackageID);
-            cmd.Parameters.AddWithValue("VehicleReg", obj.VehicleReg);
-            cmd.Parameters.AddWithValue("VehicleMake", obj.VehicleMake);
-            cmd.Parameters.AddWithValue("VehicleModel", obj.VehicleModel);
-            cmd.Parameters.AddWithValue("VehicleColor", obj.VehicleColor);
-            cmd.Parameters.AddWithValue("Address", obj.Address);
-            cmd.Parameters.AddWithValue("PostCode", obj.PostCode);
-            cmd.Parameters.AddWithValue("BookingDate", obj.BookingDate);
-            cmd.Parameters.AddWithValue("Remarks", obj.Remarks);
-            cmd.Parameters.AddWithValue("TimeSlot", obj.TimeSlot);
-            cmd.Parameters.AddWithValue("Total", obj.Total);
+            cmd.Parameters.AddWithValue("BookingId", booking.BookingNo);
+            cmd.Parameters.AddWithValue("PackageID", booking.PackageID);
+            cmd.Parameters.AddWithValue("VehicleReg", booking.VehicleReg);
+            cmd.Parameters.AddWithValue("VehicleMake", booking.VehicleMake);
+            cmd.Parameters.AddWithValue("VehicleModel", booking.VehicleModel);
+            cmd.Parameters.AddWithValue("VehicleColor", booking.VehicleColor);
+            cmd.Parameters.AddWithValue("Address", booking.Address);
+            cmd.Parameters.AddWithValue("PostCode", booking.PostCode);
+            cmd.Parameters.AddWithValue("BookingDate", booking.BookingDate);
+            cmd.Parameters.AddWithValue("Remarks", booking.Remarks);
+            cmd.Parameters.AddWithValue("TimeSlot", booking.TimeSlot);
+            cmd.Parameters.AddWithValue("Total", booking.Total);
             cmd.Parameters.AddWithValue("ExtraIDList", ExtraIDList);
 
             con.Open();
@@ -85,7 +84,7 @@ public class mgtBooking
             SqlConnection con = new SqlConnection(App.GetDBCon());
             SqlDataReader rd;
 
-            clsVehicle obj = null;
+            clsVehicle vehicle = null;
 
             using (con)
             {
@@ -101,12 +100,12 @@ public class mgtBooking
                 if (rd.Read())
                 {
                     // Reads return values to see criteria matches DB Users 
-                    obj = new clsVehicle();
+                    vehicle = new clsVehicle();
 
-                    obj.VehicleReg = rd["VehicleReg"].ToString();
-                    obj.VehicleMake = rd["VehicleMake"].ToString();
-                    obj.VehicleModel = rd["VehicleModel"].ToString();
-                    obj.VehicleColor = rd["VehicleColor"].ToString();
+                    vehicle.VehicleReg = rd["VehicleReg"].ToString();
+                    vehicle.VehicleMake = rd["VehicleMake"].ToString();
+                    vehicle.VehicleModel = rd["VehicleModel"].ToString();
+                    vehicle.VehicleColor = rd["VehicleColor"].ToString();
 
                 }
 
@@ -115,7 +114,7 @@ public class mgtBooking
 
             con.Close();
 
-            return obj;
+            return vehicle;
         }
         catch (Exception)
         {
@@ -131,7 +130,7 @@ public class mgtBooking
             SqlConnection con = new SqlConnection(App.GetDBCon());
             SqlDataReader rd;
 
-            double obj = 0;
+            double price = 0;
 
             using (con)
             {
@@ -148,7 +147,7 @@ public class mgtBooking
                 if (rd.Read())
                 {
                     // Reads return values to see criteria matches DB Users 
-                    obj = Convert.ToInt32(rd[0]);
+                    price = Convert.ToInt32(rd[0]);
                 }
 
                 rd.Close();
@@ -156,7 +155,7 @@ public class mgtBooking
 
             con.Close();
 
-            return obj;
+            return price;
         }
         catch (Exception)
         {
@@ -165,7 +164,7 @@ public class mgtBooking
         }
     }
 
-    public static DataSet GetActiveBookings()
+    public static DataSet GetActiveBookingsDataSet()
     {
         try
         {
@@ -194,7 +193,7 @@ public class mgtBooking
         }
     }
 
-    public static DataSet GetMyBookings(int userId)
+    public static DataSet GetMyBookingsDataSet(int userId)
     {
         try
         {
@@ -242,7 +241,7 @@ public class mgtBooking
         }
     }
 
-    public static DataSet GetBookingsByDate(DateTime startDate, DateTime endDate)
+    public static DataSet GetBookingsByDateDataSet(DateTime startDate, DateTime endDate)
     {
         try
         {
@@ -340,5 +339,35 @@ public class mgtBooking
         {
             throw;
         }
+    }
+
+    public static int GetTotalCompletedBookings()
+    {
+        int count = 0;
+        using (SqlConnection con = new SqlConnection(App.GetDBCon()))
+        {
+            SqlCommand cmd = new SqlCommand("sp_Get_TotalCompletedBookings", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            count = Convert.ToInt32(cmd.ExecuteScalar());
+            con.Close();
+        }
+
+        return count;
+    }
+
+    public static double GetTotalSales()
+    {
+        double total = 0;
+        using (SqlConnection con = new SqlConnection(App.GetDBCon()))
+        {
+            SqlCommand cmd = new SqlCommand("sp_Get_TotalSales", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            total = Convert.ToDouble(cmd.ExecuteScalar());
+            con.Close();
+        }
+
+        return total;
     }
 }

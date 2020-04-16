@@ -14,4 +14,5 @@ public class clsUser
     public bool AdminLogin { get; set; }
     public int FailedLoginAttempts { get; set; }
     public DateTime? LockedOutDatetime { get; set; }
+    public string Picture { get; set; }
 }

@@ -36,13 +36,13 @@ namespace AutoCareApp
 
         public void BindCurrentBookings()
         {
-            lstBookings.DataSource = mgtBooking.GetBookingsByDate(DateTime.Now, DateTime.Now).Tables[0];
+            lstBookings.DataSource = mgtBooking.GetBookingsByDateDataSet(DateTime.Now, DateTime.Now).Tables[0];
             lstBookings.DataBind();
         }
 
         public void BindBookingsByDate()
         {
-            lstAllBookings.DataSource = mgtBooking.GetBookingsByDate(Convert.ToDateTime(txtStartDate.Text), Convert.ToDateTime(txtEndDate.Text)).Tables[0];
+            lstAllBookings.DataSource = mgtBooking.GetBookingsByDateDataSet(Convert.ToDateTime(txtStartDate.Text), Convert.ToDateTime(txtEndDate.Text)).Tables[0];
             lstAllBookings.DataBind();
         }
 
