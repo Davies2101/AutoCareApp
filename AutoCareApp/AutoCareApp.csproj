@@ -46,6 +46,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>itextsharp\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>itextsharp\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.FriendlyUrls, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
@@ -103,6 +111,7 @@
       <DependentUpon>AutoCareDB.mdf</DependentUpon>
     </Content>
     <Content Include="assets\css\argon.min.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\slick-theme.min.css" />
     <Content Include="assets\css\slick.min.css" />
     <Content Include="assets\js\argon.min.js" />
@@ -130,6 +139,8 @@
     <Content Include="Content\SideMenu.css" />
     <Content Include="Content\SiteAdmin.css" />
     <Content Include="Dashboard.aspx" />
+    <Content Include="itextsharp\itextsharp.dll" />
+    <Content Include="itextsharp\itextsharp.xmlworker.dll" />
     <Content Include="ManageBookings.aspx" />
     <Content Include="MessageBox.aspx" />
     <Content Include="MyBookings.aspx" />

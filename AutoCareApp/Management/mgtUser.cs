@@ -237,4 +237,29 @@ public class mgtUSer
 
         return count;
     }
+
+    public static DataSet GetUsersDataSet(bool admin)
+    {
+        try
+        {
+            DataSet ds = new DataSet("dt");
+
+            // Getting the database connectivity as stored procedure
+            using (SqlConnection con = new SqlConnection(App.GetDBCon()))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Get_AllUsers", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("admin", admin);
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                da.Fill(ds);
+            }
+
+            return ds;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
 }

@@ -415,4 +415,30 @@ public class mgtBooking
         }
         return saleDictionary;
     }
+
+    public static DataSet GetSalesDataSet(DateTime startDate, DateTime endDate)
+    {
+        try
+        {
+            DataSet ds = new DataSet("dt");
+
+            // Getting the database connectivity as stored procedure
+            using (SqlConnection con = new SqlConnection(App.GetDBCon()))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Get_BookingSales", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("startDate", startDate);
+                cmd.Parameters.AddWithValue("endDate", endDate);
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                da.Fill(ds);
+            }
+
+            return ds;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
 }

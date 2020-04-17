@@ -315,7 +315,7 @@
                                                                 <th class="text-left" scope="col">Customer</th>
                                                                 <th class="text-left" scope="col">Vehicle #</th>
                                                                 <th class="text-left" scope="col">Package</th>
-                                                                <th class="text-left" scope="col">Extras</th>
+                                                                <th class="text-left" scope="col">Total</th>
                                                                 <th class="text-left" scope="col">Status</th>
                                                                 <th scope="col"></th>
                                                             </tr>
