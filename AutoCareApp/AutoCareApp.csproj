@@ -113,6 +113,8 @@
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\webfonts\fa-solid-900.svg" />
     <Content Include="assets\vendor\bootstrap-datepicker\dist\js\bootstrap-datepicker.min.js" />
     <Content Include="assets\vendor\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <Content Include="assets\vendor\chart.js\dist\Chart.extension.js" />
+    <Content Include="assets\vendor\chart.js\dist\Chart.min.js" />
     <Content Include="assets\vendor\jquery\dist\jquery.min.js" />
     <Content Include="assets\vendor\nucleo\css\nucleo.css" />
     <Content Include="assets\vendor\nucleo\fonts\nucleo-icons.svg" />

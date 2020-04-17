@@ -12,7 +12,7 @@
     <div class="container">
         <div class="section text-center">
             <div class="row">
-                <div class="col-md-10 ml-auto mr-auto">
+                <div class="col-md-12 ml-auto mr-auto">
                     <div class="card">
                         <div class="card-header card-header-primary text-center">
                             <h2>Register Admin</h2>

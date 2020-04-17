@@ -370,4 +370,49 @@ public class mgtBooking
 
         return total;
     }
+
+    public static int GetCurrentBookings()
+    {
+        int count = 0;
+        using (SqlConnection con = new SqlConnection(App.GetDBCon()))
+        {
+            SqlCommand cmd = new SqlCommand("sp_Get_CurrentBookings", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            count = Convert.ToInt32(cmd.ExecuteScalar());
+            con.Close();
+        }
+
+        return count;
+    }
+
+    public static Dictionary<string, int> GetWeeklySales()
+    {
+        Dictionary<string, int> saleDictionary = new Dictionary<string, int>();
+        saleDictionary["Monday"] = 0;
+        saleDictionary["Tuesday"] = 0;
+        saleDictionary["Wednesday"] = 0;
+        saleDictionary["Thursday"] = 0;
+        saleDictionary["Friday"] = 0;
+        saleDictionary["Saturday"] = 0;
+        saleDictionary["Sunday"] = 0;
+
+        SqlDataReader rd;
+        using (SqlConnection con = new SqlConnection(App.GetDBCon()))
+        {
+            SqlCommand cmd = new SqlCommand("sp_get_WeeklySales", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            rd = cmd.ExecuteReader();
+            while (rd.Read())
+            {
+                if (saleDictionary.ContainsKey(rd["Day"].ToString()))
+                {
+                    saleDictionary[rd["Day"].ToString()] = Convert.ToInt32(rd["Total"]);
+                }
+            }
+            rd.Close();
+        }
+        return saleDictionary;
+    }
 }

@@ -36,4 +36,25 @@ public class mgtPackage
             throw ex;
         }
     }
+
+    public static List<int> GetMostlyPickedPackages()
+    {
+        List<int> counts = new List<int>();
+
+        List<int> list = new List<int>(); ;
+        SqlDataReader rd;
+        using (SqlConnection con = new SqlConnection(App.GetDBCon()))
+        {
+            SqlCommand cmd = new SqlCommand("sp_Get_MostlyPickedPackages", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            con.Open();
+            rd = cmd.ExecuteReader();
+            while (rd.Read())
+            {
+                counts.Add(Convert.ToInt32(rd["Count"]));
+            }
+            rd.Close();
+        }
+        return counts;
+    }
 }
