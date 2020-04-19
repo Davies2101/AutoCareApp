@@ -20,5 +20,6 @@ public class clsBooking
     public bool IsCompleted { get; set; }
     public TimeSpan TimeSlot { get; set; }
     public double Total { get; set; }
+    public bool PaymentReceived { get; set; }
 
 }

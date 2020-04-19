@@ -20,7 +20,7 @@ namespace AutoCareApp
             else if (!user.AdminLogin)
             {
                 //TODO
-                Response.Redirect("Unauthorized");
+                Response.Redirect("/Unauthorized.aspx");
             }
 
             if (!Page.IsPostBack)
@@ -66,9 +66,9 @@ namespace AutoCareApp
             Button button = (sender as Button);
             int bookingId = Convert.ToInt32(button.Attributes["BookingId"]);
             mgtBooking.CompleteBooking(bookingId);
-            //TODO : send email with payment link
+            mgtMails.SendPaymentLink(bookingId, Server.UrlEncode(Cipher.Encrypt(bookingId.ToString())));
             ShowMessageBox("The booking is successfully completed!");
-            BindBookingsByDate();
+            BindCurrentBookings();
         }
 
         protected void btnCancelAll_OnClick(object sender, EventArgs e)
@@ -86,5 +86,6 @@ namespace AutoCareApp
             lblMessage.Text = messageText;
             messageBox.Visible = true;
         }
+        
     }
 }

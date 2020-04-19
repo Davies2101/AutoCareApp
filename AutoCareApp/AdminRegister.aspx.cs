@@ -18,7 +18,7 @@ namespace AutoCareApp
             }
             else if (!user.AdminLogin)
             {
-                Response.Redirect("Unauthorized");
+                Response.Redirect("/Unauthorized.aspx");
             }
             // Focus on name field 
             FullName.Focus();
@@ -56,7 +56,7 @@ namespace AutoCareApp
             catch (Exception ex)
             {
                 // displays error messsage
-                AlertMessage(ex.Message);
+                AlertMessage("Something went wrong. Please try again later!");
             }
         }
 

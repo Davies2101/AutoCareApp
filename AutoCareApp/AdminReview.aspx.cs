@@ -19,7 +19,7 @@ namespace AutoCareApp
             }
             else if (!user.AdminLogin)
             {
-                Response.Redirect("Unauthorized");
+                Response.Redirect("/Unauthorized.aspx");
             }
 
             if (!Page.IsPostBack)

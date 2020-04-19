@@ -62,6 +62,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net45\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -92,10 +98,6 @@
     <Reference Include="Antlr3.Runtime">
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <Private>True</Private>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
       <Private>True</Private>
@@ -136,17 +138,23 @@
     <Content Include="Content\images\quote-1-70x70.jpg" />
     <Content Include="Content\images\quote-2-70x70.jpg" />
     <Content Include="Content\images\quote-3-70x70.jpg" />
+    <Content Include="Content\Payment.css" />
     <Content Include="Content\SideMenu.css" />
     <Content Include="Content\SiteAdmin.css" />
     <Content Include="Dashboard.aspx" />
+    <Content Include="InvalidRequest.aspx" />
     <Content Include="itextsharp\itextsharp.dll" />
     <Content Include="itextsharp\itextsharp.xmlworker.dll" />
     <Content Include="ManageBookings.aspx" />
+    <Content Include="ManageProfile.aspx" />
     <Content Include="MessageBox.aspx" />
     <Content Include="MyBookings.aspx" />
     <Content Include="MyCars.aspx" />
     <Content Include="MyRewards.aspx" />
+    <Content Include="BookingPayment.aspx" />
+    <Content Include="PaymentResult.aspx" />
     <Content Include="Reports.aspx" />
+    <Content Include="Review.aspx" />
     <Content Include="Services.aspx" />
     <Content Include="About.aspx" />
     <Content Include="Contact.aspx" />
@@ -164,7 +172,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
-    <Content Include="Web.config" />
+    <Content Include="Unauthorized.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Bundle.config" />
     <Content Include="packages.config" />
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\webfonts\fa-brands-400.eot" />
@@ -237,12 +248,20 @@
     </Compile>
     <Compile Include="Classes\Cipher.cs" />
     <Compile Include="Classes\EmailSender.cs" />
+    <Compile Include="Classes\PaypalConfiguration.cs" />
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InvalidRequest.aspx.cs">
+      <DependentUpon>InvalidRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InvalidRequest.aspx.designer.cs">
+      <DependentUpon>InvalidRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManageBookings.aspx.cs">
       <DependentUpon>ManageBookings.aspx</DependentUpon>
@@ -254,6 +273,13 @@
     <Compile Include="Management\mgtMails.cs" />
     <Compile Include="Management\mgtPoint.cs" />
     <Compile Include="Management\mgtReview.cs" />
+    <Compile Include="ManageProfile.aspx.cs">
+      <DependentUpon>ManageProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageProfile.aspx.designer.cs">
+      <DependentUpon>ManageProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MessageBox.aspx.cs">
       <DependentUpon>MessageBox.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -284,12 +310,33 @@
     <Compile Include="MyRewards.aspx.designer.cs">
       <DependentUpon>MyRewards.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BookingPayment.aspx.cs">
+      <DependentUpon>BookingPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BookingPayment.aspx.designer.cs">
+      <DependentUpon>BookingPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentResult.aspx.cs">
+      <DependentUpon>PaymentResult.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymentResult.aspx.designer.cs">
+      <DependentUpon>PaymentResult.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports.aspx.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Reports.aspx.designer.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Review.aspx.cs">
+      <DependentUpon>Review.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Review.aspx.designer.cs">
+      <DependentUpon>Review.aspx</DependentUpon>
     </Compile>
     <Compile Include="Services.aspx.cs">
       <DependentUpon>Services.aspx</DependentUpon>
@@ -377,6 +424,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Unauthorized.aspx.cs">
+      <DependentUpon>Unauthorized.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Unauthorized.aspx.designer.cs">
+      <DependentUpon>Unauthorized.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

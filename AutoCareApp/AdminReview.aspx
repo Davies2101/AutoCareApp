@@ -85,7 +85,6 @@
                 </div>
             </div>
         </asp:Panel>
-
     </div>
     <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript">

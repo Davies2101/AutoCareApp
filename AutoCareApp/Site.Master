@@ -22,7 +22,7 @@
 <body>
     <form runat="server">
         <!-- Navigation -->
-        <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-default">
+        <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-default" runat="server">
             <div class="container">
                 <div class="navbar-translate">
                     <img class="navbar-brand" src="Content/images/Logo-Small.png" />

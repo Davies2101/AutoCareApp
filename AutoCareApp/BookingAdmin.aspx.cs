@@ -32,7 +32,7 @@ namespace AutoCareApp
             else if (!user.AdminLogin)
             {
                 //TODO
-                Response.Redirect("Unauthorized");
+                Response.Redirect("/Unauthorized.aspx");
             }
             string bookingId = Request.QueryString["id"];
             Wizard1.PreRender += new EventHandler(Wizard1_OnPreRender);

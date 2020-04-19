@@ -213,7 +213,6 @@
                                 </ul>
                                 <div id="myTabContent" class="tab-content fancyTabContent" aria-live="polite">
                                     <div class="tab-pane fade active in show" id="tabBody0" role="tabpanel" aria-labelledby="tab0" aria-hidden="false" tabindex="0">
-                                        <div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="table-responsive">
@@ -271,8 +270,7 @@
                                                     </div>
                                                 </div>
 
-                                            </div>
-                                        </div>
+                                            </div>                                        
                                     </div>
                                     <div class="tab-pane fade" id="tabBody1" role="tabpanel" aria-labelledby="tab1" aria-hidden="true" tabindex="0">
                                         <div class="row">

@@ -307,6 +307,7 @@ public class mgtBooking
                     booking.Total = Convert.ToDouble(rd["Total"].ToString());
                     booking.UserID = Convert.ToInt32(rd["UserID"].ToString());
                     booking.VehicleReg = rd["VehicleReg"].ToString();
+                    booking.PaymentReceived = Convert.ToBoolean(rd["PaymentReceived"].ToString());
                 }
 
                 rd.Close();
@@ -439,6 +440,24 @@ public class mgtBooking
         catch (Exception ex)
         {
             throw ex;
+        }
+    }
+
+    public static void UpdatePayment(int bookingId)
+    {
+        try
+        {
+            SqlConnection con = new SqlConnection(App.GetDBCon());
+            SqlCommand cmd = new SqlCommand("sp_Payment_Complete", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("BookingId", bookingId);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        catch (Exception)
+        {
+            throw;
         }
     }
 }
