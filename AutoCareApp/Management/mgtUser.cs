@@ -262,4 +262,23 @@ public class mgtUSer
             throw ex;
         }
     }
+
+    public static void Delete(int userId)
+    {
+        try
+        {
+            SqlConnection con = new SqlConnection(App.GetDBCon());
+            SqlCommand cmd = new SqlCommand("sp_User_Delete", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("UserID", userId);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+    }
 }

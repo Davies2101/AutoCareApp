@@ -111,6 +111,17 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">
+                                                                <i class="fas fa-car"></i>
+                                                            </span>
+                                                        </div>
+                                                        <asp:DropDownList ID="ddlMyCars" runat="server" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlMyCars_OnSelectedIndexChanged"></asp:DropDownList>
+                                                    </div>
+                                                    &nbsp;
+                                                </div>
+                                                <div class="bmd-form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
                                                                 <i class="far fa-registered"></i>
                                                             </span>
                                                         </div>

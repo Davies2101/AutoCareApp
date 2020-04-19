@@ -131,6 +131,7 @@
     <Content Include="assets\vendor\nucleo\fonts\nucleo-icons.svg" />
     <Content Include="Booking.aspx" />
     <Content Include="BookingAdmin.aspx" />
+    <Content Include="Content\Circle.css" />
     <Content Include="Content\images\about2.jpg" />
     <Content Include="Content\images\about3.jpg" />
     <Content Include="Content\images\login-bg.jpg" />
@@ -270,6 +271,8 @@
     <Compile Include="ManageBookings.aspx.designer.cs">
       <DependentUpon>ManageBookings.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Management\mgtCar.cs" />
+    <Compile Include="Management\mgtCoupon.cs" />
     <Compile Include="Management\mgtMails.cs" />
     <Compile Include="Management\mgtPoint.cs" />
     <Compile Include="Management\mgtReview.cs" />
@@ -287,6 +290,8 @@
     <Compile Include="MessageBox.aspx.designer.cs">
       <DependentUpon>MessageBox.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\clsCoupon.cs" />
+    <Compile Include="Models\clsPoint.cs" />
     <Compile Include="Models\clsReview.cs" />
     <Compile Include="Models\clsTime.cs" />
     <Compile Include="MyBookings.aspx.cs">
@@ -402,7 +407,7 @@
     <Compile Include="Models\clsPackage.cs" />
     <Compile Include="Models\clsExtra.cs" />
     <Compile Include="Models\clsUser.cs" />
-    <Compile Include="Models\clsVehicle.cs" />
+    <Compile Include="Models\clsCar.cs" />
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

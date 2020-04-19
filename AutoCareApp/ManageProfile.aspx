@@ -37,6 +37,7 @@
                                                 <th class="text-left" scope="col">Phone Number</th>
                                                 <th class="text-left" scope="col">Points Available</th>
                                                 <th class="text-left" scope="col">Redeemed</th>
+                                                <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody class="list">
@@ -50,6 +51,17 @@
                                                         <td class="text-left"><%#Eval("PhoneNumber")%></td>
                                                         <td class="text-left"><%#Eval("Points")%></td>
                                                         <td class="text-left"><%#Eval("Redeemed")%></td>
+                                                        <td class="text-right">
+                                                            <div class='dropdown'>
+                                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <i class="fas fa-ellipsis-v"></i>
+                                                                </a>
+                                                                <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
+                                                                    <%--<asp:Button ID="btnContact" runat="server" Text="Contact" CssClass="dropdown-item" UserID='<%# Eval("UserID")%>' OnClick="btnContact_OnClick" />--%>
+                                                                    <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="dropdown-item" UserID='<%# Eval("UserID")%>' OnClick="btnDelete_OnClick" />
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 </ItemTemplate>
                                             </asp:ListView>
@@ -73,8 +85,7 @@
                     <div class="modal-body">
                         <div class="text-center">
                             <i class="far fa-check-circle fa-4x"></i>
-                            <h4 class="heading mt-4">
-                                <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label></h4>
+                            <h4 class="heading mt-4">User deleted successfully!</h4>
                         </div>
                     </div>
                     <div class="modal-footer">

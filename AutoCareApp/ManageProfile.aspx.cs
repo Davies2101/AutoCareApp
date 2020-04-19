@@ -15,6 +15,8 @@ namespace AutoCareApp
             {
                 BindUsers();
             }
+
+            messageBox.Visible = false;
         }
 
         public void BindUsers()
@@ -32,6 +34,20 @@ namespace AutoCareApp
         protected void ddlUserType_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             BindUsers();
+        }
+
+        //protected void btnContact_OnClick(object sender, EventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        protected void btnDelete_OnClick(object sender, EventArgs e)
+        {
+            Button button = (sender as Button);
+            int userId = Convert.ToInt32(button.Attributes["UserID"]);
+            mgtUSer.Delete(userId);
+            BindUsers();
+            messageBox.Visible = true;
         }
     }
 }

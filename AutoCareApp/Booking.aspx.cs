@@ -38,6 +38,7 @@ namespace AutoCareApp
                 BindPackages();
                 bookingObject = new clsBooking();
                 selectedExtras = new List<string>();
+                BindMyCars();
             }
             alertBox.Visible = false;
         }
@@ -416,6 +417,28 @@ namespace AutoCareApp
             {
                 AlertMessage("Email sending failed!");
             }
+        }
+
+        protected void ddlMyCars_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlMyCars.SelectedValue != "0")
+            {
+                clsCar car = mgtCar.GetCar(Convert.ToInt32(ddlMyCars.SelectedValue));
+                VehicleReg.Text = car.VehicleReg;
+                VehicleColor.Text = car.VehicleColor;
+                VehicleMake.Text = car.VehicleMake;
+                VehicleModel.Text = car.VehicleModel;
+            }
+        }
+
+        public void BindMyCars()
+        {
+            clsUser user = (clsUser) Session["User"];
+            ddlMyCars.DataSource = mgtCar.GetCarsDataSet(user.UserID);
+            ddlMyCars.DataTextField = "VehicleReg";
+            ddlMyCars.DataValueField = "CarId";
+            ddlMyCars.DataBind();
+            ddlMyCars.Items.Insert(0, new ListItem("-- Select --", "0"));
         }
     }
 }

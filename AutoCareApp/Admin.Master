@@ -73,25 +73,6 @@
                                     <span class="nav-link-text">Manage Profiles</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="examples/tables.html">
-                                    <i class="ni ni-bullet-list-67 text-default"></i>
-                                    <span class="nav-link-text">Tables</span>
-                                </a>
-                            </li>
-                           
-                            <li class="nav-item">
-                                <a class="nav-link" href="examples/register.html">
-                                    <i class="ni ni-circle-08 text-pink"></i>
-                                    <span class="nav-link-text">Register</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="examples/upgrade.html">
-                                    <i class="ni ni-send text-dark"></i>
-                                    <span class="nav-link-text">Upgrade</span>
-                                </a>
-                            </li>
                         </ul>
                         <!-- Divider -->
                         <hr class="my-3">

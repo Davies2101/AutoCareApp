@@ -77,51 +77,7 @@ public class mgtBooking
         }
     }
 
-    public static clsVehicle GetVehicle(string VehicleReg)
-    {
-        try
-        {
-            SqlConnection con = new SqlConnection(App.GetDBCon());
-            SqlDataReader rd;
-
-            clsVehicle vehicle = null;
-
-            using (con)
-            {
-                // Getting the database connectivity using stored procedure
-                SqlCommand cmd = new SqlCommand("sp_Booking_GetVehicle", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                // Passing parameters
-                cmd.Parameters.AddWithValue("VehicleReg", VehicleReg);
-
-                con.Open();
-                rd = cmd.ExecuteReader();
-                if (rd.Read())
-                {
-                    // Reads return values to see criteria matches DB Users 
-                    vehicle = new clsVehicle();
-
-                    vehicle.VehicleReg = rd["VehicleReg"].ToString();
-                    vehicle.VehicleMake = rd["VehicleMake"].ToString();
-                    vehicle.VehicleModel = rd["VehicleModel"].ToString();
-                    vehicle.VehicleColor = rd["VehicleColor"].ToString();
-
-                }
-
-                rd.Close();
-            }
-
-            con.Close();
-
-            return vehicle;
-        }
-        catch (Exception)
-        {
-
-            throw;
-        }
-    }
+    
 
     public static double GetPrice(int PackageID, string ServiceIDList)
     {
