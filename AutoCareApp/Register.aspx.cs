@@ -34,7 +34,7 @@ namespace AutoCareApp
                     // Store user details to session as login user, redirects to home page
                     Session["User"] = user;
                     //redirect to home page
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("/Default.aspx", false);
 
                 }
                 else
