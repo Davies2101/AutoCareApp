@@ -252,7 +252,7 @@
                                                                                             <i class="fas fa-ellipsis-v"></i>
                                                                                         </a>
                                                                                         <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
-                                                                                            <asp:Button ID="btnEnd" runat="server" Text="Mark off as ‘Complete’" CssClass="dropdown-item" BookingId='<%# Eval("BookingNo")%>' OnClick="btnEnd_OnClick" />
+                                                                                            <asp:Button ID="btnEnd" runat="server" Text="Complete" CssClass="dropdown-item" BookingId='<%# Eval("BookingNo")%>' OnClick="btnEnd_OnClick" />
                                                                                             <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="dropdown-item" BookingId='<%# Eval("BookingNo")%>' OnClick="btnCancel_OnClick" />
                                                                                             <a href='BookingAdmin.aspx?id=<%# Eval("BookingNo")%>' class='dropdown-item'>Edit</a>
                                                                                         </div>
