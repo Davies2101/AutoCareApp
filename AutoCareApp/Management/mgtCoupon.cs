@@ -70,5 +70,43 @@ namespace AutoCareApp.Management
                 throw ex;
             }
         }
+
+        public static bool Validate(int couponCode)
+        {
+            bool valid = false;
+            using (SqlConnection con = new SqlConnection(App.GetDBCon()))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Validate_Coupon", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Code", couponCode);
+                con.Open();
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                con.Close();
+                if (count > 0)
+                {
+                    valid = true;
+                }
+            }
+
+            return valid;
+        }
+
+        public static void UpdateStatus(int couponCode)
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(App.GetDBCon());
+                SqlCommand cmd = new SqlCommand("sp_Coupon_UpdateStatus", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Code", couponCode);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

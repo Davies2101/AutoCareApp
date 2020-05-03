@@ -16,7 +16,7 @@ namespace AutoCareApp
             clsUser user = (clsUser) Session["User"];
             if (user == null)
             {
-                Response.Redirect("LoginMsg");
+                Response.Redirect("/LoginMsg.aspx");
             }
 
             if (user.AdminLogin)

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using AutoCareApp.Management;
+using AutoCareApp.Models;
 
 namespace AutoCareApp
 {
@@ -126,7 +127,7 @@ namespace AutoCareApp
 
             bookingTotal = extraTotal + packagePrice;
             lblTotal.Text = string.Format("{0:0.00}", bookingTotal);
-            lblBookingDateAndTime.Text = bookingObject.BookingDate.ToShortDateString() + " " + DateTime.Today.Add(bookingObject.TimeSlot).ToString("hh:mm tt");
+            lblBookingDateAndTime.Text = string.Format("{0:dd/MM/yyyy}", bookingObject.BookingDate) + " " + DateTime.Today.Add(bookingObject.TimeSlot).ToString("hh:mm tt");
         }
         protected void btnPay_OnClick(object sender, EventArgs e)
         {
@@ -186,7 +187,8 @@ namespace AutoCareApp
                     {
                         Session["PaymentStatus"] = true;
                         mgtBooking.UpdatePayment(bookingObject.BookingNo);
-                        mgtMails.SendPaymentCompletedMail(bookingObject.BookingNo);
+                        GenerateCoupon(bookingObject.UserID);
+                        mgtMails.SendPaymentCompletedMail(bookingObject.UserID);
                     }
                     redirectUrl = "/PaymentResult.aspx";
                 }
@@ -195,7 +197,7 @@ namespace AutoCareApp
             {
                 Session["PaymentStatus"] = false;
                 Session["bid"] = null;
-                Response.Redirect("/PaymentResult.aspx");
+                redirectUrl = "/PaymentResult.aspx";
             }
             Response.Redirect(redirectUrl);
         }
@@ -258,6 +260,30 @@ namespace AutoCareApp
             return this.payment.Create(apiContext);
         }
 
-        
+
+        private void GenerateCoupon(int userId)
+        {
+            clsPoint points = mgtPoint.GetPoints(userId);
+            if (points.Points == 5)
+            {
+                clsCoupon coupon = new clsCoupon();
+                coupon.PointId = points.Id;
+                coupon.Code = GenerateRandomNo();
+                mgtCoupon.Add(coupon);
+                mgtMails.SendCouponCode(userId, coupon.Code);
+
+            }
+        }
+
+        //https://stackoverflow.com/questions/33749543/unique-4-digit-random-number-in-c-sharp/33749610
+        //Generate RandomNo
+        public int GenerateRandomNo()
+        {
+            int _min = 100000;
+            int _max = 999999;
+            Random _rdm = new Random();
+            return _rdm.Next(_min, _max);
+        }
+
     }
 }

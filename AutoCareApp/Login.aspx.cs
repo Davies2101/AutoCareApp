@@ -48,11 +48,11 @@ namespace AutoCareApp
                         Session["User"] = obj;
                         if (obj.AdminLogin)
                         {
-                            Response.Redirect("~/Dashboard.aspx");
+                            Response.Redirect("~/Dashboard.aspx", false);
                         }
                         else
                         {
-                            Response.Redirect("~/Default.aspx");
+                            Response.Redirect("~/Default.aspx", false);
                         }
                     }
                     else

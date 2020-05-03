@@ -11,6 +11,16 @@ namespace AutoCareApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            clsUser user = (clsUser)Session["User"];
+            if (user == null)
+            {
+                Response.Redirect("/LoginMsg.aspx");
+            }
+            else if (!user.AdminLogin)
+            {
+                Response.Redirect("/Unauthorized.aspx");
+            }
+
             if (!IsPostBack)
             {
                 BindUsers();
@@ -36,10 +46,6 @@ namespace AutoCareApp
             BindUsers();
         }
 
-        //protected void btnContact_OnClick(object sender, EventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         protected void btnDelete_OnClick(object sender, EventArgs e)
         {

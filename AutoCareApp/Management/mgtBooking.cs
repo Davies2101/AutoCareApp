@@ -31,6 +31,7 @@ public class mgtBooking
             cmd.Parameters.AddWithValue("Remarks", booking.Remarks);
             cmd.Parameters.AddWithValue("TimeSlot", booking.TimeSlot);
             cmd.Parameters.AddWithValue("Total", booking.Total);
+            cmd.Parameters.AddWithValue("CouponCode", booking.CouponCode);
             cmd.Parameters.AddWithValue("ExtraIDList", ExtraIDList);
 
             con.Open();
@@ -264,6 +265,7 @@ public class mgtBooking
                     booking.UserID = Convert.ToInt32(rd["UserID"].ToString());
                     booking.VehicleReg = rd["VehicleReg"].ToString();
                     booking.PaymentReceived = Convert.ToBoolean(rd["PaymentReceived"].ToString());
+                    booking.CouponCode = Convert.ToInt32(rd["CouponCode"].ToString());
                 }
 
                 rd.Close();

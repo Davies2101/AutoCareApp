@@ -252,7 +252,7 @@
             }
         }
         function validatePhone() {
-            if ($('.phonenumber').val().length > 3 && $('.phonenumber').val().length <= 15) {
+            if ($('.phonenumber').val().length == 11) {
                 $('#popover-phonenumber').css('visibility', 'hidden');
                 return true;
             } else {

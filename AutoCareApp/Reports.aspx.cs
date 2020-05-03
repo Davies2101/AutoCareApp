@@ -25,7 +25,7 @@ namespace AutoCareApp
             clsUser user = (clsUser)Session["User"];
             if (user == null)
             {
-                Response.Redirect("LoginMsg");
+                Response.Redirect("/LoginMsg.aspx");
             }
             else if (!user.AdminLogin)
             {
@@ -34,8 +34,8 @@ namespace AutoCareApp
 
             if (!IsPostBack)
             {
-                txtStartDate.Text = DateTime.Now.ToShortDateString();
-                txtEndDate.Text = DateTime.Now.ToShortDateString();
+                txtStartDate.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
+                txtEndDate.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
             }
         }
 

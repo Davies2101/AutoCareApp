@@ -175,6 +175,15 @@ namespace AutoCareApp {
         protected global::System.Web.UI.WebControls.TextBox Remarks;
         
         /// <summary>
+        /// txtCoupon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCoupon;
+        
+        /// <summary>
         /// panelBookingSummary control.
         /// </summary>
         /// <remarks>
@@ -227,6 +236,24 @@ namespace AutoCareApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListView lstViewExtras;
+        
+        /// <summary>
+        /// panelCoupon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelCoupon;
+        
+        /// <summary>
+        /// lblCouponCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCouponCode;
         
         /// <summary>
         /// lblTotal control.

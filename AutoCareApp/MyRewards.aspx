@@ -37,7 +37,8 @@
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted mb-0">Total Points</h5>
-                                                <span class="h2 font-weight-bold mb-0"><asp:Label ID="lblTotal" runat="server" Text=""></asp:Label></span>
+                                                <span class="h2 font-weight-bold mb-0">
+                                                    <asp:Label ID="lblTotal" runat="server" Text=""></asp:Label></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -52,7 +53,8 @@
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted mb-0">Available</h5>
-                                                <span class="h2 font-weight-bold mb-0"><asp:Label ID="lblPoints" runat="server" Text=""></asp:Label></span>
+                                                <span class="h2 font-weight-bold mb-0">
+                                                    <asp:Label ID="lblPoints" runat="server" Text=""></asp:Label></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-success text-white rounded-circle shadow">
@@ -67,7 +69,8 @@
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted mb-0">Redeemed</h5>
-                                                <span class="h2 font-weight-bold mb-0"><asp:Label ID="lblRedeemed" runat="server" Text=""></asp:Label></span>
+                                                <span class="h2 font-weight-bold mb-0">
+                                                    <asp:Label ID="lblRedeemed" runat="server" Text=""></asp:Label></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
@@ -79,20 +82,18 @@
                                 </div>
                                 <div class="card card-stats col-md-3">
                                     <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-auto pl-0 pr-0">
-                                            <div class="c100 big" runat="server" ID="divProgree">
-                                                <span><asp:Label ID="lblProgress" runat="server" Text=""></asp:Label></span>
-                                                <div class="slice">
-                                                    <div class="bar"></div>
-                                                    <div class="fill"></div>
+                                        <div class="row">
+                                            <div class="col-auto pl-0 pr-0 mr-auto ml-auto">
+                                                <div class="c100 big" runat="server" ID="divProgree">
+                                                    <span><asp:Label ID="lblProgress" runat="server" Text=""></asp:Label></span>
+                                                    <div class="slice">
+                                                        <div class="bar"></div>
+                                                        <div class="fill"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col float-right pr-0 mt-2">
-                                            <asp:Button ID="btnGenerateCoupon" runat="server" Text="Get Coupon" CssClass="btn btn-primary btn-sm" OnClick="btnGenerateCoupon_OnClick" />
-                                        </div>
-                                    </div> </div>
+                                    </div>
                                 </div>
                                 <div class="table-responsive">
                                     <div>
@@ -132,42 +133,6 @@
 
                 </div>
             </div>
-            <asp:Panel ID="messageBox" runat="server" Visible="False">
-                <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                    <div class="modal-dialog modal-success modal-dialog-centered modal-" role="document">
-                        <div class="modal-content bg-gradient-success">
-                            <div class="modal-body">
-                                <div class="text-center">
-                                    <i class="far fa-check-circle fa-4x"></i>
-                                    <h4 class="heading mt-4">
-                                        <asp:Label ID="lblMessage" runat="server" Text="Label"></asp:Label></h4>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-white ml-auto" data-dismiss="modal">Ok</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </asp:Panel>
-            <asp:Panel ID="warningBox" runat="server" Visible="False">
-                <div class="modal fade" id="modal-notification-warn" tabindex="-1" role="dialog" aria-labelledby="modal-notification-warn" aria-hidden="true">
-                    <div class="modal-dialog modal-waning modal-dialog-centered modal-" role="document">
-                        <div class="modal-content bg-gradient-warning">
-                            <div class="modal-body">
-                                <div class="text-center">
-                                    <i class="fas fa-exclamation-triangle fa-4x"></i>
-                                    <h4 class="heading mt-4">
-                                        <asp:Label ID="lblWarnMessage" runat="server" Text="Label"></asp:Label></h4>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-white ml-auto" data-dismiss="modal">Ok</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </asp:Panel>
         </div>
     </div>
 
@@ -175,10 +140,6 @@
     <%-- https://codepen.io/flizoid/pen/EnHed--%>
     <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#modal-notification").modal('show');
-            $("#modal-notification-warn").modal('show');
-        });
         $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");

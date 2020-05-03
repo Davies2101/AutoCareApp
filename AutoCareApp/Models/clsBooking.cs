@@ -21,5 +21,6 @@ public class clsBooking
     public TimeSpan TimeSlot { get; set; }
     public double Total { get; set; }
     public bool PaymentReceived { get; set; }
+    public int CouponCode { get; set; }
 
 }

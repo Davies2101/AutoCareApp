@@ -13,7 +13,7 @@ namespace AutoCareApp
         {
             // Clearing the session and redirecting to home page
             Session.Clear();
-            Response.Redirect("Default");
+            Response.Redirect("/Default.aspx");
         }
     }
 }

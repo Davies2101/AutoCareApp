@@ -147,7 +147,7 @@
                                                                 <i class="fas fa-palette"></i>
                                                             </span>
                                                         </div>
-                                                        <asp:TextBox runat="server" ID="VehicleColor" CssClass="form-control" TextMode="SingleLine" placeholder="Vehicle Color" />
+                                                        <asp:TextBox runat="server" ID="VehicleColor" CssClass="form-control" TextMode="SingleLine" placeholder="Colour" />
                                                     </div>
                                                     &nbsp;
                                                 </div>
@@ -234,6 +234,13 @@
                                                                 </tr>
                                                             </ItemTemplate>
                                                         </asp:ListView>
+                                                    <asp:Panel ID="panelCoupon" runat="server" Visible="False">
+                                                        <tr>
+                                                            <td class="col-md-9 text-left">Coupon Code:
+                                                                <asp:Label ID="lblCouponCode" runat="server" Text=""></asp:Label></td>
+                                                            <td class="col-md-3 text-left">-£5</td>
+                                                        </tr>
+                                                    </asp:Panel>
                                                         <tr class="font-weight-800">
                                                             <td class="col-md-9 text-left">
                                                                 <h4>Total:</h4>

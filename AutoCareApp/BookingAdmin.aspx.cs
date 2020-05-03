@@ -7,6 +7,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Transactions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -27,11 +28,10 @@ namespace AutoCareApp
             clsUser user = (clsUser)Session["User"];
             if (user == null)
             {
-                Response.Redirect("LoginMsg");
+                Response.Redirect("/LoginMsg.aspx");
             }
             else if (!user.AdminLogin)
             {
-                //TODO
                 Response.Redirect("/Unauthorized.aspx");
             }
             string bookingId = Request.QueryString["id"];
@@ -57,7 +57,7 @@ namespace AutoCareApp
             Address.Text = bookingObject.Address;
             PostCode.Text = bookingObject.PostCode;
             Remarks.Text = bookingObject.Remarks;
-           
+            lblCouponCode.Text = bookingObject.CouponCode.ToString();
             foreach (Control childControl in lstVPackage.Controls)
             {
                 HtmlControl divCard = (HtmlControl)childControl.FindControl("divCard");
@@ -208,13 +208,24 @@ namespace AutoCareApp
                 DateTime bookingDate;
                 foreach (DataRow dr in bookingDateDataSet.Tables[0].Rows)
                 {
-                    bookingDate = (DateTime)dr["BookingDate"];
-                    bookingTime = (TimeSpan)dr["TimeSlot"];
+                    bookingDate = (DateTime) dr["BookingDate"];
+                    bookingTime = (TimeSpan) dr["TimeSlot"];
                     if (bookingDate.Date == selectedDate.Date)
                     {
                         foreach (clsTime timeSlot in availableSlots)
                         {
-                            if (timeSlot.Value == bookingTime || timeSlot.Value <= DateTime.Now.TimeOfDay)
+                            if (timeSlot.Value == bookingTime ||
+                                (selectedDate == DateTime.Now.Date && timeSlot.Value <= DateTime.Now.TimeOfDay))
+                            {
+                                timeSlot.IsAvailable = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (clsTime timeSlot in availableSlots)
+                        {
+                            if (selectedDate == DateTime.Now.Date && timeSlot.Value <= DateTime.Now.TimeOfDay)
                             {
                                 timeSlot.IsAvailable = false;
                             }
@@ -226,7 +237,7 @@ namespace AutoCareApp
             {
                 foreach (clsTime timeSlot in availableSlots)
                 {
-                    if (timeSlot.Value <= DateTime.Now.TimeOfDay)
+                    if (selectedDate == DateTime.Now.Date && timeSlot.Value <= DateTime.Now.TimeOfDay)
                     {
                         timeSlot.IsAvailable = false;
                     }
@@ -236,6 +247,7 @@ namespace AutoCareApp
             bookingObject.BookingDate = selectedDate;
             BindTimeSlots(availableSlots);
         }
+
         //select time slot
         protected void btnSelectTime_OnClick(object sender, EventArgs e)
         {
@@ -415,8 +427,17 @@ namespace AutoCareApp
                 }
 
                 total = extraTotal + packagePrice;
+                if (bookingObject.CouponCode > 0)
+                {
+                    panelCoupon.Visible = true;
+                    total = total - 5;
+                }
+                else
+                {
+                    panelCoupon.Visible = false;
+                }
                 lblTotal.Text = string.Format("{0:0.00}", total);
-                lblBookingDateAndTime.Text = bookingObject.BookingDate.ToShortDateString() + " " +
+                lblBookingDateAndTime.Text = string.Format("{0:dd/MM/yyyy}", bookingObject.BookingDate) + " " +
                                              DateTime.Today.Add(bookingObject.TimeSlot).ToString("hh:mm tt");
             }
         }
@@ -430,26 +451,34 @@ namespace AutoCareApp
 
         protected void FinishButton_OnClick(object sender, EventArgs e)
         {
-            try
+            //https://www.c-sharpcorner.com/UploadFile/1326ef/transactionscope-in-C-Sharp/
+            using (TransactionScope transactionScope = new TransactionScope())
             {
-                clsUser user = mgtUSer.GetUserByUserId(bookingObject.UserID);
-                bookingObject.Address = Address.Text;
-                bookingObject.PostCode = PostCode.Text;
-                bookingObject.Remarks = Remarks.Text;
-                bookingObject.VehicleColor = VehicleColor.Text;
-                bookingObject.VehicleMake = VehicleMake.Text;
-                bookingObject.VehicleReg = VehicleReg.Text;
-                bookingObject.VehicleModel = VehicleModel.Text;
-                bookingObject.UserID = user.UserID;
-                bookingObject.Total = Convert.ToDouble(lblTotal.Text);
-                mgtBooking.Update(bookingObject, string.Join(",", selectedExtras));
-                messageBox.Visible = true;
-                SendUpdateConfirmation(user);
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "clientScript", "redirectToHome();", true);
-            }
-            catch (Exception ex)
-            {
-                AlertMessage("Something went wrong. Please try again later!");
+
+                try
+                {
+                    clsUser user = mgtUSer.GetUserByUserId(bookingObject.UserID);
+                    bookingObject.Address = Address.Text;
+                    bookingObject.PostCode = PostCode.Text;
+                    bookingObject.Remarks = Remarks.Text;
+                    bookingObject.VehicleColor = VehicleColor.Text;
+                    bookingObject.VehicleMake = VehicleMake.Text;
+                    bookingObject.VehicleReg = VehicleReg.Text;
+                    bookingObject.VehicleModel = VehicleModel.Text;
+                    bookingObject.UserID = user.UserID;
+                    bookingObject.Total = Convert.ToDouble(lblTotal.Text);
+                    mgtBooking.Update(bookingObject, string.Join(",", selectedExtras));
+                    SendUpdateConfirmation(user);
+                    transactionScope.Complete();
+                    transactionScope.Dispose();
+                    messageBox.Visible = true;
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "clientScript", "redirectToHome();", true);
+                }
+                catch (Exception ex)
+                {
+                    transactionScope.Dispose();
+                    AlertMessage("Something went wrong. Please try again later!");
+                }
             }
 
         }

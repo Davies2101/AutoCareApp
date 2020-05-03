@@ -2,3 +2,9 @@
     left: 40% !important;
     width: 40% !important;
 }
+.navbar-vertical.navbar-expand-xs .navbar-nav .nav-link, .navbar-brand p {
+    color: white;
+}
+.navbar-vertical.navbar-expand-xs .navbar-nav > .nav-item > .nav-link.active {
+    background: #626c75;
+}

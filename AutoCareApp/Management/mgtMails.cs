@@ -55,13 +55,11 @@ namespace AutoCareApp.Management
             }
         }
 
-        public static void SendPaymentCompletedMail(int bookingId)
+        public static void SendPaymentCompletedMail(int userId)
         {
             try
             {
-
-                clsBooking booking = mgtBooking.GetBookingById(bookingId);
-                clsUser user = mgtUSer.GetUserByUserId(booking.UserID);
+                clsUser user = mgtUSer.GetUserByUserId(userId);
                 string emailBody = "<h2>Hello " + user.FullName + ".</h2>" +
                                    "<h3>Your payment is successful.</h3></br></br>";
                 emailBody = emailBody + "<p>Thank You, <br>Team AutoCare </p>";
@@ -70,6 +68,36 @@ namespace AutoCareApp.Management
             catch (Exception ex)
             {
                 
+            }
+        }
+
+
+        public static void SendCouponCode(int userId, int code)
+        {
+            try
+            {
+                clsUser user = mgtUSer.GetUserByUserId(userId);
+                string emailBody = "<h2>Hello " + user.FullName + ".</h2>" +
+                                   "<h3>Here is your £5 coupon.</h3></br></br>" +
+                                   "<h2>Coupon Code # " + code + "</h2>";
+                emailBody = emailBody + "<p>Thank You, <br>Team AutoCare </p>";
+                EmailSender.Send("Coupon Code!", emailBody, user.Email);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public static void SendMailToGroup(string subject, string bodyMessage, List<string> emailList)
+        {
+            try
+            {
+                EmailSender.SendToList(subject, bodyMessage, emailList);
+            }
+            catch (Exception ex)
+            {
+
             }
         }
     }

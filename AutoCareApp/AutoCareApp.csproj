@@ -73,6 +73,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -105,6 +106,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminMail.aspx" />
     <Content Include="AdminPage.aspx" />
     <Content Include="AdminRegister.aspx" />
     <Content Include="AdminReview.aspx" />
@@ -153,10 +155,10 @@
     <Content Include="MyCars.aspx" />
     <Content Include="MyRewards.aspx" />
     <Content Include="BookingPayment.aspx" />
+    <Content Include="Packages.aspx" />
     <Content Include="PaymentResult.aspx" />
     <Content Include="Reports.aspx" />
     <Content Include="Review.aspx" />
-    <Content Include="Services.aspx" />
     <Content Include="About.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\images\about1.png" />
@@ -211,6 +213,13 @@
     </Compile>
     <Compile Include="Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMail.aspx.cs">
+      <DependentUpon>AdminMail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminMail.aspx.designer.cs">
+      <DependentUpon>AdminMail.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminPage.aspx.cs">
       <DependentUpon>AdminPage.aspx</DependentUpon>
@@ -322,6 +331,13 @@
     <Compile Include="BookingPayment.aspx.designer.cs">
       <DependentUpon>BookingPayment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Packages.aspx.cs">
+      <DependentUpon>Packages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Packages.aspx.designer.cs">
+      <DependentUpon>Packages.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PaymentResult.aspx.cs">
       <DependentUpon>PaymentResult.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -342,13 +358,6 @@
     </Compile>
     <Compile Include="Review.aspx.designer.cs">
       <DependentUpon>Review.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Services.aspx.cs">
-      <DependentUpon>Services.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Services.aspx.designer.cs">
-      <DependentUpon>Services.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

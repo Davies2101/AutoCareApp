@@ -95,4 +95,10 @@
             </div>
         </div>
     </asp:Panel>
+    <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#modal-notification").modal('show');
+        });
+    </script>
 </asp:Content>

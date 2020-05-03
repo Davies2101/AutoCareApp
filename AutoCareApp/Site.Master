@@ -59,9 +59,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-icon" href="Services">
+                            <a class="nav-link nav-link-icon" href="Packages.aspx">
                                 <i class="fas fa-taxi"></i>
-                                <span class="nav-link-inner--text">Services</span>
+                                <span class="nav-link-inner--text">Packages</span>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -323,7 +323,7 @@
                                                                 <ItemTemplate>
                                                                     <tr>
                                                                         <td class="text-left"><%#string.Format("#{0}",Eval("BookingNo"))%></td>
-                                                                        <td class="text-left"><%#DateTime.Parse(Eval("BookingDate").ToString()).ToShortDateString()%></td>
+                                                                        <td class="text-left"><%#Eval("BookingDate", "{0:dd/MM/yyyy}") %></td>
                                                                         <td class="text-left"><%#DateTime.Today.Add((TimeSpan)Eval("TimeSlot")).ToString("hh:mm tt")%></td>
                                                                         <td class="text-left"><%#Eval("Customer")%></td>
                                                                         <td class="text-left"><%#Eval("VehicleReg")%></td>

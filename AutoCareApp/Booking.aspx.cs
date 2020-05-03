@@ -14,6 +14,7 @@ using System.Web.UI.WebControls;
 using AutoCareApp.Classes;
 using System.Globalization;
 using AutoCareApp.Management;
+using System.Transactions;
 
 namespace AutoCareApp
 {
@@ -29,7 +30,7 @@ namespace AutoCareApp
         {
             if (Session["User"] == null)
             {
-                Response.Redirect("LoginMsg");
+                Response.Redirect("/LoginMsg.aspx");
             }
 
             Wizard1.PreRender += new EventHandler(Wizard1_OnPreRender);
@@ -159,7 +160,17 @@ namespace AutoCareApp
                     {
                         foreach (clsTime timeSlot in availableSlots)
                         {
-                            if (timeSlot.Value == bookingTime || timeSlot.Value <= DateTime.Now.TimeOfDay)
+                            if (timeSlot.Value == bookingTime || (selectedDate == DateTime.Now.Date && timeSlot.Value <= DateTime.Now.TimeOfDay))
+                            {
+                                timeSlot.IsAvailable = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (clsTime timeSlot in availableSlots)
+                        {
+                            if (selectedDate == DateTime.Now.Date && timeSlot.Value <= DateTime.Now.TimeOfDay)
                             {
                                 timeSlot.IsAvailable = false;
                             }
@@ -171,7 +182,7 @@ namespace AutoCareApp
             {
                 foreach (clsTime timeSlot in availableSlots)
                 {
-                    if (timeSlot.Value <= DateTime.Now.TimeOfDay)
+                    if (selectedDate == DateTime.Now.Date &&  timeSlot.Value <= DateTime.Now.TimeOfDay)
                     {
                         timeSlot.IsAvailable = false;
                     }
@@ -311,6 +322,21 @@ namespace AutoCareApp
             
             if (Wizard1.ActiveStep.Name == "Summary")
             {
+                if (txtCoupon.Text != "")
+                {
+                    bool isValid = mgtCoupon.Validate(Convert.ToInt32(txtCoupon.Text));
+                    if (!isValid)
+                    {
+                        AlertMessage("Invalid Coupon Code");
+                        Wizard1.ActiveStepIndex = 2;
+                    }
+                    else
+                    {
+                        bookingObject.CouponCode = Convert.ToInt32(txtCoupon.Text);
+                        lblCouponCode.Text = txtCoupon.Text;
+                    }
+                }
+
                 double packagePrice = 0;
                 double extraTotal = 0;
                 double total = 0;
@@ -351,15 +377,22 @@ namespace AutoCareApp
                     }
                 }
 
-                if (extras.Count > 0)
-                {
-                    lstViewExtras.DataSource = extras;
-                    lstViewExtras.DataBind();
-                }
+                lstViewExtras.DataSource = extras;
+                lstViewExtras.DataBind();
 
                 total = extraTotal + packagePrice;
+                if (bookingObject.CouponCode > 0)
+                {
+                    panelCoupon.Visible = true;
+                    total = total - 5;
+                }
+                else
+                {
+                    panelCoupon.Visible = false;
+                }
+
                 lblTotal.Text = string.Format("{0:0.00}", total);
-                lblBookingDateAndTime.Text = bookingObject.BookingDate.ToShortDateString() + " " + DateTime.Today.Add(bookingObject.TimeSlot).ToString("hh:mm tt");
+                lblBookingDateAndTime.Text = string.Format("{0:dd/MM/yyyy}", bookingObject.BookingDate) + " " + DateTime.Today.Add(bookingObject.TimeSlot).ToString("hh:mm tt");
              }
         }
 
@@ -372,27 +405,39 @@ namespace AutoCareApp
 
         protected void FinishButton_OnClick(object sender, EventArgs e)
         {
-            try
+            //https://www.c-sharpcorner.com/UploadFile/1326ef/transactionscope-in-C-Sharp/
+            using (TransactionScope transactionScope = new TransactionScope())
             {
-                clsUser user = (clsUser)Session["User"];
-                bookingObject.Address = Address.Text;
-                bookingObject.PostCode = PostCode.Text;
-                bookingObject.Remarks = Remarks.Text;
-                bookingObject.VehicleColor = VehicleColor.Text;
-                bookingObject.VehicleMake = VehicleMake.Text;
-                bookingObject.VehicleReg = VehicleReg.Text;
-                bookingObject.VehicleModel = VehicleModel.Text;
-                bookingObject.UserID = user.UserID;
-                bookingObject.Total = Convert.ToDouble(lblTotal.Text);
-                mgtBooking.Add(bookingObject, string.Join(",", selectedExtras));
-                mgtPoint.Add(user.UserID);
-                messageBox.Visible = true;
-                SendBookingConfirmation(user);
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "clientScript", "redirectToHome();", true);
-            }
-            catch (Exception ex)
-            {
-                AlertMessage("Something went wrong. Please try again later!");
+                try
+                {
+                    clsUser user = (clsUser) Session["User"];
+                    bookingObject.Address = Address.Text;
+                    bookingObject.PostCode = PostCode.Text;
+                    bookingObject.Remarks = Remarks.Text;
+                    bookingObject.VehicleColor = VehicleColor.Text;
+                    bookingObject.VehicleMake = VehicleMake.Text;
+                    bookingObject.VehicleReg = VehicleReg.Text;
+                    bookingObject.VehicleModel = VehicleModel.Text;
+                    bookingObject.UserID = user.UserID;
+                    bookingObject.Total = Convert.ToDouble(lblTotal.Text);
+                    mgtBooking.Add(bookingObject, string.Join(",", selectedExtras));
+                    mgtPoint.Add(user.UserID);
+
+                    if (bookingObject.CouponCode > 0)
+                    {
+                        mgtCoupon.UpdateStatus(bookingObject.CouponCode);
+                    }
+                    SendBookingConfirmation(user);
+                    transactionScope.Complete();
+                    transactionScope.Dispose();
+                    messageBox.Visible = true;
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "clientScript", "redirectToHome();", true);
+                }
+                catch (Exception ex)
+                {
+                    transactionScope.Dispose();
+                    AlertMessage("Something went wrong. Please try again later!");
+                }
             }
 
         }

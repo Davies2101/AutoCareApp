@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -15,7 +16,7 @@ namespace AutoCareApp
             clsUser user = (clsUser)Session["User"];
             if (user == null)
             {
-                Response.Redirect("LoginMsg");
+                Response.Redirect("/LoginMsg.aspx");
             }
             else if (!user.AdminLogin)
             {
@@ -25,8 +26,8 @@ namespace AutoCareApp
 
             if (!Page.IsPostBack)
             {
-                txtStartDate.Text = DateTime.Now.ToShortDateString();
-                txtEndDate.Text = DateTime.Now.ToShortDateString();
+                txtStartDate.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
+                txtEndDate.Text = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
                 BindCurrentBookings();
                 BindBookingsByDate();
             }
@@ -42,7 +43,10 @@ namespace AutoCareApp
 
         public void BindBookingsByDate()
         {
-            lstAllBookings.DataSource = mgtBooking.GetBookingsByDateDataSet(Convert.ToDateTime(txtStartDate.Text), Convert.ToDateTime(txtEndDate.Text)).Tables[0];
+            lstAllBookings.DataSource = mgtBooking
+                .GetBookingsByDateDataSet(
+                    Convert.ToDateTime(txtStartDate.Text, CultureInfo.GetCultureInfo("en-GB").DateTimeFormat),
+                    Convert.ToDateTime(txtEndDate.Text, CultureInfo.GetCultureInfo("en-GB").DateTimeFormat)).Tables[0];
             lstAllBookings.DataBind();
         }
 

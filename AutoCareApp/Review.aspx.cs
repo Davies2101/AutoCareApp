@@ -16,7 +16,7 @@ namespace AutoCareApp
         {
             if (Request.QueryString["id"] == null)
             {
-                Response.Redirect("Default.aspx");
+                Response.Redirect("/Default.aspx");
             }
             else
             {
