@@ -240,12 +240,13 @@ namespace AutoCareApp
                 currency = "GBP",
                 total = bookingTotal.ToString() // Total must be equal to sum of tax, shipping and subtotal.  
             };
+            var randomInv = Convert.ToString((new Random()).Next(10000));
             var transactionList = new List<Transaction>();
             // Adding description about the transaction  
             transactionList.Add(new Transaction()
             {
                 description = "Auto Care - Payment",
-                invoice_number = "INV"+ bookingObject.BookingNo.ToString(), //Generate an Invoice No  
+                invoice_number = "INV" + bookingObject.BookingNo.ToString() + randomInv, //Generate an Invoice No  
                 amount = amount,
                 item_list = itemList
             });
@@ -264,7 +265,7 @@ namespace AutoCareApp
         private void GenerateCoupon(int userId)
         {
             clsPoint points = mgtPoint.GetPoints(userId);
-            if (points.Points == 5)
+            if (points.Points >= 5)
             {
                 clsCoupon coupon = new clsCoupon();
                 coupon.PointId = points.Id;
