@@ -35,6 +35,7 @@ namespace AutoCareApp
                     int bookingId = Convert.ToInt32(Server.UrlDecode(Cipher.Decrypt(Request.QueryString["id"])));
                     bookingObject = mgtBooking.GetBookingById(bookingId);
                     selectedExtras = mgtExtra.GetExtrasByBookingId(bookingId);
+                    bookingItemList = new List<Item>();
                     GenerateBookingSummary();
                 }
                 
