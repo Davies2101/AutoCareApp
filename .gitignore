@@ -94,8 +94,8 @@ AutoCareApp/obj/Debug/AutoCareApp.csprojResolveAssemblyReference.cache
 AutoCareApp/obj/Debug/AutoCareApp.dll
 AutoCareApp/obj/Debug/AutoCareApp.pdb
 AutoCareApp/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-AutoCareApp/obj/Debug/Tsc.out
-packages/Newtonsoft.Json.7.0.1/.signature.p7s
+AutoCareApp/obj/*
+packages/*
 packages/Newtonsoft.Json.7.0.1/lib/net20/Newtonsoft.Json.dll
 packages/Newtonsoft.Json.7.0.1/lib/net20/Newtonsoft.Json.xml
 packages/Newtonsoft.Json.7.0.1/lib/net35/Newtonsoft.Json.dll
@@ -118,3 +118,4 @@ packages/PayPal.1.9.1/lib/net45/PayPal.xml
 packages/PayPal.1.9.1/lib/net451/PayPal.dll
 packages/PayPal.1.9.1/lib/net451/PayPal.xml
 packages/PayPal.1.9.1/PayPal.1.9.1.nupkg
+AutoCareApp/bin/*

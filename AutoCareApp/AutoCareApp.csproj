@@ -359,7 +359,6 @@
     <Compile Include="Review.aspx.designer.cs">
       <DependentUpon>Review.aspx</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -452,7 +451,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\profile\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
