@@ -194,7 +194,9 @@
 
     <!-- Core -->
     <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/js.cookie.js"></script>
     <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/spin.js"></script>
     <!-- Argon JS -->
     <script src="/assets/js/argon.min.js"></script>
 </body>

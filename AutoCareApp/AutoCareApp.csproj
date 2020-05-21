@@ -119,7 +119,9 @@
     <Content Include="assets\css\slick-theme.min.css" />
     <Content Include="assets\css\slick.min.css" />
     <Content Include="assets\js\argon.min.js" />
+    <Content Include="assets\js\js.cookie.js" />
     <Content Include="assets\js\slick.min.js" />
+    <Content Include="assets\js\spin.js" />
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\css\all.min.css" />
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\webfonts\fa-brands-400.svg" />
     <Content Include="assets\vendor\%40fortawesome\fontawesome-free\webfonts\fa-regular-400.svg" />
@@ -141,6 +143,8 @@
     <Content Include="Content\images\quote-1-70x70.jpg" />
     <Content Include="Content\images\quote-2-70x70.jpg" />
     <Content Include="Content\images\quote-3-70x70.jpg" />
+    <Content Include="Content\images\spin-wheel-v2.png" />
+    <Content Include="Content\images\wheel-pointer-v2.png" />
     <Content Include="Content\Payment.css" />
     <Content Include="Content\SideMenu.css" />
     <Content Include="Content\SiteAdmin.css" />
@@ -150,7 +154,6 @@
     <Content Include="itextsharp\itextsharp.xmlworker.dll" />
     <Content Include="ManageBookings.aspx" />
     <Content Include="ManageProfile.aspx" />
-    <Content Include="MessageBox.aspx" />
     <Content Include="MyBookings.aspx" />
     <Content Include="MyCars.aspx" />
     <Content Include="MyRewards.aspx" />
@@ -175,6 +178,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
+    <Content Include="SpinToWin.aspx" />
     <Content Include="Unauthorized.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -291,13 +295,6 @@
     </Compile>
     <Compile Include="ManageProfile.aspx.designer.cs">
       <DependentUpon>ManageProfile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="MessageBox.aspx.cs">
-      <DependentUpon>MessageBox.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MessageBox.aspx.designer.cs">
-      <DependentUpon>MessageBox.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\clsCoupon.cs" />
     <Compile Include="Models\clsPoint.cs" />
@@ -437,6 +434,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SpinToWin.aspx.cs">
+      <DependentUpon>SpinToWin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SpinToWin.aspx.designer.cs">
+      <DependentUpon>SpinToWin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Unauthorized.aspx.cs">
       <DependentUpon>Unauthorized.aspx</DependentUpon>

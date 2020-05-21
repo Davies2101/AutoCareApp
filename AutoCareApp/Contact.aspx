@@ -85,7 +85,7 @@
                     <div class="mt-2">
                     <p class="h5">40 Ballyronan Rd,<br />Magherafelt BT45 6EN</p>
                     <p class="h5">Phone: +44 7703549800</p>
-                    <p class="h5">Email: <a href="mailto:almosthomeadopt@gmail.com">autocarebookings@gmail.com</a></p>
+                    <p class="h5">Email: <a href="mailto:autcarebookings@gmail.com">autocarebookings@gmail.com</a></p>
                     <p class="h5">Hours: Monday - Friday: 9:00 AM to 5:00 PM</p>
                     </div>
                     <!-- Embedded Google Map -->

@@ -42,6 +42,7 @@ public class mgtUSer
                     user.FailedLoginAttempts = Convert.ToInt32(rd["FailedLoginAttempts"].ToString());
                     user.LockedOutDatetime = rd["LockedOutDatetime"] == DBNull.Value ? (DateTime?)null : (DateTime)rd["LockedOutDatetime"];
                     user.Picture = rd["Picture"].ToString();
+                    user.IsSpinned = Convert.ToBoolean(rd["IsSpinned"].ToString());
 
                 }
                 rd.Close();
@@ -269,6 +270,25 @@ public class mgtUSer
         {
             SqlConnection con = new SqlConnection(App.GetDBCon());
             SqlCommand cmd = new SqlCommand("sp_User_Delete", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("UserID", userId);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+    }
+
+    public static void UpdateUserSpinStatus(int userId)
+    {
+        try
+        {
+            SqlConnection con = new SqlConnection(App.GetDBCon());
+            SqlCommand cmd = new SqlCommand("sp_User_UpdateUserSpinStatus", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("UserID", userId);
             con.Open();

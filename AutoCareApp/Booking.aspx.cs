@@ -76,6 +76,41 @@ namespace AutoCareApp
             }
         }
 
+        //bind packages
+        private void BindPackages()
+        {
+            lstVPackage.DataSource = packageList;
+            lstVPackage.DataBind();
+        }
+
+        public void BindMyCars()
+        {
+            clsUser user = (clsUser)Session["User"];
+            ddlMyCars.DataSource = mgtCar.GetCarsDataSet(user.UserID);
+            ddlMyCars.DataTextField = "VehicleReg";
+            ddlMyCars.DataValueField = "CarId";
+            ddlMyCars.DataBind();
+            ddlMyCars.Items.Insert(0, new ListItem("-- Select --", "0"));
+        }
+
+        //select package
+        protected void btnSelectPackage_OnClick(object sender, EventArgs e)
+        {
+            Button button = (sender as Button);
+            int packageID = Convert.ToInt32(button.Attributes["PackageID"]);
+
+            foreach (Control childControl in lstVPackage.Controls)
+            {
+                HtmlControl divCard = (HtmlControl)childControl.FindControl("divCard");
+                divCard.Attributes.Add("class", "card col-md-3");
+            }
+
+            HtmlControl card = (HtmlControl)button.Parent.FindControl("divCard");
+            card.Attributes.Add("class", "card col-md-3 bg-gradient-default");
+            bookingObject.PackageID = packageID;
+            CalculateTotal();
+        }
+
         protected void bookingDate_OnDayRender(object sender, DayRenderEventArgs e)
         {
             //disable weekends
@@ -99,7 +134,7 @@ namespace AutoCareApp
                 int timeSlotCount = 0;
                 foreach (DataRow dr in bookingDateDataSet.Tables[0].Rows)
                 {
-                    bookingDate = (DateTime) dr["BookingDate"];
+                    bookingDate = (DateTime)dr["BookingDate"];
                     if (bookingDate.Date == e.Day.Date)
                     {
                         timeSlotCount++;
@@ -113,36 +148,6 @@ namespace AutoCareApp
             }
         }
 
-        public List<clsTime> GetSlotList()
-        {
-            return new List<clsTime>
-            {
-                new clsTime {Time = "9:00 AM", Value = new TimeSpan(9, 0, 0)},
-                new clsTime {Time = "11:00 AM", Value = new TimeSpan(11, 0, 0)},
-                new clsTime {Time = "1:00 PM", Value = new TimeSpan(13, 0, 0)},
-                new clsTime {Time = "3:00 PM", Value = new TimeSpan(15, 0, 0)},
-                new clsTime {Time = "5:00 PM", Value = new TimeSpan(17, 0, 0)}
-            };
-        }
-
-        //select package
-        protected void btnSelectPackage_OnClick(object sender, EventArgs e)
-        {
-            Button button = (sender as Button);
-            int packageID = Convert.ToInt32(button.Attributes["PackageID"]);
-
-            foreach (Control childControl in lstVPackage.Controls)
-            {
-                HtmlControl divCard = (HtmlControl)childControl.FindControl("divCard");
-                divCard.Attributes.Add("class", "card col-md-3");
-            }
-
-            HtmlControl card = (HtmlControl)button.Parent.FindControl("divCard");
-            card.Attributes.Add("class", "card col-md-3 bg-gradient-default");
-            bookingObject.PackageID = packageID;
-            CalculateTotal();
-        }
-
         //select booking date
         protected void bookingDate_OnSelectionChanged(object sender, EventArgs e)
         {
@@ -154,8 +159,8 @@ namespace AutoCareApp
                 DateTime bookingDate;
                 foreach (DataRow dr in bookingDateDataSet.Tables[0].Rows)
                 {
-                    bookingDate = (DateTime) dr["BookingDate"];
-                    bookingTime = (TimeSpan) dr["TimeSlot"];
+                    bookingDate = (DateTime)dr["BookingDate"];
+                    bookingTime = (TimeSpan)dr["TimeSlot"];
                     if (bookingDate.Date == selectedDate.Date)
                     {
                         foreach (clsTime timeSlot in availableSlots)
@@ -182,7 +187,7 @@ namespace AutoCareApp
             {
                 foreach (clsTime timeSlot in availableSlots)
                 {
-                    if (selectedDate == DateTime.Now.Date &&  timeSlot.Value <= DateTime.Now.TimeOfDay)
+                    if (selectedDate == DateTime.Now.Date && timeSlot.Value <= DateTime.Now.TimeOfDay)
                     {
                         timeSlot.IsAvailable = false;
                     }
@@ -193,6 +198,29 @@ namespace AutoCareApp
             BindTimeSlots(availableSlots);
         }
 
+
+        //bind time slots
+        public void BindTimeSlots(List<clsTime> listTimes)
+        {
+            lstVTimeSlots.DataSource = listTimes;
+            lstVTimeSlots.DataBind();
+        }
+
+        
+
+        public List<clsTime> GetSlotList()
+        {
+            return new List<clsTime>
+            {
+                new clsTime {Time = "9:00 AM", Value = new TimeSpan(9, 0, 0)},
+                new clsTime {Time = "11:00 AM", Value = new TimeSpan(11, 0, 0)},
+                new clsTime {Time = "1:00 PM", Value = new TimeSpan(13, 0, 0)},
+                new clsTime {Time = "3:00 PM", Value = new TimeSpan(15, 0, 0)},
+                new clsTime {Time = "5:00 PM", Value = new TimeSpan(17, 0, 0)}
+            };
+        }
+
+       
         //select time slot
         protected void btnSelectTime_OnClick(object sender, EventArgs e)
         {
@@ -215,21 +243,7 @@ namespace AutoCareApp
             bookingObject.TimeSlot = TimeSpan.Parse(timeSlot);
         }
 
-        //bind packages
-        private void BindPackages()
-        {
-            lstVPackage.DataSource = packageList;
-            lstVPackage.DataBind();
-        }
-
-        //bind time slots
-        public void BindTimeSlots(List<clsTime> listTimes)
-        {
-            lstVTimeSlots.DataSource = listTimes;
-            lstVTimeSlots.DataBind();
-        }
-        
-
+       
         /// <summary>
         /// getting checbox values
         /// https://stackoverflow.com/questions/9523263/how-can-i-get-the-checkboxlist-selected-values-what-i-have-doesnt-seem-to-work
@@ -421,7 +435,7 @@ namespace AutoCareApp
                     bookingObject.UserID = user.UserID;
                     bookingObject.Total = Convert.ToDouble(lblTotal.Text);
                     mgtBooking.Add(bookingObject, string.Join(",", selectedExtras));
-                    mgtPoint.Add(user.UserID);
+                    mgtPoint.Add(user.UserID, 1);
 
                     if (bookingObject.CouponCode > 0)
                     {
@@ -476,14 +490,6 @@ namespace AutoCareApp
             }
         }
 
-        public void BindMyCars()
-        {
-            clsUser user = (clsUser) Session["User"];
-            ddlMyCars.DataSource = mgtCar.GetCarsDataSet(user.UserID);
-            ddlMyCars.DataTextField = "VehicleReg";
-            ddlMyCars.DataValueField = "CarId";
-            ddlMyCars.DataBind();
-            ddlMyCars.Items.Insert(0, new ListItem("-- Select --", "0"));
-        }
+        
     }
 }

@@ -52,7 +52,15 @@ namespace AutoCareApp
                         }
                         else
                         {
-                            Response.Redirect("~/Default.aspx", false);
+                            if (!obj.IsSpinned)
+                            {
+                                Response.Redirect("~/SpinToWin.aspx", false);
+                            }
+                            else
+                            {
+                                Response.Redirect("~/Default.aspx", false);
+                            }
+                            
                         }
                     }
                     else

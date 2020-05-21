@@ -10,7 +10,7 @@ namespace AutoCareApp.Management
 {
     public class mgtPoint
     {
-        public static void Add(int userId)
+        public static void Add(int userId, int points)
         {
             try
             {
@@ -18,6 +18,7 @@ namespace AutoCareApp.Management
                 SqlCommand cmd = new SqlCommand("sp_Point_Add", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("UserID", userId);
+                cmd.Parameters.AddWithValue("Points", points);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();

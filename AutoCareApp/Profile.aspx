@@ -19,7 +19,6 @@
                 <li><a href="MyBookings.aspx"><i class="fab fa-bootstrap"></i>&nbsp;&nbsp;My Bookings</a></li>
                 <li><a href="MyCars.aspx"><i class="fas fa-car"></i>&nbsp;&nbsp;My Cars</a></li>
                 <li><a href="MyRewards.aspx"><i class="fas fa-trophy"></i>&nbsp;&nbsp;My Rewards</a></li>
-                <li><a href="MessageBox.aspx"><i class="far fa-envelope"></i>&nbsp;&nbsp;Notifications</a></li>
             </ul>
         </div>
         <a href="#menu-toggle" id="menu-toggle" class="ml-2" style="font-size: x-large; color: #172b4d"><i class="fas fa-arrow-alt-circle-left"></i></a>

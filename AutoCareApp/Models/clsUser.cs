@@ -15,4 +15,5 @@ public class clsUser
     public int FailedLoginAttempts { get; set; }
     public DateTime? LockedOutDatetime { get; set; }
     public string Picture { get; set; }
+    public bool IsSpinned { get; set; }
 }
