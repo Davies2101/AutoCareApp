@@ -40,9 +40,9 @@
                                                     </span>
                                                 </div>
                                                 <asp:TextBox runat="server" ID="VehicleReg" CssClass="form-control" TextMode="SingleLine" placeholder="Registraion No." />
+                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleReg"
+                                                                            CssClass="text-danger small" ErrorMessage="The Vehicle Registraion No. is required." />
                                             </div>
-                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleReg"
-                                                CssClass="text-danger small" ErrorMessage="The Vehicle Registraion No. is required." />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -54,10 +54,9 @@
                                                     </span>
                                                 </div>
                                                 <asp:TextBox runat="server" ID="VehicleMake" CssClass="form-control" TextMode="SingleLine" placeholder="Make" />
-
+                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleMake"
+                                                                            CssClass="text-danger small" ErrorMessage="The Vehicle Make is required." />
                                             </div>
-                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleMake"
-                                                CssClass="text-danger small" ErrorMessage="The Vehicle Make is required." />
                                             &nbsp;
                                         </div>
                                     </div>
@@ -70,10 +69,9 @@
                                                     </span>
                                                 </div>
                                                 <asp:TextBox runat="server" ID="VehicleModel" CssClass="form-control" TextMode="SingleLine" placeholder="Model" />
-
+                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleModel"
+                                                                            CssClass="text-danger small" ErrorMessage="The Vehicle Model is required." />
                                             </div>
-                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleModel"
-                                                CssClass="text-danger small" ErrorMessage="The Vehicle Model is required." />
                                             &nbsp;
                                         </div>
                                     </div>
@@ -86,16 +84,15 @@
                                                     </span>
                                                 </div>
                                                 <asp:TextBox runat="server" ID="VehicleColor" CssClass="form-control" TextMode="SingleLine" placeholder="Color" />
-
+                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleColor"
+                                                                            CssClass="text-danger small" ErrorMessage="The Vehicle Color is required." />
                                             </div>
-                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleColor"
-                                                CssClass="text-danger small" ErrorMessage="The Vehicle Color is required." />
                                             &nbsp;
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <asp:Button ID="btnUpdate" runat="server" Text="Add" CssClass="btn btn-default btn-sm" OnClick="btnUpdate_OnClick" />
-                                        <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-info btn-sm" OnClick="btnClear_OnClick" CausesValidation="False" />
+                                        <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-info btn-sm" OnClick="btnClear_OnClick" CausesValidation="False"/>
                                     </div>
                                     <asp:HiddenField ID="hdnCarId" runat="server" Value="0" />
                                 </div>
@@ -127,8 +124,8 @@
                                                                         <i class="fas fa-ellipsis-v"></i>
                                                                     </a>
                                                                     <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
-                                                                        <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="dropdown-item" CarId='<%# Eval("CarId")%>' OnClick="btnEdit_OnClick" CausesValidation="False" />
-                                                                        <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="dropdown-item" CarId='<%# Eval("CarId")%>' OnClick="btnDelete_OnClick" CausesValidation="False" />
+                                                                        <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="dropdown-item" CarId='<%# Eval("CarId")%>' OnClick="btnEdit_OnClick" CausesValidation="False"/>
+                                                                        <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="dropdown-item" CarId='<%# Eval("CarId")%>' OnClick="btnDelete_OnClick"  CausesValidation="False"/>
                                                                     </div>
                                                                 </div>
                                                             </td>

@@ -54,6 +54,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>itextsharp\itextsharp.xmlworker.dll</HintPath>
     </Reference>
+    <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Jint.2.11.58\lib\net45\Jint.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.FriendlyUrls, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
@@ -62,17 +65,35 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
       <HintPath>..\packages\PayPal.1.9.1\lib\net45\PayPal.dll</HintPath>
+    </Reference>
+    <Reference Include="Syn.Bot, Version=1.0.8.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>syn.chat\Syn.Bot.dll</HintPath>
+    </Reference>
+    <Reference Include="Syn.Chat, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>syn.chat\Syn.Chat.dll</HintPath>
+    </Reference>
+    <Reference Include="Syn.Oryzer, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syn.Oryzer.1.4.1\lib\net45\Syn.Oryzer.dll</HintPath>
+    </Reference>
+    <Reference Include="Syn.Utilities, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syn.Utilities.1.4.5-beta3\lib\net45\Syn.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Syn.Workspace, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syn.Workspace.1.0.4\lib\net45\Syn.Workspace.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
@@ -135,6 +156,7 @@
     <Content Include="assets\vendor\nucleo\fonts\nucleo-icons.svg" />
     <Content Include="Booking.aspx" />
     <Content Include="BookingAdmin.aspx" />
+    <Content Include="ChatService.aspx" />
     <Content Include="Content\Circle.css" />
     <Content Include="Content\images\about2.jpg" />
     <Content Include="Content\images\about3.jpg" />
@@ -179,6 +201,8 @@
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
     <Content Include="SpinToWin.aspx" />
+    <Content Include="syn.chat\Syn.Bot.dll" />
+    <Content Include="syn.chat\Syn.Chat.dll" />
     <Content Include="Unauthorized.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -259,6 +283,13 @@
     </Compile>
     <Compile Include="BookingAdmin.aspx.designer.cs">
       <DependentUpon>BookingAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ChatService.aspx.cs">
+      <DependentUpon>ChatService.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChatService.aspx.designer.cs">
+      <DependentUpon>ChatService.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classes\Cipher.cs" />
     <Compile Include="Classes\EmailSender.cs" />
@@ -454,6 +485,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assistant\" />
     <Folder Include="Content\profile\" />
   </ItemGroup>
   <PropertyGroup>

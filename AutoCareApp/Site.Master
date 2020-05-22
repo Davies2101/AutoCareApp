@@ -37,7 +37,7 @@
                             <div class="col-8 collapse-brand">
                                 <a href="Default.aspx">
                                     <div class="row">
-                                        <img src="/Content/images/Logo-Small.png" style="filter: invert(100%);"/>
+                                        <img src="/Content/images/Logo-Small.png" style="filter: invert(100%);" />
                                         <p class="ml-4">Auto Care</p>
 
                                     </div>
@@ -199,6 +199,16 @@
     <script src="/assets/js/spin.js"></script>
     <!-- Argon JS -->
     <script src="/assets/js/argon.min.js"></script>
+
+    <script type="text/javascript">
+            (function () {
+                var scriptElement = document.createElement('script');
+                scriptElement.type = 'text/javascript';
+                scriptElement.async = true;
+                scriptElement.src = '/ChatService.aspx?Get=Script';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(scriptElement);
+            })();
+    </script>
 </body>
 </html>
 
