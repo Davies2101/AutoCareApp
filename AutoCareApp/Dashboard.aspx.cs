@@ -48,7 +48,7 @@ namespace AutoCareApp
 
         public void GetTotalCompleted()
         {
-            int total = mgtUSer.GetTotalCustomers();
+            int total = mgtBooking.GetTotalCompletedBookings();
             Page.ClientScript.RegisterStartupScript(this.GetType(), "setTotalCompleted", "setTotalCompleted('" + total + "');", true);
         }
 

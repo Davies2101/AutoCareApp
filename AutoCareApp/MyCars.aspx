@@ -40,9 +40,10 @@
                                                     </span>
                                                 </div>
                                                 <asp:TextBox runat="server" ID="VehicleReg" CssClass="form-control" TextMode="SingleLine" placeholder="Registraion No." />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleReg"
-                                                                            CssClass="text-danger small" ErrorMessage="The Vehicle Registraion No. is required." />
+                                               
                                             </div>
+                                             <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleReg"
+                                                                            CssClass="text-danger small" ErrorMessage="The Vehicle Registraion No. is required." />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -54,10 +55,11 @@
                                                     </span>
                                                 </div>
                                                 <asp:TextBox runat="server" ID="VehicleMake" CssClass="form-control" TextMode="SingleLine" placeholder="Make" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleMake"
-                                                                            CssClass="text-danger small" ErrorMessage="The Vehicle Make is required." />
+                                               
                                             </div>
-                                            &nbsp;
+                                             <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleMake"
+                                                                            CssClass="text-danger small" ErrorMessage="The Vehicle Make is required." />
+                                           
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -69,10 +71,10 @@
                                                     </span>
                                                 </div>
                                                 <asp:TextBox runat="server" ID="VehicleModel" CssClass="form-control" TextMode="SingleLine" placeholder="Model" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleModel"
-                                                                            CssClass="text-danger small" ErrorMessage="The Vehicle Model is required." />
+                                               
                                             </div>
-                                            &nbsp;
+                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleModel"
+                                                                            CssClass="text-danger small" ErrorMessage="The Vehicle Model is required." />
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -84,10 +86,10 @@
                                                     </span>
                                                 </div>
                                                 <asp:TextBox runat="server" ID="VehicleColor" CssClass="form-control" TextMode="SingleLine" placeholder="Color" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleColor"
-                                                                            CssClass="text-danger small" ErrorMessage="The Vehicle Color is required." />
+                                               
                                             </div>
-                                            &nbsp;
+                                             <asp:RequiredFieldValidator runat="server" ControlToValidate="VehicleColor"
+                                                                            CssClass="text-danger small" ErrorMessage="The Vehicle Color is required." />
                                         </div>
                                     </div>
                                     <div class="col-md-2">
